@@ -6,7 +6,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"@tanstack/react-query": "^4.29.5",
@@ -36,7 +37,20 @@
 		"eslint-plugin-prettier": "^4.2.1",
 		"eslint-plugin-react": "^7.28.0",
 		"eslint-plugin-react-hooks": "^4.3.0",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.2.2",
 		"prettier": "^2.8.8",
 		"typescript": "^5.0.4"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{ts,tsx}": [
+			"prettier --write",
+			"eslint --fix"
+		]
 	}
 }
