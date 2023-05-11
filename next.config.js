@@ -1,6 +1,23 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { withSentryConfig } = require('@sentry/nextjs');
 
-module.exports = nextConfig
+const nextConfig = {
+	reactStrictMode: true,
+};
+
+module.exports = withSentryConfig(
+	nextConfig,
+	{
+		silent: true,
+		org: '15-12-fe-0v',
+		project: 'sadang-nextjs',
+	},
+	{
+		widenClientFileUpload: true,
+		transpileClientSDK: true,
+		tunnelRoute: '/monitoring',
+		hideSourceMaps: true,
+		disableLogger: true,
+	},
+);
