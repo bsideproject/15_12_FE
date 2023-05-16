@@ -1,7 +1,9 @@
-export default function Home() {
+'use client';
+
+export default function Page() {
 	return (
 		<main>
-			<div>메인페이지</div>
+			<h2>메인페이지</h2>
 			<button
 				type="button"
 				style={{
