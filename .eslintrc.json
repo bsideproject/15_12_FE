@@ -1,87 +1,72 @@
 {
- "root": true,
- "parser": "@typescript-eslint/parser",
- "plugins": [
-  "@typescript-eslint",
-  "import",
-  "prettier"
- ],
- "parserOptions": {
-  "project": "./tsconfig.json",
-  "createDefaultProgram": true
- },
- "env": {
-  "browser": true,
-  "node": true,
-  "es6": true
- },
- "ignorePatterns": [
-  "node_modules/"
- ],
- "extends": [
-  "airbnb",
-  "airbnb-typescript",
-  "airbnb/hooks",
-  "next/core-web-vitals",
-  "plugin:@typescript-eslint/recommended",
-  "plugin:import/typescript",
-  "plugin:import/recommended",
-  "plugin:jsx-a11y/recommended",
-  "plugin:prettier/recommended",
-  "prettier",
-  "plugin:storybook/recommended"
- ],
- "rules": {
-  "react/react-in-jsx-scope": "off",
-  "react/jsx-props-no-spreading": 0,
-  "@typescript-eslint/semi": "off",
-  "react/jsx-filename-extension": [
-   "warn",
-   {
-    "extensions": [
-     ".ts",
-     ".tsx"
-    ]
-   }
-  ],
-  "no-useless-catch": "off",
-  "import/order": [
-   "warn",
-   {
-    "newlines-between": "always",
-    "groups": [
-     "builtin",
-     "external",
-     "internal",
-     "parent",
-     "sibling",
-     "index"
-    ],
-    "pathGroups": [
-     {
-      "pattern": "next/*",
-      "group": "external",
-      "position": "before"
-     },
-     {
-      "pattern": "{react*, react*/**}",
-      "group": "external",
-      "position": "before"
-     }
-    ],
-    "pathGroupsExcludedImportTypes": [
-     "external"
-    ],
-    "alphabetize": {
-     "order": "asc",
-     "caseInsensitive": true
-    }
-   }
-  ]
- },
- "settings": {
-  "import/resolver": {
-   "typescript": {}
-  }
- }
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint", "import", "prettier", "react"],
+	"parserOptions": {
+		"project": "./tsconfig.json",
+		"createDefaultProgram": true,
+		"ecmaVersion": 2020,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true
+	},
+	"ignorePatterns": ["node_modules/"],
+	"extends": [
+		"airbnb",
+		"airbnb-typescript",
+		"airbnb/hooks",
+		"next/core-web-vitals",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:import/typescript",
+		"plugin:jsx-a11y/recommended",
+		"plugin:prettier/recommended",
+		"prettier",
+		"plugin:storybook/recommended"
+	],
+	"rules": {
+		"react/react-in-jsx-scope": "off",
+		"@typescript-eslint/semi": "off",
+		"react/jsx-filename-extension": [
+			"warn",
+			{
+				"extensions": [".ts", ".tsx"]
+			}
+		],
+		"no-useless-catch": "off",
+		"import/order": [
+			"warn",
+			{
+				"newlines-between": "always",
+				"groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+				"pathGroups": [
+					{
+						"pattern": "next/*",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "{react*, react*/**}",
+						"group": "external",
+						"position": "before"
+					}
+				],
+				"pathGroupsExcludedImportTypes": ["external"],
+				"alphabetize": {
+					"order": "asc",
+					"caseInsensitive": true
+				}
+			}
+		]
+	},
+	"settings": {
+		"import/resolver": {
+			"typescript": "./tsconfig.json"
+		}
+	}
 }
