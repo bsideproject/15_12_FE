@@ -3,14 +3,15 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	id: string;
 	label: string;
+	type: 'text' | 'password';
 	register: UseFormRegisterReturn;
 }
 
-export default function ElInput({ id, label, register }: ElInputProps) {
+export default function ElInput({ id, label, type, register }: ElInputProps) {
 	return (
 		<label htmlFor={id}>
 			{label}
-			<input id={id} type="text" {...register} />
+			<input id={id} type={type} {...register} />
 		</label>
 	);
 }

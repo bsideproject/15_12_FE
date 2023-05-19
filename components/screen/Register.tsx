@@ -53,13 +53,14 @@ export default function ScreenRegister() {
 		<section>
 			<h2>회원가입</h2>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<ElInput id="email" label="email" register={register('email')} />
-				<p>{errors.email?.message}</p>
-				<ElInput id="password" label="password" register={register('password')} />
-				<p>{errors.password?.message}</p>
-				<ElInput id="passwordConfirm" label="password 확인" register={register('passwordConfirm')} />
-				<p>{errors.passwordConfirm?.message}</p>
+				<ElInput id="email" label="email" type="text" register={register('email')} />
+				<p className="text-[red]">{errors.email?.message}</p>
+				<ElInput id="password" label="password" type="password" register={register('password')} />
+				<p className="text-[red]">{errors.password?.message}</p>
+				<ElInput id="passwordConfirm" label="password 확인" type="password" register={register('passwordConfirm')} />
+				<p className="text-[red]">{errors.passwordConfirm?.message}</p>
 				<button
+					className="bg-[#b7b7e5] disabled:bg-[#c9c9cb]"
 					type="submit"
 					disabled={
 						Object.entries(errors).length > 0 ||
