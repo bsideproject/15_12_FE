@@ -33,7 +33,7 @@ export default function ScreenRegister() {
 		formState: { errors },
 	} = useForm<UserInfo>({ mode: 'onChange', resolver: yupResolver(registerSchema) });
 
-	const onSubmit: SubmitHandler<UserInfo> = (data) => {
+	const handleRegister: SubmitHandler<UserInfo> = (data) => {
 		const { email, password } = data;
 
 		const attribute = [new CognitoUserAttribute({ Name: 'email', Value: email })];
@@ -52,7 +52,7 @@ export default function ScreenRegister() {
 	return (
 		<section>
 			<h2>회원가입</h2>
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form onSubmit={handleSubmit(handleRegister)}>
 				<ElInput id="email" label="email" type="text" register={register('email')} />
 				<p className="text-[red]">{errors.email?.message}</p>
 				<ElInput id="password" label="password" type="password" register={register('password')} />
