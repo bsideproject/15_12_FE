@@ -64,7 +64,7 @@ export default function ScreenRegister() {
 				<ElInput id="passwordConfirm" label="password 확인" type="password" register={register('passwordConfirm')} />
 				<p className="text-[red]">{errors.passwordConfirm?.message}</p>
 				<button
-					className="bg-[#b7b7e5] disabled:bg-[#c9c9cb]"
+					className="bg-[#ff7777] disabled:bg-[#c9c9cb]"
 					type="submit"
 					disabled={
 						Object.entries(errors).length > 0 ||

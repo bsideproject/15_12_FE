@@ -67,7 +67,11 @@ export default function ScreenLogin() {
 			<form onSubmit={handleSubmit(handleLogin)}>
 				<ElInput id="email" label="email" type="text" register={register('email')} />
 				<ElInput id="password" label="password" type="password" register={register('password')} />
-				<button type="submit" disabled={Object.values(watch()).length === 0 || Object.values(watch()).includes('')}>
+				<button
+					className="bg-[#ff7777] disabled:bg-[#c9c9cb]"
+					type="submit"
+					disabled={Object.values(watch()).length === 0 || Object.values(watch()).includes('')}
+				>
 					login
 				</button>
 			</form>
