@@ -1,6 +1,9 @@
 'use client';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 export default function ScreenSignUp() {
 	const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
