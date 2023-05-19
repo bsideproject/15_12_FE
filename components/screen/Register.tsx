@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 
 import ElInput from '@/components/elements/ElInput';
+import useNavigation from '@/hooks/useNavigation';
 import userPool from '@/utils/userPool';
 
 const registerSchema = yup
@@ -26,6 +27,8 @@ const registerSchema = yup
 type UserInfo = yup.InferType<typeof registerSchema>;
 
 export default function ScreenRegister() {
+	const navigation = useNavigation();
+
 	const {
 		register,
 		handleSubmit,
@@ -46,6 +49,7 @@ export default function ScreenRegister() {
 			}
 			console.log(result);
 			alert('가입완료! 이메일 인증 후 로그인 하세요.');
+			navigation.push('/');
 		});
 	};
 
