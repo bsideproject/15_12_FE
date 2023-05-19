@@ -1,13 +1,16 @@
+import { UseFormRegisterReturn } from 'react-hook-form';
+
 interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-	name: string;
+	htmlFor: string;
 	label: string;
+	register: UseFormRegisterReturn;
 }
 
-export default function ElInput({ name, label, ...rest }: ElInputProps) {
+export default function ElInput({ htmlFor, label, register }: ElInputProps) {
 	return (
-		<label htmlFor={name}>
+		<label htmlFor={htmlFor}>
 			{label}
-			<input id={name} type="text" {...rest} />
+			<input id={htmlFor} type="text" {...register} />
 		</label>
 	);
 }
