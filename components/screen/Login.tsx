@@ -3,6 +3,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
+import useNavigation from '@/hooks/useNavigation';
 
 interface LoginState extends React.InputHTMLAttributes<HTMLInputElement> {
 	email: string;
@@ -14,6 +15,8 @@ export default function ScreenLogin() {
 
 	const handleLogin: SubmitHandler<LoginState> = (data) => console.log(data);
 
+	const navigation = useNavigation();
+
 	return (
 		<section>
 			<form onSubmit={handleSubmit(handleLogin)}>
@@ -23,6 +26,9 @@ export default function ScreenLogin() {
 					로그인
 				</button>
 			</form>
+			<button type="button" onClick={() => navigation.push('/register')}>
+				회원가입 하러 가기
+			</button>
 		</section>
 	);
 }
