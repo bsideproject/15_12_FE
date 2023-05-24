@@ -7,7 +7,7 @@ import * as yup from 'yup';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
-import userPool from '@/utils/userPool';
+import userPool from '@/service/userPool';
 
 const registerSchema = yup
 	.object({

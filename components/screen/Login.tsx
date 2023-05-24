@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
-import userPool from '@/utils/userPool';
+import userPool from '@/service/userPool';
 
 interface LoginState extends React.InputHTMLAttributes<HTMLInputElement> {
 	email: string;
