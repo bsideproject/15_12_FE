@@ -1,11 +1,11 @@
 'use client';
 
-import { CognitoUser, AuthenticationDetails, CognitoUserSession } from 'amazon-cognito-identity-js';
+import { AuthenticationDetails, CognitoUserSession } from 'amazon-cognito-identity-js';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
-import userPool from '@/service/userPool';
+import user from '@/service/user';
 
 interface LoginState extends React.InputHTMLAttributes<HTMLInputElement> {
 	email: string;
@@ -22,12 +22,11 @@ export default function ScreenLogin() {
 
 	const { register, handleSubmit, watch } = useForm<LoginState>();
 
-	const authenticate = async (email: string, password: string): Promise<CognitoUserSession> =>
+	const authenticate = (email: string, password: string): Promise<CognitoUserSession> =>
 		new Promise((resolve, reject) => {
-			const user = new CognitoUser({ Username: email, Pool: userPool });
 			const authDetails = new AuthenticationDetails({ Username: email, Password: password });
 
-			user.authenticateUser(authDetails, {
+			user(email).authenticateUser(authDetails, {
 				onSuccess: (data) => {
 					resolve(data);
 				},
@@ -43,6 +42,7 @@ export default function ScreenLogin() {
 			const res = await authenticate(email, password);
 
 			console.log(res);
+			navigation.push('/main');
 		} catch (err: unknown) {
 			const loginError = err as LoginError;
 
