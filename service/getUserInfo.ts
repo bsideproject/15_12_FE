@@ -6,6 +6,11 @@ interface UserAttributeType {
 	[key: string]: string;
 }
 
+interface UserInfoType {
+	session: CognitoUserSession | null;
+	attributes: UserAttributeType;
+}
+
 const getUserAttributes = (user: CognitoUser): Promise<UserAttributeType> =>
 	new Promise((resolve, reject) => {
 		user.getUserAttributes((err, attributes) => {
@@ -24,7 +29,7 @@ const getUserAttributes = (user: CognitoUser): Promise<UserAttributeType> =>
 		});
 	});
 
-const getSession = () => {
+const getSession = (): Promise<UserInfoType> => {
 	return new Promise((resolve, reject) => {
 		const user = userPool.getCurrentUser();
 

@@ -1,6 +1,8 @@
 import { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
-const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
+import getSession from '@/service/getUserInfo';
+
+const onRequest = async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
 	return config;
 };
 
