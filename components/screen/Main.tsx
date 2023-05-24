@@ -1,6 +1,6 @@
 'use client';
 
-import getSession from '@/service/getSession';
+import getSession from '@/service/getUserInfo';
 
 export default async function ScreenMain() {
 	const getUserInfo = await getSession();

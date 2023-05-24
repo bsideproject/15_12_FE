@@ -8,19 +8,19 @@ interface UserAttributeType {
 
 const getUserAttributes = (user: CognitoUser): Promise<UserAttributeType> =>
 	new Promise((resolve, reject) => {
-		user.getUserAttributes((error, attributes) => {
-			if (error) {
-				reject(error);
-				console.error(error);
-			} else {
-				const results: UserAttributeType = {};
-
-				attributes?.forEach((attribute) => {
-					results[attribute.Name] = attribute.Value;
-				});
-
-				resolve(results);
+		user.getUserAttributes((err, attributes) => {
+			if (err) {
+				reject(err);
+				return;
 			}
+
+			const results: UserAttributeType = {};
+
+			attributes?.forEach((attribute) => {
+				results[attribute.Name] = attribute.Value;
+			});
+
+			resolve(results);
 		});
 	});
 
@@ -32,11 +32,12 @@ const getSession = () => {
 			user.getSession(async (err: Error | null, session: CognitoUserSession | null) => {
 				if (err) {
 					reject(err);
-				} else {
-					const attributes = await getUserAttributes(user);
-
-					resolve({ session, attributes });
+					return;
 				}
+
+				const attributes = await getUserAttributes(user);
+
+				resolve({ session, attributes });
 			});
 		}
 	});
