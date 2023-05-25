@@ -8,15 +8,15 @@ import getSession from '@/service/getUserInfo';
 import userPool from '@/service/userPool';
 
 export default function ScreenMain() {
-	const navigator = useNavigation();
+	const navigation = useNavigation();
 	const [userName, setUserName] = useState<string>('');
 
 	const getUserInfo = async () => {
-		const userInfo = await getSession();
-		setUserName(userInfo.attributes.email);
+		const { attributes } = await getSession();
+		setUserName(attributes.email);
 	};
 
-	const test = async () => apiClient.post('');
+	const test = async () => apiClient.post('/api/test');
 
 	useEffect(() => {
 		getUserInfo();
@@ -31,7 +31,7 @@ export default function ScreenMain() {
 
 		if (cognitoUser) {
 			cognitoUser.signOut();
-			navigator.push('/');
+			navigation.push('/');
 		}
 	};
 

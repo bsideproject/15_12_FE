@@ -41,7 +41,6 @@ export default function ScreenLogin() {
 		try {
 			const res = await authenticate(email, password);
 
-			console.log(res);
 			navigation.push('/main');
 		} catch (err: unknown) {
 			const loginError = err as LoginError;
