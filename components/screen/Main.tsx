@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import apiClient from '@/core';
 import useNavigation from '@/hooks/useNavigation';
 import getSession from '@/service/getUserInfo';
 import userPool from '@/service/userPool';
@@ -16,11 +15,8 @@ export default function ScreenMain() {
 		setUserName(attributes.email);
 	};
 
-	const test = async () => apiClient.post('/api/test');
-
 	useEffect(() => {
 		getUserInfo();
-		test();
 	}, []);
 
 	/**

@@ -60,6 +60,33 @@ export default function ScreenLogin() {
 		}
 	};
 
+	const forgotPassword = () => {
+		const username = prompt('가입하신 이메일을 입력해 주세요.');
+
+		if (username) {
+			user(username).forgotPassword({
+				onSuccess: (result) => {
+					console.log(`call result: ${result}`);
+				},
+				onFailure: (err) => {
+					alert(JSON.stringify(err));
+				},
+				inputVerificationCode() {
+					const verificationCode = prompt('입력하신 이메일로 발송된 코드를 입력해 주세요 ', '');
+					const newPassword = prompt('새로운 비밀번호를 입력해 주세요.', '');
+					user(username).confirmPassword(verificationCode!, newPassword!, {
+						onSuccess() {
+							alert('비밀번호가 변경되었습니다.');
+						},
+						onFailure(err) {
+							console.log('error');
+						},
+					});
+				},
+			});
+		}
+	};
+
 	return (
 		<section>
 			<h2>로그인</h2>
@@ -76,6 +103,9 @@ export default function ScreenLogin() {
 			</form>
 			<button type="button" onClick={() => navigation.push('/register')}>
 				회원가입 하러 가기
+			</button>
+			<button type="button" onClick={forgotPassword}>
+				비밀번호 찾기
 			</button>
 		</section>
 	);
