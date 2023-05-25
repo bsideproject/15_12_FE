@@ -3,6 +3,9 @@ import { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import getSession from '@/service/getUserInfo';
 
 const onRequest = async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
+	const { session } = await getSession();
+	console.log(session);
+
 	return config;
 };
 
