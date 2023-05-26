@@ -1,6 +1,7 @@
 'use client';
 
 import { CognitoUser, AuthenticationDetails, CognitoUserSession } from 'amazon-cognito-identity-js';
+import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
@@ -78,6 +79,13 @@ export default function ScreenLogin() {
 			<button type="button" onClick={() => navigation.push('/register')}>
 				회원가입 하러 가기
 			</button>
+			<Link
+				href={`https://${process.env.NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_COGNITO_REDIRECT_URI}&identity_provider=Google`}
+			>
+				<button type="button" className="block">
+					구글 로그인
+				</button>
+			</Link>
 		</section>
 	);
 }
