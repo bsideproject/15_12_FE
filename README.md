@@ -8,11 +8,11 @@
 
 ## Skill Stack
 
-- **FrameWork** : NextJS + Typescript
-- **Styling** : Tailwind CSS
+- **FrameWork** : Next.js + TypeScript
+- **Styling** : Tailwind css
 - **Store** : Recoil
 - **API** : React Query
-<!-- Test : Jest-->
+- **Test** : Storybook
 
 ## Package Version
 
@@ -22,14 +22,16 @@
 | react       | v18.2.0 |
 | typescript  | v5.0.4  |
 | tailwindcss | v3.3.2  |
-| Recoil      | v0.0.0  |
-| React Query | v0.0.0  |
+| recoil      | v0.7.7  |
+| react-query | v4.29.5 |
 
 ## Branch Naming Rule
 
 - **main** : 메인 브랜치
+  <!-- **develop** -->
 - **feature** : 기능 개발
 - **hotfix** : 버그 수정
-  <!-- **develop** -->
 
-<!-- ## Commit Message -->
+## [Commit Message](.gitmessage.txt)
+
+## [PR Rule](.github/PULL_REQUEST_TEMPLATE.md)
