@@ -1,12 +1,12 @@
 'use client';
 
-import { CognitoUser, AuthenticationDetails, CognitoUserSession } from 'amazon-cognito-identity-js';
+import { AuthenticationDetails, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
-import userPool from '@/utils/userPool';
+import user from '@/service/user';
 
 interface LoginState extends React.InputHTMLAttributes<HTMLInputElement> {
 	email: string;
@@ -23,12 +23,11 @@ export default function ScreenLogin() {
 
 	const { register, handleSubmit, watch } = useForm<LoginState>();
 
-	const authenticate = async (email: string, password: string): Promise<CognitoUserSession> =>
+	const authenticate = (email: string, password: string): Promise<CognitoUserSession> =>
 		new Promise((resolve, reject) => {
-			const user = new CognitoUser({ Username: email, Pool: userPool });
 			const authDetails = new AuthenticationDetails({ Username: email, Password: password });
 
-			user.authenticateUser(authDetails, {
+			user(email).authenticateUser(authDetails, {
 				onSuccess: (data) => {
 					resolve(data);
 				},
@@ -43,7 +42,7 @@ export default function ScreenLogin() {
 		try {
 			const res = await authenticate(email, password);
 
-			console.log(res);
+			navigation.push('/main');
 		} catch (err: unknown) {
 			const loginError = err as LoginError;
 
@@ -59,6 +58,33 @@ export default function ScreenLogin() {
 			}
 
 			console.log(err);
+		}
+	};
+
+	const forgotPassword = () => {
+		const username = prompt('가입하신 이메일을 입력해 주세요.');
+
+		if (username) {
+			user(username).forgotPassword({
+				onSuccess: (result) => {
+					console.log(`call result: ${result}`);
+				},
+				onFailure: (err) => {
+					alert(JSON.stringify(err));
+				},
+				inputVerificationCode() {
+					const verificationCode = prompt('입력하신 이메일로 발송된 코드를 입력해 주세요 ', '');
+					const newPassword = prompt('새로운 비밀번호를 입력해 주세요.', '');
+					user(username).confirmPassword(verificationCode!, newPassword!, {
+						onSuccess() {
+							alert('비밀번호가 변경되었습니다.');
+						},
+						onFailure(err) {
+							console.log('error');
+						},
+					});
+				},
+			});
 		}
 	};
 
@@ -78,6 +104,9 @@ export default function ScreenLogin() {
 			</form>
 			<button type="button" onClick={() => navigation.push('/register')}>
 				회원가입 하러 가기
+			</button>
+			<button type="button" onClick={forgotPassword}>
+				비밀번호 찾기
 			</button>
 			<Link
 				href={`https://${process.env.NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_COGNITO_REDIRECT_URI}&identity_provider=Google`}
