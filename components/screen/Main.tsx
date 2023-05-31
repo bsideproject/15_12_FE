@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { CompatClient, Stomp } from '@stomp/stompjs';
+import { useEffect, useRef, useState } from 'react';
+import SockJS from 'sockjs-client';
 
 import useNavigation from '@/hooks/useNavigation';
 import getSession from '@/service/getUserInfo';
@@ -31,12 +33,46 @@ export default function ScreenMain() {
 		}
 	};
 
+	/**
+	 * soket 구현
+	 */
+
+	const token = async () => {
+		const { session } = await getSession();
+
+		return `Bearer ${session?.getAccessToken().getJwtToken()}`;
+	};
+
+	const [message, setMessage] = useState();
+
+	const client = useRef<CompatClient>();
+
+	client.current = Stomp.over(() => {
+		const sock = new SockJS('http://twelfth.ap-northeast-2.elasticbeanstalk.com/ws');
+		return sock;
+	});
+
+	const connect = () => {
+		if (client.current) {
+			client.current.connect({ Authorization: token() }, () => {
+				console.log('success');
+			});
+		}
+	};
+
+	useEffect(() => {
+		connect();
+	}, []);
+
 	return (
 		<section>
 			<h2>{`회원 이메일: ${userName}`}</h2>
 			<button type="button" onClick={logout}>
 				로그아웃
 			</button>
+			<div>
+				<h3>채팅</h3>
+			</div>
 		</section>
 	);
 }
