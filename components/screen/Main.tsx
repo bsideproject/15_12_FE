@@ -52,10 +52,22 @@ export default function ScreenMain() {
 		return sock;
 	});
 
+	const subscribe = () => {
+		if (client.current) {
+			client.current.subscribe('/topic/greetings', (body) => {
+				const jsonBody = JSON.parse(body.body);
+				console.log(jsonBody);
+				setMessage(jsonBody);
+			});
+			client.current.activate();
+		}
+	};
+
 	const connect = () => {
 		if (client.current) {
 			client.current.connect({ Authorization: token() }, () => {
 				console.log('success');
+				subscribe();
 			});
 		}
 	};
