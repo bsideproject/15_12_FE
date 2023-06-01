@@ -47,11 +47,6 @@ export default function ScreenMain() {
 
 	const client = useRef<CompatClient>();
 
-	client.current = Stomp.over(() => {
-		const sock = new SockJS('http://twelfth.ap-northeast-2.elasticbeanstalk.com/ws');
-		return sock;
-	});
-
 	const subscribe = () => {
 		if (client.current) {
 			client.current.subscribe('/topic/greetings', (body) => {
@@ -64,16 +59,31 @@ export default function ScreenMain() {
 	};
 
 	const connect = () => {
+		client.current = Stomp.over(() => {
+			const sock = new SockJS('/ws');
+			return sock;
+		});
+
 		if (client.current) {
-			client.current.connect({ Authorization: token() }, () => {
+			client.current.connect({}, () => {
 				console.log('success');
-				subscribe();
+				// subscribe();
 			});
+		}
+	};
+
+	const disconnect = () => {
+		if (client.current) {
+			client.current.deactivate();
 		}
 	};
 
 	useEffect(() => {
 		connect();
+
+		return () => {
+			disconnect();
+		};
 	}, []);
 
 	return (

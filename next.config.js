@@ -7,6 +7,14 @@ const nextConfig = {
 	experimental: {
 		appDir: true,
 	},
+	async rewrites() {
+		return [
+			{
+				source: '/ws/:path*',
+				destination: `${process.env.NEXT_PUBLIC_API_PROXY_URL}/ws/:path*`,
+			},
+		];
+	},
 };
 
 module.exports = withSentryConfig(
