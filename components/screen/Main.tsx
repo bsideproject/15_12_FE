@@ -1,12 +1,14 @@
 'use client';
 
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SockJS from 'sockjs-client';
 
 import useNavigation from '@/hooks/useNavigation';
 import getSession from '@/service/getUserInfo';
 import userPool from '@/service/userPool';
+
+import ElInput from '../elements/ElInput';
 
 export default function ScreenMain() {
 	const navigation = useNavigation();
@@ -43,8 +45,8 @@ export default function ScreenMain() {
 		return `Bearer ${session?.getAccessToken().getJwtToken()}`;
 	};
 
-	const [messageList, setMessageList] = useState();
-	const [message, setMessage] = useState();
+	const [messageList, setMessageList] = useState<string[]>([]);
+	const [message, setMessage] = useState<string>('');
 
 	const client = useRef<CompatClient>();
 
@@ -52,8 +54,7 @@ export default function ScreenMain() {
 		if (client.current) {
 			client.current.subscribe('/topic/greetings', (body) => {
 				const jsonBody = JSON.parse(body.body);
-				console.log(jsonBody);
-				setMessageList(jsonBody);
+				setMessageList((prev) => [...prev, jsonBody.content]);
 			});
 		}
 	};
@@ -79,6 +80,22 @@ export default function ScreenMain() {
 		}
 	};
 
+	const publish = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (!client.current?.connected) return;
+
+		client.current?.send(
+			'/app/hello',
+			{},
+			JSON.stringify({
+				name: message,
+			}),
+		);
+
+		setMessage('');
+	};
+
 	useEffect(() => {
 		connect();
 
@@ -95,6 +112,11 @@ export default function ScreenMain() {
 			</button>
 			<div>
 				<h3>채팅</h3>
+				<ul>
+					{messageList?.map((msg) => {
+						return <li key={msg}>{msg}</li>;
+					})}
+				</ul>
 			</div>
 		</section>
 	);
