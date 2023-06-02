@@ -117,6 +117,14 @@ export default function ScreenMain() {
 						return <li key={msg}>{msg}</li>;
 					})}
 				</ul>
+				<form onSubmit={publish}>
+					<input
+						type="text"
+						value={message}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)}
+					/>
+					<button type="submit">전송</button>
+				</form>
 			</div>
 		</section>
 	);
