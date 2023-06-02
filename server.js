@@ -13,23 +13,36 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 // 웹소켓 프록시 설정
-const wsProxy = createProxyMiddleware('/ws/:path*', {
-	target: `http://twelfth.ap-northeast-2.elasticbeanstalk.com/ws/:path*`,
-	ws: true,
-	changeOrigin: true,
+const wsProxy = createProxyMiddleware('/ws', {
+	target: `http://twelfth.ap-northeast-2.elasticbeanstalk.com/`, // 웹소켓 연결을 프록시할 대상 주소
+	ws: true, // 웹소켓 프록시를 사용하도록 설정
+	changeOrigin: true, // 원본 주소를 대상 주소로 변경하여 프록시
+	onProxyRes: (proxyRes) => {
+		proxyRes.headers['Access-Control-Allow-Credentials'] = 'true';
+	},
+	onProxyReq: (proxyReq) => {
+		proxyReq.setHeader('Origin', 'https://15-12-fe.netlify.app/');
+		proxyReq.setHeader('Referer', 'https://15-12-fe.netlify.app/');
+		proxyReq.setHeader('Host', 'twelfth.ap-northeast-2.elasticbeanstalk.com');
+		proxyReq.setHeader('Cookie', ''); // 필요에 따라 쿠키를 설정해야 할 수 있습니다.
+	},
 });
 
 app.prepare().then(() => {
-	createServer((req, res) => {
+	const server = createServer((req, res) => {
 		const parsedUrl = parse(req.url, true);
 		const { pathname } = parsedUrl;
 
-		if (pathname.startsWith('/ws/:path*')) {
+		if (pathname.startsWith('/ws')) {
+			// 웹소켓 요청인 경우 프록시로 처리
 			wsProxy(req, res);
 		} else {
+			// 일반 HTTP 요청인 경우 Next.js 핸들러로 라우팅
 			handle(req, res, parsedUrl);
 		}
-	}).listen(3000, (err) => {
+	});
+
+	server.listen(3000, (err) => {
 		if (err) throw err;
 		console.log('> Ready on http://localhost:3000');
 	});

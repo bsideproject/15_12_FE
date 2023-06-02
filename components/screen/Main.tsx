@@ -43,6 +43,7 @@ export default function ScreenMain() {
 		return `Bearer ${session?.getAccessToken().getJwtToken()}`;
 	};
 
+	const [messageList, setMessageList] = useState();
 	const [message, setMessage] = useState();
 
 	const client = useRef<CompatClient>();
@@ -52,9 +53,8 @@ export default function ScreenMain() {
 			client.current.subscribe('/topic/greetings', (body) => {
 				const jsonBody = JSON.parse(body.body);
 				console.log(jsonBody);
-				setMessage(jsonBody);
+				setMessageList(jsonBody);
 			});
-			client.current.activate();
 		}
 	};
 
@@ -67,9 +67,10 @@ export default function ScreenMain() {
 		if (client.current) {
 			client.current.connect({}, () => {
 				console.log('success');
-				// subscribe();
+				subscribe();
 			});
 		}
+		client.current.activate();
 	};
 
 	const disconnect = () => {
