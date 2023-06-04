@@ -59,7 +59,7 @@ export default function ScreenMain() {
 
 	const connect = () => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOKET_URL}`);
+			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
 			return sock;
 		});
 
