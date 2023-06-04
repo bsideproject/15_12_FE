@@ -8,8 +8,6 @@ import useNavigation from '@/hooks/useNavigation';
 import getSession from '@/service/getUserInfo';
 import userPool from '@/service/userPool';
 
-import ElInput from '../elements/ElInput';
-
 export default function ScreenMain() {
 	const navigation = useNavigation();
 	const [userName, setUserName] = useState<string>('');
@@ -61,7 +59,7 @@ export default function ScreenMain() {
 
 	const connect = () => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS('/ws');
+			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOKET_URL}`);
 			return sock;
 		});
 
