@@ -4,7 +4,7 @@ interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	id: string;
 	label: string;
 	type: 'text' | 'password';
-	register: UseFormRegisterReturn;
+	register: null | UseFormRegisterReturn;
 }
 
 export default function ElInput({ id, label, type, register }: ElInputProps) {
