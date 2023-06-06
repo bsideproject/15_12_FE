@@ -37,7 +37,10 @@ next-env.d.ts
 # Sentry Auth Token
 .sentryclirc
 
-#amplify-do-not-edit-begin
+# custom server
+server.js
+
+# amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/logs
@@ -55,4 +58,4 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
-#amplify-do-not-edit-end
+# amplify-do-not-edit-end
