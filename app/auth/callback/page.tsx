@@ -4,7 +4,7 @@ import { Amplify, Auth } from 'aws-amplify';
 // import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import awsConfig from '@/app/aws-exports';
+import awsConfig from 'aws-exports';
 // import useGoogleLogin from '@/hooks/useGoogleLogin';
 
 export default function GoogleLogin() {

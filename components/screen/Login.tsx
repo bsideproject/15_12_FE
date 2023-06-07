@@ -6,10 +6,10 @@ import { Amplify, Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import awsConfig from '@/app/aws-exports';
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
 import user from '@/service/user';
+import awsConfig from 'aws-exports';
 
 Amplify.configure(awsConfig);
 
