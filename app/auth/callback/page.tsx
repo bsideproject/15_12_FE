@@ -45,8 +45,8 @@ export default function GoogleLogin() {
 
 	return (
 		<div>
-			<p>이름: {googleUser ? googleUser.username : 'none'}</p>
-			<p>이메일: {googleUser ? googleUser.signInUserSession.idToken.payload.email : 'none'}</p>
+			<p>이름: {googleUser ? googleUser?.username : 'none'}</p>
+			<p>이메일: {googleUser ? googleUser?.signInUserSession.idToken.payload.email : 'none'}</p>
 			{googleUser && (
 				<button type="button" onClick={() => Auth.signOut()}>
 					구글 로그아웃(amplify)
