@@ -1,12 +1,17 @@
 'use client';
 
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { AuthenticationDetails, CognitoUserSession } from 'amazon-cognito-identity-js';
+import { Amplify, Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
 import user from '@/service/user';
+import awsConfig from 'aws-exports';
+
+Amplify.configure(awsConfig);
 
 interface LoginState extends React.InputHTMLAttributes<HTMLInputElement> {
 	email: string;
@@ -108,13 +113,16 @@ export default function ScreenLogin() {
 			<button type="button" onClick={forgotPassword}>
 				비밀번호 찾기
 			</button>
-			<Link
+			{/* <Link
 				href={`https://${process.env.NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_COGNITO_REDIRECT_URI}&identity_provider=Google`}
 			>
 				<button type="button" className="block">
-					구글 로그인
+					구글 로그인(endpoint)
 				</button>
-			</Link>
+			</Link> */}
+			<button type="button" onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })}>
+				구글 로그인(amplify)
+			</button>
 		</section>
 	);
 }
