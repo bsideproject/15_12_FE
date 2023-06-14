@@ -7,6 +7,7 @@ import SockJS from 'sockjs-client';
 
 import useNavigation from '@/hooks/useNavigation';
 import getUserAttributes from '@/service/getUserAttributes';
+import getUserSession from '@/service/getUserSession';
 import awsConfig from 'aws-exports';
 
 Amplify.configure(awsConfig);
@@ -21,8 +22,15 @@ export default function ScreenMain() {
 		setUserName(info.name);
 	};
 
+	const test = async () => {
+		const info = await getUserSession();
+
+		console.log(info);
+	};
+
 	useEffect(() => {
 		handleUserInfo();
+		test();
 	}, []);
 
 	/**

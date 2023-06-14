@@ -1,13 +1,12 @@
 import { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
-import getSession from '@/service/getUserInfo';
-import user from '@/service/user';
+import getUserSession from '@/service/getUserSession';
 
 // eslint-disable-next-line import/no-cycle
 import apiClient from '.';
 
 const onRequest = async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
-	const { session } = await getSession();
+	const { accessToken } = await getUserSession();
 
 	config.headers.Authorization = session ? `Bearer ${session?.getAccessToken().getJwtToken()}` : null;
 
