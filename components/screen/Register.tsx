@@ -20,6 +20,10 @@ const registerSchema = yup
 			)
 			.required('대소문자, 특수문자, 숫자 포함 8자리 이상 입력해주세요.'),
 		passwordConfirm: yup.string().oneOf([yup.ref('password')], '비밀번호가 다릅니다.'),
+		name: yup
+			.string()
+			.matches(/^[가-힣a-zA-Z]+$/, '한글 혹은 영어만 입력 가능합니다.')
+			.required('한글 혹은 영어만 입력 가능합니다.'),
 	})
 	.required();
 
@@ -36,15 +40,15 @@ export default function ScreenRegister() {
 	} = useForm<UserInfo>({ mode: 'onChange', resolver: yupResolver(registerSchema) });
 
 	const handleRegister: SubmitHandler<UserInfo> = async (data) => {
-		const { email, password } = data;
+		const { email, password, name } = data;
 
 		try {
 			const { user } = await Auth.signUp({
 				username: email,
 				password,
-				// attributes: {
-				// 	name,
-				// },
+				attributes: {
+					name,
+				},
 				autoSignIn: {
 					enabled: false,
 				},
@@ -67,6 +71,8 @@ export default function ScreenRegister() {
 				<p className="text-[red]">{errors.password?.message}</p>
 				<ElInput id="passwordConfirm" label="password 확인" type="password" register={register('passwordConfirm')} />
 				<p className="text-[red]">{errors.passwordConfirm?.message}</p>
+				<ElInput id="name" label="이름" type="text" register={register('name')} />
+				<p className="text-[red]">{errors.name?.message}</p>
 				<button
 					className="bg-[#ff7777] disabled:bg-[#c9c9cb]"
 					type="submit"
