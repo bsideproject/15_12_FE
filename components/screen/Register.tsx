@@ -1,13 +1,12 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import { Auth } from 'aws-amplify';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
-import userPool from '@/service/userPool';
 
 const registerSchema = yup
 	.object({
@@ -36,21 +35,26 @@ export default function ScreenRegister() {
 		formState: { errors },
 	} = useForm<UserInfo>({ mode: 'onChange', resolver: yupResolver(registerSchema) });
 
-	const handleRegister: SubmitHandler<UserInfo> = (data) => {
+	const handleRegister: SubmitHandler<UserInfo> = async (data) => {
 		const { email, password } = data;
 
-		const attribute = [new CognitoUserAttribute({ Name: 'email', Value: email })];
-
-		userPool.signUp(email, password, attribute, [], (err, result) => {
-			if (err) {
-				console.log(err.message || JSON.stringify(err));
-				alert('가입실패!');
-				return;
-			}
-			console.log(result);
+		try {
+			const { user } = await Auth.signUp({
+				username: email,
+				password,
+				// attributes: {
+				// 	name,
+				// },
+				autoSignIn: {
+					enabled: false,
+				},
+			});
+			console.log(user);
 			alert('가입완료! 이메일 인증 후 로그인 하세요.');
 			navigation.push('/');
-		});
+		} catch (error) {
+			console.log('error signing up:', error);
+		}
 	};
 
 	return (
