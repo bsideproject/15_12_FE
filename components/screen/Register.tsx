@@ -1,12 +1,15 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Auth } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
+import awsConfig from 'aws-exports';
+
+Amplify.configure(awsConfig);
 
 const registerSchema = yup
 	.object({
@@ -47,7 +50,7 @@ export default function ScreenRegister() {
 				username: email,
 				password,
 				attributes: {
-					'custom:attribute_name': name,
+					name,
 				},
 				autoSignIn: {
 					enabled: false,
