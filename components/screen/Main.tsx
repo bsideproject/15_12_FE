@@ -13,12 +13,12 @@ Amplify.configure(awsConfig);
 
 export default function ScreenMain() {
 	const navigation = useNavigation();
-	const [userInfo, setUserInfo] = useState<string>('');
+	const [userName, setUserName] = useState<string | boolean>('');
 
 	const handleUserInfo = async () => {
 		const info = await getUserAttributes();
 
-		console.log(info);
+		setUserName(info.name);
 	};
 
 	useEffect(() => {
@@ -108,7 +108,7 @@ export default function ScreenMain() {
 
 	return (
 		<section>
-			<h2>{`회원 이메일: ${userInfo}`}</h2>
+			<h2>{`회원 이름: ${userName}`}</h2>
 			<button type="button" onClick={logout}>
 				로그아웃
 			</button>
