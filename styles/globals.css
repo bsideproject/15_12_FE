@@ -1,16 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
 
 @layer base {
 	html,
 	body {
 		height: 100%;
 		width: 100%;
-		line-height: 1;
+	}
+
+	html {
+		font-family: 'Pretendard-Regular';
 	}
 
 	body {
+		line-height: 1;
 		user-select: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
