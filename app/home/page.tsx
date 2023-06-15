@@ -1,5 +1,5 @@
 import ScreenHome from '@/components/screen/Home';
 
-export default function Main() {
+export default function Home() {
 	return <ScreenHome />;
 }
