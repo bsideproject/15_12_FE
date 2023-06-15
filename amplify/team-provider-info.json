@@ -21,5 +21,34 @@
         }
       }
     }
+  },
+  "bsidedev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-1512fe-bsidedev-84107-authRole",
+      "UnauthRoleArn": "arn:aws:iam::127297669853:role/amplify-1512fe-bsidedev-84107-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::127297669853:role/amplify-1512fe-bsidedev-84107-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-1512fe-bsidedev-84107-deployment",
+      "UnauthRoleName": "amplify-1512fe-bsidedev-84107-unauthRole",
+      "StackName": "amplify-1512fe-bsidedev-84107",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:127297669853:stack/amplify-1512fe-bsidedev-84107/efa36500-0b0c-11ee-adc1-0693c5bccf8a",
+      "AmplifyAppId": "d3k0cxrkczloid"
+    },
+    "categories": {
+      "auth": {
+        "1512fe1f2d4d8a": {
+          "userPoolId": "ap-northeast-2_V2jamxTob",
+          "userPoolName": "bside1512-dev",
+          "webClientId": "3lvkebff0907o3vuvm64i60uso",
+          "nativeClientId": "3lvkebff0907o3vuvm64i60uso"
+        },
+        "1512fe199e37b1": {
+          "userPoolId": "ap-northeast-2_V2jamxTob",
+          "userPoolName": "bside1512-dev",
+          "webClientId": "3lvkebff0907o3vuvm64i60uso",
+          "nativeClientId": "3lvkebff0907o3vuvm64i60uso"
+        }
+      }
+    }
   }
 }

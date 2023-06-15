@@ -18,8 +18,7 @@ export default function ScreenMain() {
 
 	const handleUserInfo = async () => {
 		const info = await getUserAttributes();
-
-		setUserName(info.name);
+		setUserName(info.nickname);
 	};
 
 	const test = async () => {

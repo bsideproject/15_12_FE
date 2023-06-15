@@ -50,7 +50,7 @@ export default function ScreenRegister() {
 				username: email,
 				password,
 				attributes: {
-					name,
+					nickname: name,
 				},
 				autoSignIn: {
 					enabled: false,

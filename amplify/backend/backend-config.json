@@ -40,6 +40,38 @@
           "resourceName": "1512fe199e37b1"
         }
       ]
+    },
+    "AMPLIFY_auth_1512fe1f2d4d8a_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "1512fe1f2d4d8a"
+        }
+      ]
+    },
+    "AMPLIFY_auth_1512fe1f2d4d8a_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "1512fe1f2d4d8a"
+        }
+      ]
+    },
+    "AMPLIFY_auth_1512fe1f2d4d8a_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "1512fe1f2d4d8a"
+        }
+      ]
+    },
+    "AMPLIFY_auth_1512fe1f2d4d8a_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "1512fe1f2d4d8a"
+        }
+      ]
     }
   }
 }
