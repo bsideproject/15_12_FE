@@ -1,6 +1,7 @@
 'use client';
 
 import GameInputs from '@/components/modules/gameInputs';
+import apiClient from '@/core';
 import useNavigation from '@/hooks/useNavigation';
 import clsxm from '@/service/mergeStyle';
 import AddIcon from 'public/images/add-icon.svg';
@@ -16,8 +17,8 @@ export default function ScreenSpeedGame() {
 	const imageClasses = clsxm('my-20', 'w-[73px]', 'h-[73px]', 'mx-auto', 'bg-gray030');
 	const addClasses = clsxm('flex', 'mx-auto', 'text-sm', 'leading-4');
 	const addIconClasses = clsxm('w-4', 'h-4', 'mr-2');
+	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-6', 'bg-gray010');
 	const buttonClasses = clsxm('bg-blue050', 'text-button', 'rounded');
-	const bottomClasses = clsxm('fixed bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-6', 'bg-gray010');
 
 	return (
 		<section className={sectionClasses}>
@@ -42,7 +43,18 @@ export default function ScreenSpeedGame() {
 				<button
 					type="button"
 					className={`${buttonClasses} flex-1 mr-4 text-white`}
-					onClick={() => navigation.push('/start-game')}
+					onClick={() => {
+						navigation.push('/start-game');
+						apiClient
+							.get('https://api.bside1512.dev/activity/speedgame')
+							.then((res) => {
+								console.log('res..', res);
+								navigation.push('/start-game');
+							})
+							.catch((err) => {
+								console.log('err..', err);
+							});
+					}}
 				>
 					만들기
 				</button>
