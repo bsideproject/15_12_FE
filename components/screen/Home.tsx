@@ -18,6 +18,7 @@ export default function ScreenHome() {
 
 	const handleUserInfo = async () => {
 		const info = await getUserAttributes();
+		console.log(info);
 		setUserName(info.nickname);
 	};
 
