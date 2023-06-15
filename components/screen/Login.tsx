@@ -71,7 +71,7 @@ export default function ScreenLogin() {
 
 	return (
 		<section>
-			<h2>로그인</h2>
+			<h2 className="text-h2">로그인</h2>
 			<form onSubmit={handleSubmit(handleLogin)}>
 				<ElInput id="email" label="email" type="text" register={register('email')} />
 				<ElInput id="password" label="password" type="password" register={register('password')} />
