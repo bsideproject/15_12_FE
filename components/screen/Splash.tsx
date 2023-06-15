@@ -1,5 +1,9 @@
 'use client';
 
 export default function ScreenSplash() {
-	return <>스플래시</>;
+	return (
+		<div>
+			<button type="button">시작하기</button>
+		</div>
+	);
 }
