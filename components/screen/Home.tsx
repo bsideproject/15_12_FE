@@ -12,7 +12,7 @@ import awsConfig from 'aws-exports';
 
 Amplify.configure(awsConfig);
 
-export default function ScreenMain() {
+export default function ScreenHome() {
 	const navigation = useNavigation();
 	const [userName, setUserName] = useState<string | boolean>('');
 

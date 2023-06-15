@@ -9,8 +9,8 @@ const awsmobile = {
 	oauth: {
 		domain: 'bside1512-dev.auth.ap-northeast-2.amazoncognito.com',
 		scope: ['aws.cognito.signin.user.admin', 'email', 'openid'],
-		redirectSignIn: 'http://localhost:3000/auth/callback, https://bside1512.dev/auth/callback',
-		redirectSignOut: 'http://localhost:3000/home, https://bside1512.dev/home',
+		redirectSignIn: 'http://localhost:3000/home',
+		redirectSignOut: 'http://localhost:3000/home',
 		responseType: 'code',
 	},
 	federationTarget: 'COGNITO_USER_POOLS',

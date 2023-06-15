@@ -92,6 +92,9 @@ export default function ScreenLogin() {
 			<button type="button" onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })}>
 				구글 로그인(amplify)
 			</button>
+			<button type="button" onClick={() => Auth.federatedSignIn({ customProvider: 'kakao' })}>
+				카카오 로그인
+			</button>
 		</section>
 	);
 }
