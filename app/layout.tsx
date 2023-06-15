@@ -1,4 +1,7 @@
+import { Amplify } from 'aws-amplify';
 import { Metadata } from 'next';
+
+import awsConfig from 'aws-exports';
 
 import '../styles/globals.css';
 
@@ -11,7 +14,10 @@ export const metadata: Metadata = {
 	icons: {
 		icon: '/favicon.ico',
 	},
+	viewport: 'width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover',
 };
+
+Amplify.configure(awsConfig);
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
