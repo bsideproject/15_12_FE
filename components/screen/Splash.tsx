@@ -19,7 +19,7 @@ export default function ScreenSplash() {
 					꽁꽁 얼어붙은 어색함을 부숴줄 <br /> 아이스 브레이킹 도구 모음
 				</p>
 			</div>
-			<button type="button" className={`${buttonClasses} text-white`} onClick={() => navigation.push('/onBoarding')}>
+			<button type="button" className={`${buttonClasses} text-white`} onClick={() => navigation.push('/on-boarding')}>
 				시작하기
 			</button>
 		</div>
