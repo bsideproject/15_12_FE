@@ -31,7 +31,7 @@ export default function ScreenLogin() {
 		try {
 			await Auth.signIn(email, password);
 
-			navigation.push('/main');
+			navigation.push('/home');
 		} catch (err: unknown) {
 			const loginError = err as LoginError;
 
