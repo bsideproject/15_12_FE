@@ -68,12 +68,14 @@ module.exports = {
 					`${16 / 16}rem`,
 					{
 						fontWeight: '400',
+						lineHeight: `${24 / 16}rem`,
 					},
 				],
 				p2: [
 					`${14 / 16}rem`,
 					{
 						fontWeight: '400',
+						lineHeight: `${17 / 16}rem`,
 					},
 				],
 				c: [

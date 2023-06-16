@@ -32,4 +32,12 @@
 		min-height: 100%;
 		box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 	}
+
+	.custom_bullet {
+		@apply inline-block w-[8px] h-[8px] mx-1 bg-[#C3C7CB] rounded-[50%] indent-[-9999px];
+	}
+
+	.custom-bullet-active {
+		@apply w-[28px] bg-blue050 rounded-lg duration-300;
+	}
 }
