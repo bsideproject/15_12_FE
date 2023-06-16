@@ -116,7 +116,15 @@ export default function ScreenHome() {
 
 	return (
 		<section>
-			<h2>{`회원 이름: ${userName}`}</h2>
+			<div>
+				{userName ? (
+					<h2>{`회원 이름: ${userName}`}</h2>
+				) : (
+					<button type="button" onClick={() => navigation.push('/login')}>
+						로그인 안 하셨군요 (로그인 버튼)
+					</button>
+				)}
+			</div>
 			<button type="button" onClick={logout}>
 				로그아웃
 			</button>
