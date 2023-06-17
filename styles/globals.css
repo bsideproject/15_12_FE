@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
+
+@layer base {
+	html,
+	body {
+		height: 100%;
+		width: 100%;
+	}
+
+	html {
+		font-family: 'Pretendard-Regular';
+	}
+
+	body {
+		line-height: 1;
+		user-select: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+	}
+}
+
+@layer components {
+	.layout {
+		max-width: 480px;
+		margin: 0 auto;
+		width: auto;
+		min-height: 100%;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+	}
+
+	.custom_bullet {
+		@apply inline-block w-[8px] h-[8px] mx-1 bg-[#C3C7CB] rounded-[50%] indent-[-9999px];
+	}
+
+	.custom-bullet-active {
+		@apply w-[28px] bg-blue050 rounded-lg duration-300;
+	}
+}

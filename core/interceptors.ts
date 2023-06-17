@@ -1,13 +1,14 @@
+import { Amplify } from 'aws-amplify';
 import { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
-import getSession from '@/service/getUserInfo';
-import user from '@/service/user';
+import apiClient from '@/core/index';
+import getUserSession from '@/service/getUserSession';
+import awsConfig from 'aws-exports';
 
-// eslint-disable-next-line import/no-cycle
-import apiClient from '.';
+Amplify.configure(awsConfig);
 
 const onRequest = async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
-	const { session } = await getSession();
+	const session = await getUserSession();
 
 	config.headers.Authorization = session ? `Bearer ${session?.getAccessToken().getJwtToken()}` : null;
 
@@ -24,30 +25,17 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
 
 const onErrorResponse = async (error: AxiosError): Promise<AxiosError> => {
 	if (error?.response?.status === 403) {
-		const { session, attributes } = await getSession();
 		const originalConfig = error.config!;
 
-		if (session) {
-			try {
-				const refreshToken = session.getRefreshToken();
+		try {
+			const session = await getUserSession();
 
-				await new Promise((resolve, reject) => {
-					user(attributes.email).refreshSession(refreshToken, (err, result) => {
-						if (err) {
-							reject(err);
-							return;
-						}
+			originalConfig.headers.Authorization = `Bearer ${session.getAccessToken().getJwtToken()}`;
 
-						originalConfig.headers.Authorization = `Bearer ${result.getAccessToken().getJwtToken()}`;
-					});
-				});
-
-				return await apiClient.request(originalConfig);
-			} catch (err) {
-				user(attributes.email).signOut();
-				window.location.href = '/';
-				alert('로그인 시간이 만료되었습니다. 다시 로그인 해 주세요.');
-			}
+			return await apiClient.request(originalConfig);
+		} catch (err) {
+			window.location.href = '/';
+			alert('로그인 시간이 만료되었습니다. 다시 로그인 해 주세요.');
 		}
 		return Promise.reject(error);
 	}

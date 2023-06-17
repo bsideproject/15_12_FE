@@ -1,14 +1,11 @@
 'use client';
 
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
-import { AuthenticationDetails, CognitoUserSession } from 'amazon-cognito-identity-js';
 import { Amplify, Auth } from 'aws-amplify';
-import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
-import user from '@/service/user';
 import awsConfig from 'aws-exports';
 
 Amplify.configure(awsConfig);
@@ -28,26 +25,13 @@ export default function ScreenLogin() {
 
 	const { register, handleSubmit, watch } = useForm<LoginState>();
 
-	const authenticate = (email: string, password: string): Promise<CognitoUserSession> =>
-		new Promise((resolve, reject) => {
-			const authDetails = new AuthenticationDetails({ Username: email, Password: password });
-
-			user(email).authenticateUser(authDetails, {
-				onSuccess: (data) => {
-					resolve(data);
-				},
-				onFailure: (err) => {
-					reject(err);
-				},
-			});
-		});
-
 	const handleLogin: SubmitHandler<LoginState> = async (data) => {
 		const { email, password } = data;
-		try {
-			const res = await authenticate(email, password);
 
-			navigation.push('/main');
+		try {
+			await Auth.signIn(email, password);
+
+			navigation.push('/home');
 		} catch (err: unknown) {
 			const loginError = err as LoginError;
 
@@ -70,32 +54,24 @@ export default function ScreenLogin() {
 		const username = prompt('가입하신 이메일을 입력해 주세요.');
 
 		if (username) {
-			user(username).forgotPassword({
-				onSuccess: (result) => {
-					console.log(`call result: ${result}`);
-				},
-				onFailure: (err) => {
-					alert(JSON.stringify(err));
-				},
-				inputVerificationCode() {
+			Auth.forgotPassword(username)
+				.then(() => {
 					const verificationCode = prompt('입력하신 이메일로 발송된 코드를 입력해 주세요 ', '');
 					const newPassword = prompt('새로운 비밀번호를 입력해 주세요.', '');
-					user(username).confirmPassword(verificationCode!, newPassword!, {
-						onSuccess() {
-							alert('비밀번호가 변경되었습니다.');
-						},
-						onFailure(err) {
-							console.log('error');
-						},
-					});
-				},
-			});
+					Auth.forgotPasswordSubmit(username, verificationCode!, newPassword!)
+						.then(() => alert('비밀번호가 변경되었습니다.'))
+						.catch((err) => console.log(err));
+				})
+				.catch((err) => {
+					console.log(err);
+					alert('가입하지 않은 이메일입니다.');
+				});
 		}
 	};
 
 	return (
 		<section>
-			<h2>로그인</h2>
+			<h2 className="text-h2">로그인</h2>
 			<form onSubmit={handleSubmit(handleLogin)}>
 				<ElInput id="email" label="email" type="text" register={register('email')} />
 				<ElInput id="password" label="password" type="password" register={register('password')} />
@@ -113,15 +89,11 @@ export default function ScreenLogin() {
 			<button type="button" onClick={forgotPassword}>
 				비밀번호 찾기
 			</button>
-			{/* <Link
-				href={`https://${process.env.NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_COGNITO_REDIRECT_URI}&identity_provider=Google`}
-			>
-				<button type="button" className="block">
-					구글 로그인(endpoint)
-				</button>
-			</Link> */}
 			<button type="button" onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })}>
 				구글 로그인(amplify)
+			</button>
+			<button type="button" onClick={() => Auth.federatedSignIn({ customProvider: 'kakao' })}>
+				카카오 로그인
 			</button>
 		</section>
 	);

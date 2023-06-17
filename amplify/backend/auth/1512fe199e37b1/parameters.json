@@ -10,6 +10,7 @@
     "Google"
   ],
   "requiredAttributes": [
+    "nickname",
     "email"
   ],
   "passwordPolicyMinLength": 8,
