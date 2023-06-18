@@ -4,7 +4,10 @@ import apiKeys from '../apiKeys';
 import queryKeys from '../queryKeys';
 
 const useQueryActivities = () => {
-	return useQuery(queryKeys.activities(), () => apiKeys.getActivities());
+	return useQuery(queryKeys.activities(), () => apiKeys.getActivities(), {
+		select: (data) => data.data,
+		staleTime: Infinity,
+	});
 };
 
 export default useQueryActivities;
