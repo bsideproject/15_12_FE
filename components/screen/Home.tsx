@@ -4,6 +4,7 @@ import { Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 
 import useNavigation from '@/hooks/useNavigation';
+import useQueryActivities from '@/queries/queryFn/useQueryActivities';
 import getUserAttributes from '@/service/getUserAttributes';
 import getUserSession from '@/service/getUserSession';
 
@@ -27,6 +28,10 @@ export default function ScreenHome() {
 		handleUserInfo();
 		test();
 	}, []);
+
+	const { data } = useQueryActivities();
+
+	console.log(data);
 
 	/**
 	 * 로그아웃

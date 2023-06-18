@@ -1,6 +1,7 @@
 import { Amplify } from 'aws-amplify';
 import { Metadata } from 'next';
 
+import ScreenLayout from '@/layout/screen/Layout';
 import awsConfig from 'aws-exports';
 
 import '../styles/globals.css';
@@ -23,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body>
-				<div className="layout bg-gray010">{children}</div>
+				<ScreenLayout>{children}</ScreenLayout>
 			</body>
 		</html>
 	);

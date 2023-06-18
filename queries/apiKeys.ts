@@ -1,7 +1,7 @@
 import apiClient from '@/core';
 
 const apiKeys = {
-	getActivities: () => apiClient.get('https://api.bside1512.dev/activities'),
+	getActivities: () => apiClient.get('/activities'),
 };
 
 export default apiKeys;
