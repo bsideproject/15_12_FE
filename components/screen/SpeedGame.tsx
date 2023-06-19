@@ -1,6 +1,6 @@
 'use client';
 
-import GameInputs from '@/components/modules/gameInputs';
+import GameInputs from '@/components/modules/GameInputs';
 import apiClient from '@/core';
 import useNavigation from '@/hooks/useNavigation';
 import clsxm from '@/service/mergeStyle';
@@ -12,12 +12,12 @@ import SaveIcon from 'public/images/save-icon.svg';
 export default function ScreenSpeedGame() {
 	const navigation = useNavigation();
 
-	const sectionClasses = clsxm('pb-[105px]');
-	const headerClasses = clsxm('flex', 'justify-between', 'px-6', 'py-3');
-	const imageClasses = clsxm('my-20', 'w-[73px]', 'h-[73px]', 'mx-auto', 'bg-gray030');
-	const addClasses = clsxm('flex', 'mx-auto', 'text-sm', 'leading-4');
-	const addIconClasses = clsxm('w-4', 'h-4', 'mr-2');
-	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-6', 'bg-gray010');
+	const sectionClasses = clsxm('pb-[29.17%]');
+	const headerClasses = clsxm('flex', 'justify-between', 'px-[6.67%]', 'py-[3.33%]');
+	const imageClasses = clsxm('my-[22.22%]', 'w-[5.63%]', 'h-[5.63%]', 'mx-auto', 'bg-gray030');
+	const addClasses = clsxm('flex', 'mx-auto', 'text-p1');
+	const addIconClasses = clsxm('w-[4.44%]', 'h-[4.44%]', 'mr-[2.22%]');
+	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-[6.67%]', 'bg-gray010');
 	const buttonClasses = clsxm('bg-blue050', 'text-button', 'rounded');
 
 	return (
@@ -42,7 +42,7 @@ export default function ScreenSpeedGame() {
 			<div className={bottomClasses}>
 				<button
 					type="button"
-					className={`${buttonClasses} flex-1 mr-4 text-white`}
+					className={`${buttonClasses} flex-1 mr-[3.89%] text-white`}
 					onClick={() => {
 						navigation.push('/start-game');
 						apiClient
@@ -58,7 +58,7 @@ export default function ScreenSpeedGame() {
 				>
 					만들기
 				</button>
-				<button type="button" className={`${buttonClasses} flex-0 px-5 py-3`}>
+				<button type="button" className={`${buttonClasses} flex-0 px-[5.56%] py-[3.33%]`}>
 					<SaveIcon />
 				</button>
 			</div>

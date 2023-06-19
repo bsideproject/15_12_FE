@@ -2,21 +2,18 @@ import clsxm from '@/service/mergeStyle';
 
 interface GameInputsProps {
 	caption: string;
-	// eslint-disable-next-line react/require-default-props
 	inputIcon?: string | JSX.Element;
 	placeholder: string;
-	// eslint-disable-next-line react/require-default-props
 	description?: string | null;
-	// eslint-disable-next-line react/require-default-props
 	inputData?: Array<string | number>;
 }
 
 export default function GameInputs({ caption, inputIcon, placeholder, description, inputData }: GameInputsProps) {
-	const containerClasses = clsxm('w-full', 'bg-blue030', 'px-[24px]', 'py-[23px]', 'mb-4');
-	const inputWrapClasses = clsxm('bg-white', 'p-[15px]', 'rounded-[5px]', 'flex', 'items-center', 'mt-2');
-	const inputIconClasses = clsxm('leading-4', 'text-h6', 'mr-[10px]');
-	const inputClasses = clsxm('w-full', 'text-sm', 'leading-4', 'outline-none');
-	const descriptionClasses = clsxm('px-3', 'mt-2', 'text-p2');
+	const containerClasses = clsxm('w-full', 'bg-blue030', 'px-[6.67%]', 'py-[6.39%]', 'mb-[4.44%]');
+	const inputWrapClasses = clsxm('bg-white', 'p-[4.17%]', 'rounded-[1.39%]', 'flex', 'items-center', 'mt-[2.22%]');
+	const inputIconClasses = clsxm('text-h6', 'mr-[2.78%]');
+	const inputClasses = clsxm('w-full', 'text-sm', 'outline-none');
+	const descriptionClasses = clsxm('px-[3.33]', 'mt-[2.22%]', 'text-p2');
 
 	return (
 		<div className={containerClasses}>
