@@ -30,7 +30,7 @@ const onErrorResponse = async (error: AxiosError): Promise<AxiosError> => {
 		try {
 			const session = await getUserSession();
 
-			originalConfig.headers.Authorization = `Bearer ${session.getAccessToken().getJwtToken()}`;
+			originalConfig.headers.Authorization = `Bearer ${session?.getAccessToken().getJwtToken()}`;
 
 			return await apiClient.request(originalConfig);
 		} catch (err) {
