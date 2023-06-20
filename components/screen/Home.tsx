@@ -1,149 +1,86 @@
 'use client';
 
-import { CompatClient, Stomp } from '@stomp/stompjs';
-import { Amplify, Auth } from 'aws-amplify';
-import React, { useEffect, useRef, useState } from 'react';
-import SockJS from 'sockjs-client';
+import React, { useEffect, useState } from 'react';
 
+import ACTIVITY_FIGCAPTION from '@/constants/activityFigcaption';
 import useNavigation from '@/hooks/useNavigation';
+import useQueryActivities from '@/queries/queryFn/useQueryActivities';
 import getUserAttributes from '@/service/getUserAttributes';
-import getUserSession from '@/service/getUserSession';
-import awsConfig from 'aws-exports';
+import clsxm from '@/service/mergeStyle';
+import Logo from 'public/images/home-logo.svg';
+import ButtonIcon from 'public/images/mytemplate-icon.svg';
 
-Amplify.configure(awsConfig);
+import Sidebar from '../modules/Sidebar';
 
 export default function ScreenHome() {
 	const navigation = useNavigation();
 	const [userName, setUserName] = useState<string | boolean>('');
+	const [isSidebar, setIsSidebar] = useState<boolean>(false);
 
 	const handleUserInfo = async () => {
 		const info = await getUserAttributes();
-		console.log(info);
 		setUserName(info.nickname);
-	};
-
-	const test = async () => {
-		const info = await getUserSession();
-
-		console.log(info);
 	};
 
 	useEffect(() => {
 		handleUserInfo();
-		test();
 	}, []);
 
-	/**
-	 * 로그아웃
-	 */
-	const logout = async () => {
-		try {
-			await Auth.signOut();
-			navigation.push('/');
-		} catch (error) {
-			console.log('error signing out: ', error);
-		}
+	const handleToggleSide = () => {
+		setIsSidebar(!isSidebar);
 	};
 
-	/**
-	 * soket 구현
-	 */
+	const { data } = useQueryActivities();
 
-	// const token = async () => {
-	// 	const { session } = await getSession();
-
-	// 	return `Bearer ${session?.getAccessToken().getJwtToken()}`;
-	// };
-
-	// const [messageList, setMessageList] = useState<string[]>([]);
-	// const [message, setMessage] = useState<string>('');
-
-	// const client = useRef<CompatClient>();
-
-	// const subscribe = () => {
-	// 	if (client.current) {
-	// 		client.current.subscribe('/topic/greetings', (body) => {
-	// 			const jsonBody = JSON.parse(body.body);
-	// 			setMessageList((prev) => [...prev, jsonBody.content]);
-	// 		});
-	// 	}
-	// };
-
-	// const connect = () => {
-	// 	client.current = Stomp.over(() => {
-	// 		const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
-	// 		return sock;
-	// 	});
-
-	// 	if (client.current) {
-	// 		client.current.connect({}, () => {
-	// 			console.log('success');
-	// 			subscribe();
-	// 		});
-	// 	}
-	// 	client.current.activate();
-	// };
-
-	// const disconnect = () => {
-	// 	if (client.current) {
-	// 		client.current.deactivate();
-	// 	}
-	// };
-
-	// const publish = (e: React.FormEvent<HTMLFormElement>) => {
-	// 	e.preventDefault();
-
-	// 	if (!client.current?.connected) return;
-
-	// 	client.current?.send(
-	// 		'/app/hello',
-	// 		{},
-	// 		JSON.stringify({
-	// 			name: message,
-	// 		}),
-	// 	);
-
-	// 	setMessage('');
-	// };
-
-	// useEffect(() => {
-	// 	connect();
-
-	// 	return () => {
-	// 		disconnect();
-	// 	};
-	// }, []);
+	const menuWrapClasses = clsxm('flex flex-col justify-between w-[20px] h-[12px]');
+	const menuClasses = clsxm('block w-full bg-gray090 h-[2px]');
+	const templateBtnClasses = clsxm('flex w-full p-[5.13%] mb-[5.13%] bg-[#F5F7F8] border border-gray020 rounded');
+	const templateContentClasses = clsxm(
+		'flex justify-between items-center flex-wrap [&>li:not(:nth-child(5),:nth-child(6))]:mb-[10.81%]',
+	);
 
 	return (
-		<section>
-			<div>
-				{userName ? (
-					<h2>{`회원 이름: ${userName}`}</h2>
-				) : (
-					<button type="button" onClick={() => navigation.push('/login')}>
-						로그인 안 하셨군요 (로그인 버튼)
-					</button>
-				)}
+		<section className="p-[6.67%] relative">
+			<div className="flex items-center justify-between mb-[8%]">
+				<div className="flex justify-between items-center w-[87px]">
+					<Logo />
+					<h1 className="text-h6 text-[#727488]">얼음땡</h1>
+				</div>
+				<button type="button" className={menuWrapClasses} onClick={handleToggleSide}>
+					<span className={menuClasses} />
+					<span className={menuClasses} />
+					<span className={menuClasses} />
+				</button>
 			</div>
-			<button type="button" onClick={logout}>
-				로그아웃
+			<h2 className="text-h3 text-gray090 mb-[8%]">
+				원하는 액티비티를 <br /> 선택하세요
+			</h2>
+			<button type="button" className={templateBtnClasses}>
+				<ButtonIcon />
+				<p className="text-h7 text-gray090 ml-[2.88%]">내 템플릿 사용하기</p>
 			</button>
-			{/* <div>
-				<h3>채팅</h3>
-				<ul>
-					{messageList?.map((msg) => {
-						return <li key={msg}>{msg}</li>;
-					})}
-				</ul>
-				<form onSubmit={publish}>
-					<input
-						type="text"
-						value={message}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)}
-					/>
-					<button type="submit">전송</button>
-				</form>
-			</div> */}
+			<ul className={templateContentClasses}>
+				{data?.map((activity: any) => {
+					return (
+						<li
+							key={activity.activity_id}
+							className="w-[calc(50%-8px)] text-center border border-gray020 rounded overflow-hidden"
+						>
+							<div
+								className="flex items-center justify-center"
+								style={{ backgroundColor: `${ACTIVITY_FIGCAPTION[activity.display_name]?.color}` }}
+							>
+								{ACTIVITY_FIGCAPTION[activity.display_name]?.icon}
+							</div>
+							<div className="px-[10.81%] py-[16.22%] bg-white">
+								<h3 className="text-h7 text-gray090 leading-[1.5625rem] mb-[5.41%]">{activity.display_name}</h3>
+								<p className="text-sh3 text-[#5F6468]">{activity.description}</p>
+							</div>
+						</li>
+					);
+				})}
+			</ul>
+			<Sidebar isSidebar={isSidebar} handleToggleSide={handleToggleSide} userName={userName} />
 		</section>
 	);
 }

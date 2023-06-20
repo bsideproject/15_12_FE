@@ -13,7 +13,7 @@ import clsxm from '@/service/mergeStyle';
 export default function ScreenOnBoarding() {
 	const navigation = useNavigation();
 
-	const sectionClasses = clsxm('p-[6.67%]', 'flex', 'flex-col', 'justify-between', 'h-[100vh]');
+	const sectionClasses = clsxm('p-[6.67%]', 'flex', 'flex-col', 'justify-between', 'h-screen');
 	const textClasses = clsxm('whitespace-pre-wrap', 'text-center', 'text-p1');
 	const buttonClasses = clsxm('bg-blue050', 'text-button', 'rounded', 'w-full');
 

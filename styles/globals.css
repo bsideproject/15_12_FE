@@ -40,4 +40,8 @@
 	.custom-bullet-active {
 		@apply w-[28px] bg-blue050 rounded-lg duration-300;
 	}
+
+	.activity01 {
+		@apply bg-[#E1DEBF];
+	}
 }

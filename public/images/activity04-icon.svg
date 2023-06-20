@@ -1,0 +1,23 @@
+<svg width="148" height="83" viewBox="0 0 148 83" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M72.05 71.9062C91.4352 71.9062 107.15 66.0629 107.15 58.8549C107.15 51.6469 91.4352 45.8037 72.05 45.8037C52.6648 45.8037 36.95 51.6469 36.95 58.8549C36.95 66.0629 52.6648 71.9062 72.05 71.9062Z" fill="url(#paint0_linear_175_229)"/>
+<path d="M113.931 18.0821C113.931 21.1214 111.456 23.5956 108.391 23.5956C105.325 23.5956 102.85 21.1214 102.85 18.0821C102.85 15.0428 105.325 12.5686 108.391 12.5686C111.456 12.5686 113.931 15.0428 113.931 18.0821Z" fill="white" fill-opacity="0.6" stroke="black" stroke-width="3.13725"/>
+<g filter="url(#filter0_b_175_229)">
+<path d="M71.3501 53C76.8729 53 81.3501 48.5228 81.3501 43C81.3501 37.4772 76.8729 33 71.3501 33C65.8273 33 61.3501 37.4772 61.3501 43C61.3501 48.5228 65.8273 53 71.3501 53Z" fill="white" fill-opacity="0.6"/>
+</g>
+<path d="M79.7815 43C79.7815 47.6565 76.0066 51.4314 71.3501 51.4314C66.6936 51.4314 62.9187 47.6565 62.9187 43C62.9187 38.3435 66.6936 34.5686 71.3501 34.5686C76.0066 34.5686 79.7815 38.3435 79.7815 43Z" stroke="black" stroke-width="3.13725"/>
+<path d="M44.6501 27.0821C44.6501 30.1214 42.1751 32.5956 39.1094 32.5956C36.0436 32.5956 33.5686 30.1214 33.5686 27.0821C33.5686 24.0428 36.0436 21.5686 39.1094 21.5686C42.1751 21.5686 44.6501 24.0428 44.6501 27.0821Z" fill="white" fill-opacity="0.6" stroke="black" stroke-width="3.13725"/>
+<path d="M47.0312 32.1406C47.0312 32.1406 59.625 40.9791 59.625 62.8972" stroke="black" stroke-width="3.13725" stroke-miterlimit="10"/>
+<path d="M100.92 22.332C100.92 22.332 83 34.0762 83 63.2059" stroke="black" stroke-width="3.13725" stroke-miterlimit="10"/>
+<defs>
+<filter id="filter0_b_175_229" x="57.3501" y="29" width="28" height="28" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="2"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_175_229"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_175_229" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_175_229" x1="53.5" y1="72" x2="99.4691" y2="55.9129" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0053CF"/>
+<stop offset="1" stop-color="#246EFF" stop-opacity="0.29"/>
+</linearGradient>
+</defs>
+</svg>
