@@ -37,6 +37,7 @@ module.exports = {
 					`${24 / 16}rem`,
 					{
 						fontWeight: '700',
+						lineHeight: `${36 / 16}rem`,
 					},
 				],
 				h4: [
@@ -55,6 +56,14 @@ module.exports = {
 					`${18 / 16}rem`,
 					{
 						fontWeight: '700',
+						lineHeight: `${22 / 16}rem`,
+					},
+				],
+				h7: [
+					`${16 / 16}rem`,
+					{
+						fontWeight: '700',
+						lineHeight: `${19 / 16}rem`,
 					},
 				],
 				sh1: [
@@ -62,6 +71,13 @@ module.exports = {
 					{
 						fontWeight: '500',
 						lineHeight: `${30 / 16}rem`,
+					},
+				],
+				sh3: [
+					`${14 / 16}rem`,
+					{
+						fontWeight: '500',
+						lineHeight: `${17 / 16}rem`,
 					},
 				],
 				p1: [
