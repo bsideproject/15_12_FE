@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import ACTIVITY_FIGCAPTION from '@/constants/activityFigcaption';
 import useNavigation from '@/hooks/useNavigation';
@@ -11,14 +11,19 @@ import Logo from 'public/images/home-logo.svg';
 
 import Sidebar from '../modules/Sidebar';
 
+interface UserInfoState {
+	[key: string]: string | boolean;
+}
+
 export default function ScreenHome() {
 	const navigation = useNavigation();
-	const [userName, setUserName] = useState<string | boolean>('');
+	const [userinfo, setUserInfo] = useState<UserInfoState>({ email: '', nickname: '' });
 	const [isSidebar, setIsSidebar] = useState<boolean>(false);
 
 	const handleUserInfo = async () => {
 		const info = await getUserAttributes();
-		setUserName(info.nickname);
+
+		setUserInfo({ email: info.email, nickname: info.nickname });
 	};
 
 	useEffect(() => {
@@ -82,7 +87,7 @@ export default function ScreenHome() {
 					);
 				})}
 			</ul>
-			<Sidebar isSidebar={isSidebar} handleToggleSide={handleToggleSide} userName={userName} />
+			<Sidebar isSidebar={isSidebar} handleToggleSide={handleToggleSide} userinfo={userinfo} />
 		</section>
 	);
 }

@@ -1,6 +1,7 @@
+import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 
-const getUserSession = async () => {
+const getUserSession = async (): Promise<CognitoUserSession | null> => {
 	try {
 		const token = await Auth.currentSession();
 		return token;
