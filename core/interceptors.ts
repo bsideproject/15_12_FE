@@ -32,11 +32,11 @@ const onErrorResponse = async (error: AxiosError): Promise<AxiosError> => {
 
 			if (session) {
 				originalConfig.headers.Authorization = `Bearer ${session?.getAccessToken().getJwtToken()}`;
-				await apiClient.request(originalConfig);
-			} else {
-				alert('로그인 시간이 만료되었습니다. 다시 로그인 해 주세요.');
-				window.location.href = '/login';
+				return await apiClient.request(originalConfig);
 			}
+
+			alert('로그인 시간이 만료되었습니다. 다시 로그인 해 주세요.');
+			window.location.href = '/login';
 		} catch (err) {
 			throw err;
 		}
