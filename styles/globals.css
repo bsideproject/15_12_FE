@@ -42,3 +42,7 @@
 		@apply w-[28px] bg-blue050 rounded-lg duration-300;
 	}
 }
+
+.swiper-pagination {
+	bottom: 15% !important;
+}
