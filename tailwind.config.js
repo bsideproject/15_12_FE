@@ -101,7 +101,7 @@ module.exports = {
 					},
 				],
 				button: [
-					`${20 / 16}rem`,
+					`${19 / 16}rem`,
 					{
 						fontWeight: '800',
 						lineHeight: `${54 / 16}rem`,

@@ -12,10 +12,10 @@ export default function ScreenSplash() {
 
 	return (
 		<div className={sectionClasses}>
-			<div className="text-center mt-[25.64%]">
+			<div className="text-center mt-[24.04%]">
 				<Logo className="mx-auto" />
-				<h2 className="text-h1 text-gray090 mt-[6.41%] mb-[3.85%]">어색한 사이 이제 끝!</h2>
-				<p className="text-sh1 text-gray090">
+				<h2 className="text-h1 text-gray090 mt-[9.62%] mb-[3.85%]">어색한 사이 이제 끝!</h2>
+				<p className="text-p1 text-gray090">
 					꽁꽁 얼어붙은 어색함을 부숴줄 <br /> 아이스 브레이킹 도구 모음
 				</p>
 			</div>
