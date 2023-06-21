@@ -9,11 +9,20 @@ interface GameInputsProps {
 }
 
 export default function GameInputs({ caption, inputIcon, placeholder, description, inputData }: GameInputsProps) {
-	const containerClasses = clsxm('w-full', 'bg-blue030', 'px-[6.67%]', 'py-[6.39%]', 'mb-[4.44%]');
-	const inputWrapClasses = clsxm('bg-white', 'p-[4.17%]', 'rounded-[1.39%]', 'flex', 'items-center', 'mt-[2.22%]');
-	const inputIconClasses = clsxm('text-h6', 'mr-[2.78%]');
-	const inputClasses = clsxm('w-full', 'text-sm', 'outline-none');
-	const descriptionClasses = clsxm('px-[3.33]', 'mt-[2.22%]', 'text-p2');
+	const containerClasses = clsxm('w-full', 'bg-white', 'px-[6.67%]', 'py-[6.39%]', 'mb-[4.44%]');
+	const inputWrapClasses = clsxm(
+		'px-[6.67%]',
+		'py-[4.17%]',
+		'rounded',
+		'flex',
+		'items-center',
+		'mt-[2.22%]',
+		'border',
+		'border-blue030',
+	);
+	const inputIconClasses = clsxm('text-h4', 'mr-[2.78%]', 'text-gray070');
+	const inputClasses = clsxm('w-full', 'text-p2', 'outline-none');
+	const descriptionClasses = clsxm('px-[3.33%]', 'mt-[2.22%]', 'text-p2', 'text-gray070');
 
 	return (
 		<div className={containerClasses}>

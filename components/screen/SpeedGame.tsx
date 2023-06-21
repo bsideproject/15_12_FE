@@ -7,17 +7,18 @@ import clsxm from '@/service/mergeStyle';
 import AddIcon from 'public/images/add-icon.svg';
 import CheckIcon from 'public/images/check-icon.svg';
 import CloseIcon from 'public/images/close-icon.svg';
+import GameIcon from 'public/images/game-icon.svg';
 import SaveIcon from 'public/images/save-icon.svg';
 
 export default function ScreenSpeedGame() {
 	const navigation = useNavigation();
 
 	const sectionClasses = clsxm('pb-[29.17%]');
-	const headerClasses = clsxm('flex', 'justify-between', 'px-[6.67%]', 'py-[3.33%]');
-	const imageClasses = clsxm('my-[22.22%]', 'w-[5.63%]', 'h-[5.63%]', 'mx-auto', 'bg-gray030');
-	const addClasses = clsxm('flex', 'mx-auto', 'text-p1');
-	const addIconClasses = clsxm('w-[4.44%]', 'h-[4.44%]', 'mr-[2.22%]');
-	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-[6.67%]', 'bg-gray010');
+	const headerClasses = clsxm('flex', 'items-center', 'justify-between', 'px-[6.67%]', 'py-[3.33%]');
+	const imageClasses = clsxm('my-[22.22%]', 'mx-auto');
+	const addClasses = clsxm('flex', 'mx-auto', 'text-p1', 'justify-center', 'items-center');
+	const addIconClasses = clsxm('mr-[2.22%]');
+	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-[6.67%]');
 	const buttonClasses = clsxm('bg-blue050', 'text-button', 'rounded');
 
 	return (
@@ -26,7 +27,7 @@ export default function ScreenSpeedGame() {
 				<h2 className="text-h2">스피드 게임</h2>
 				<CloseIcon />
 			</header>
-			<div className={imageClasses} />
+			<GameIcon className={imageClasses} />
 			<GameInputs caption="문제" inputIcon="Q1" placeholder="문제를 입력해 주세요." />
 			<GameInputs
 				caption="Q1 답안"
@@ -35,18 +36,18 @@ export default function ScreenSpeedGame() {
 				description="정답인 경우, 체크표시가 뜨도록 두 번 눌러주세요."
 				inputData={[1, 2, 3]}
 			/>
-			<button type="button" className={addClasses}>
+			<div className={addClasses}>
 				<AddIcon className={addIconClasses} />
-				문제 만들기
-			</button>
+				<p className="text-p1 text-gray070">문제 추가하기</p>
+			</div>
 			<div className={bottomClasses}>
 				<button
 					type="button"
 					className={`${buttonClasses} flex-1 mr-[3.89%] text-white`}
 					onClick={() => {
-						navigation.push('/start-game');
+						// navigation.push('/start-game');
 						apiClient
-							.get('https://api.bside1512.dev/activity/speedgame')
+							.post('/activity/speedgame')
 							.then((res) => {
 								console.log('res..', res);
 								navigation.push('/start-game');
