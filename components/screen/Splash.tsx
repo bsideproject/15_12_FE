@@ -5,7 +5,7 @@ import clsxm from '@/service/mergeStyle';
 import Logo from 'public/images/splash-logo.svg';
 
 export default function ScreenSplash() {
-	const sectionClasses = clsxm('p-[6.67%]', 'flex', 'flex-col', 'justify-between', 'h-screen');
+	const sectionClasses = clsxm('p-[6.67%]', 'flex', 'flex-col', 'justify-between', 'h-real-screen');
 	const buttonClasses = clsxm('bg-blue050', 'text-button', 'rounded', 'w-full');
 
 	const navigation = useNavigation();

@@ -44,7 +44,7 @@ export default function ScreenOnBoarding() {
 		'flex',
 		'flex-col',
 		'justify-between',
-		'h-screen',
+		'h-real-screen',
 	);
 	const textClasses = clsxm('whitespace-pre-wrap', 'text-center', 'text-p1');
 	const buttonClasses = clsxm('bg-blue050', 'text-h7', 'leading-[3rem]', 'rounded', 'w-full');

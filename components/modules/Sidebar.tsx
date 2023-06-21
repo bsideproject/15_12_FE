@@ -44,7 +44,7 @@ export default function Sidebar({ isSidebar, handleToggleSide, userName }: Sideb
 	};
 
 	const sidebarClasses = clsxm(
-		`flex flex-col justify-between absolute top-0 right-0 w-[75%] h-screen bg-white ease-in-out duration-300 pt-[13.33%] pb-[8.33%] px-[4.44%] ${
+		`flex flex-col justify-between absolute top-0 right-0 w-[75%] h-real-screen bg-white ease-in-out duration-300 pt-[13.33%] pb-[8.33%] px-[4.44%] ${
 			isSidebar ? 'translate-x-0 visible' : 'translate-x-full invisible'
 		}`,
 	);
