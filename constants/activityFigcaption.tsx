@@ -8,12 +8,10 @@ interface ActivityFigcaptionType {
 }
 
 const ACTIVITY_FIGCAPTION: ActivityFigcaptionType = {
-	스피드게임: { color: '#E1DEBF', icon: <ActivityIcon01 /> },
-	'진진가 게임': { color: '#DDCACA', icon: <ActivityIcon02 /> },
+	'스피드 게임': { color: '#E1DEBF', icon: <ActivityIcon01 /> },
 	'감사 서클': { color: '#CADDD4', icon: <ActivityIcon03 /> },
 	'기분 체크인': { color: '#CAD1DD', icon: <ActivityIcon04 /> },
-	'미니 네트워킹': { color: '#D0CADD', icon: <ActivityIcon01 /> },
-	'이미지 게임': { color: '#DDD2CA', icon: <ActivityIcon01 /> },
+	'미니 네트워킹': { color: '#D0CADD', icon: <ActivityIcon02 /> },
 };
 
 export default ACTIVITY_FIGCAPTION;

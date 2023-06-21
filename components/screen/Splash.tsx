@@ -11,7 +11,7 @@ export default function ScreenSplash() {
 	const navigation = useNavigation();
 
 	return (
-		<div className={sectionClasses}>
+		<section className={sectionClasses}>
 			<div className="text-center mt-[24.04%]">
 				<Logo className="mx-auto w-[41.67%]" />
 				<h2 className="text-h1 text-gray090 mt-[9.62%] mb-[3.85%]">어색한 사이 이제 끝!</h2>
@@ -22,6 +22,6 @@ export default function ScreenSplash() {
 			<button type="button" className={`${buttonClasses} text-white`} onClick={() => navigation.push('/on-boarding')}>
 				시작하기
 			</button>
-		</div>
+		</section>
 	);
 }

@@ -50,7 +50,7 @@ export default function ScreenOnBoarding() {
 	const buttonClasses = clsxm('bg-blue050', 'text-h7', 'leading-[3rem]', 'rounded', 'w-full');
 
 	return (
-		<div className={sectionClasses}>
+		<section className={sectionClasses}>
 			<div className="text-right mb-[12.82%]">
 				<button type="button" className="text-p2 text-gray080" onClick={() => navigation.push('/home')}>
 					Skip
@@ -69,6 +69,6 @@ export default function ScreenOnBoarding() {
 			<button type="button" className={`${buttonClasses} text-white`} onClick={nextButton}>
 				{sliderIndex === 2 ? '시작하기' : '다음'}
 			</button>
-		</div>
+		</section>
 	);
 }
