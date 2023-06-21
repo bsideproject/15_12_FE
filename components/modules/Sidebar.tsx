@@ -19,10 +19,10 @@ export default function Sidebar({ isSidebar, handleToggleSide, userName }: Sideb
 	useEffect(() => {
 		if (isSidebar) {
 			document.body.style.cssText = `
-          position: fixed; 
-          top: -${window.scrollY}px;
-          overflow-y: scroll;
-          width: 100%;`;
+          		position: fixed; 
+          		top: -${window.scrollY}px;
+          		overflow-y: scroll;
+          		width: 100%;`;
 		}
 		return () => {
 			const scrollY = document.body.style.top;
@@ -54,7 +54,7 @@ export default function Sidebar({ isSidebar, handleToggleSide, userName }: Sideb
 	return (
 		<aside className={sidebarClasses}>
 			<div>
-				<button type="button" onClick={handleToggleSide} className="mb-[20.17%]">
+				<button type="button" onClick={handleToggleSide} className="mb-[16.81%]">
 					<Close />
 				</button>
 				<ul className="ml-[10.08%]">
