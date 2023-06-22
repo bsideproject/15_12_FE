@@ -1,18 +1,15 @@
 'use client';
 
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
-import { Amplify, Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
 import clsxm from '@/service/mergeStyle';
-import awsConfig from 'aws-exports';
 import Close from 'public/images/close-icon.svg';
 import Google from 'public/images/google-icon.svg';
 import Kakao from 'public/images/kakao-icon.svg';
-
-Amplify.configure(awsConfig);
 
 interface LoginState extends React.InputHTMLAttributes<HTMLInputElement> {
 	email: string;
@@ -51,25 +48,6 @@ export default function ScreenLogin() {
 			}
 
 			console.log(err);
-		}
-	};
-
-	const forgotPassword = () => {
-		const username = prompt('가입하신 이메일을 입력해 주세요.');
-
-		if (username) {
-			Auth.forgotPassword(username)
-				.then(() => {
-					const verificationCode = prompt('입력하신 이메일로 발송된 코드를 입력해 주세요 ', '');
-					const newPassword = prompt('새로운 비밀번호를 입력해 주세요.', '');
-					Auth.forgotPasswordSubmit(username, verificationCode!, newPassword!)
-						.then(() => alert('비밀번호가 변경되었습니다.'))
-						.catch((err) => console.log(err));
-				})
-				.catch((err) => {
-					console.log(err);
-					alert('가입하지 않은 이메일입니다.');
-				});
 		}
 	};
 
@@ -139,7 +117,7 @@ export default function ScreenLogin() {
 				>
 					회원가입 하기
 				</button>
-				<button className="text-p2 text-gray070" type="button" onClick={forgotPassword}>
+				<button className="text-p2 text-gray070" type="button" onClick={() => navigation.push('/forgot-password')}>
 					비밀번호를 잊으셨나요?
 				</button>
 			</div>

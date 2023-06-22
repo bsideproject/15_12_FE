@@ -17,7 +17,7 @@ const inputClasses = clsxm(
 	'py-[4.65%]',
 	'px-[7.69%]',
 	'placeholder:text-gray020',
-	'focus:border-0',
+	'focus:!outline-none',
 );
 
 export default function ElInput({ id, type, register, placeholder, margin }: ElInputProps) {
