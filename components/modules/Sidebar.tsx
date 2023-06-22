@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import useNavigation from '@/hooks/useNavigation';
 import clsxm from '@/service/mergeStyle';
-import Close from 'public/images/back-icon.svg';
+import Back from 'public/images/back-icon.svg';
 
 interface SidebarProps {
 	isSidebar: boolean;
@@ -63,7 +63,7 @@ export default function Sidebar({ isSidebar, handleToggleSide, userinfo }: Sideb
 		<aside className={sidebarClasses}>
 			<div>
 				<button type="button" onClick={handleToggleSide} className="mb-[16.81%] ml-[5.93%]">
-					<Close />
+					<Back />
 				</button>
 				<div className="ml-[10.08%]">
 					{userinfo.email && (

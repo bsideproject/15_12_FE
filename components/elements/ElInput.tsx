@@ -6,8 +6,8 @@ interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	id: string;
 	placeholder: string;
 	type: 'text' | 'password';
-	register: null | UseFormRegisterReturn;
-	margin: string;
+	register?: null | UseFormRegisterReturn;
+	margin?: string;
 }
 
 const inputClasses = clsxm(
@@ -33,3 +33,8 @@ export default function ElInput({ id, type, register, placeholder, margin }: ElI
 		</label>
 	);
 }
+
+ElInput.defaultProps = {
+	register: null,
+	margin: '',
+};
