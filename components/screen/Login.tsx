@@ -6,7 +6,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
+import clsxm from '@/service/mergeStyle';
 import awsConfig from 'aws-exports';
+import Close from 'public/images/close-icon.svg';
+import Google from 'public/images/google-icon.svg';
+import Kakao from 'public/images/kakao-icon.svg';
 
 Amplify.configure(awsConfig);
 
@@ -69,32 +73,76 @@ export default function ScreenLogin() {
 		}
 	};
 
+	const sectionClasses = clsxm('pt-[3.33%]', 'px-[6.67%]', 'pb-[8.33%]', 'relative');
+	const buttonClasses = clsxm('bg-blue050', 'text-h7', 'leading-[3rem]', 'rounded', 'w-full');
+	const oauthClasses = clsxm('border', 'bg-white', 'w-[48px]', 'h-[48px]', 'rounded-[50%]');
+	const registerBtnClasses = clsxm(
+		'border-blue050',
+		'bg-transparent',
+		'text-h7',
+		'leading-[3rem]',
+		'rounded',
+		'w-full',
+		'mt-[5.13%]',
+		'mb-[10.26%]',
+	);
+
 	return (
-		<section>
-			<h2 className="text-h2">로그인</h2>
-			<form onSubmit={handleSubmit(handleLogin)}>
-				<ElInput id="email" label="email" type="text" register={register('email')} />
-				<ElInput id="password" label="password" type="password" register={register('password')} />
+		<section className={sectionClasses}>
+			<div className="flex justify-end mb-[11.54%]">
+				<Close />
+			</div>
+			<h2 className="text-h3 text-gray090 mb-[5.13%]">로그인</h2>
+			<form className="mb-[10.26%]" onSubmit={handleSubmit(handleLogin)}>
+				<ElInput id="email" placeholder="아이디(이메일)" type="text" margin="mb-[2.56%]" register={register('email')} />
+				<ElInput
+					id="password"
+					type="password"
+					placeholder="비밀번호"
+					margin="mb-[5.13%]"
+					register={register('password')}
+				/>
 				<button
-					className="bg-[#ff7777] disabled:bg-[#c9c9cb]"
+					className={`${buttonClasses} text-white`}
 					type="submit"
 					disabled={Object.values(watch()).length === 0 || Object.values(watch()).includes('')}
 				>
-					login
+					로그인
 				</button>
 			</form>
-			<button type="button" onClick={() => navigation.push('/register')}>
-				회원가입 하러 가기
-			</button>
-			<button type="button" onClick={forgotPassword}>
-				비밀번호 찾기
-			</button>
-			<button type="button" onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })}>
-				구글 로그인(amplify)
-			</button>
-			<button type="button" onClick={() => Auth.federatedSignIn({ customProvider: 'kakao' })}>
-				카카오 로그인
-			</button>
+			<div className="text-center mb-[10.26%]">
+				<span className="text-p2 text-gray070">또는 SNS 계정으로 로그인하기</span>
+				<div className="flex justify-center items-center my-[5.13%]">
+					<button
+						className={`${oauthClasses} border-gray020`}
+						type="button"
+						onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })}
+					>
+						<Google className="mx-auto" />
+					</button>
+					<button
+						className={`${oauthClasses} border-gray020 ml-[3.21%]`}
+						type="button"
+						onClick={() => Auth.federatedSignIn({ customProvider: 'kakao' })}
+					>
+						<Kakao className="mx-auto" />
+					</button>
+				</div>
+				<hr className="border-none w-[19.23%] h-[1px] bg-gray020 mx-auto" />
+			</div>
+			<div className="text-center">
+				<span className="text-p2 text-gray080">회원가입하고 나만의 템플릿을 만들어보세요!</span>
+				<button
+					type="button"
+					className={`${registerBtnClasses} border text-blue050`}
+					onClick={() => navigation.push('/register')}
+				>
+					회원가입 하기
+				</button>
+				<button className="text-p2 text-gray070" type="button" onClick={forgotPassword}>
+					비밀번호를 잊으셨나요?
+				</button>
+			</div>
 		</section>
 	);
 }

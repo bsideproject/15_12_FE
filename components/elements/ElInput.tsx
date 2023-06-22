@@ -1,17 +1,35 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 
+import clsxm from '@/service/mergeStyle';
+
 interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	id: string;
-	label: string;
+	placeholder: string;
 	type: 'text' | 'password';
 	register: null | UseFormRegisterReturn;
+	margin: string;
 }
 
-export default function ElInput({ id, label, type, register }: ElInputProps) {
+const inputClasses = clsxm(
+	'w-full',
+	'rounded',
+	'border',
+	'py-[4.65%]',
+	'px-[7.69%]',
+	'placeholder:text-gray020',
+	'focus:border-0',
+);
+
+export default function ElInput({ id, type, register, placeholder, margin }: ElInputProps) {
 	return (
 		<label htmlFor={id}>
-			{label}
-			<input id={id} type={type} {...register} />
+			<input
+				className={`${inputClasses} ${margin} border-blue030`}
+				id={id}
+				type={type}
+				placeholder={placeholder}
+				{...register}
+			/>
 		</label>
 	);
 }
