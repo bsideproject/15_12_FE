@@ -3,6 +3,7 @@
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 
+import useNavigation from '@/hooks/useNavigation';
 import clsxm from '@/service/mergeStyle';
 import Back from 'public/images/back-sm-icon.svg';
 
@@ -10,6 +11,8 @@ import ElInput from '../elements/ElInput';
 import ForgotPwdForm from '../modules/ForgotPwdForm';
 
 export default function ScreenForgotPwd() {
+	const navigation = useNavigation();
+
 	const [userEmail, setUserEmail] = useState<string>('');
 
 	const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +47,9 @@ export default function ScreenForgotPwd() {
 		<section className={sectionClasses}>
 			<div>
 				<div className="flex items-center mb-[10.26%]">
-					<Back />
+					<button type="button" onClick={() => navigation.push('/login')}>
+						<Back />
+					</button>
 					<span className="text-p1 text-gray090 ml-[2.56%]">비밀번호 찾기</span>
 				</div>
 				<h2 className="text-h3 text-gray090 mb-[2.56%]">비밀번호가 기억나지 않으세요?</h2>

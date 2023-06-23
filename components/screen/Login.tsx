@@ -68,7 +68,9 @@ export default function ScreenLogin() {
 	return (
 		<section className={sectionClasses}>
 			<div className="flex justify-end mb-[11.54%]">
-				<Close />
+				<button type="button" onClick={() => navigation.push('/home')}>
+					<Close />
+				</button>
 			</div>
 			<h2 className="text-h3 text-gray090 mb-[5.13%]">로그인</h2>
 			<form className="mb-[10.26%]" onSubmit={handleSubmit(handleLogin)}>
