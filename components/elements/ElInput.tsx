@@ -6,25 +6,25 @@ interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	id: string;
 	placeholder: string;
 	type: 'text' | 'password';
-	register?: null | UseFormRegisterReturn;
+	register?: UseFormRegisterReturn;
 	margin?: string;
+	padding?: string;
 }
 
-const inputClasses = clsxm(
-	'w-full',
-	'rounded',
-	'border',
-	'py-[4.65%]',
-	'px-[7.69%]',
-	'placeholder:text-gray020',
-	'focus:!outline-none',
-);
+const inputClasses = clsxm('w-full', 'rounded', 'border', 'placeholder:text-gray020', 'focus:!outline-none');
 
-export default function ElInput({ id, type, register, placeholder, margin }: ElInputProps) {
+export default function ElInput({
+	id,
+	type,
+	register,
+	placeholder,
+	margin,
+	padding = 'py-[4.65%] px-[7.69%]',
+}: ElInputProps) {
 	return (
-		<label htmlFor={id}>
+		<label htmlFor={id} className="w-full">
 			<input
-				className={`${inputClasses} ${margin} border-blue030`}
+				className={`${inputClasses} ${margin} ${padding} border-blue030`}
 				id={id}
 				type={type}
 				placeholder={placeholder}
@@ -33,8 +33,3 @@ export default function ElInput({ id, type, register, placeholder, margin }: ElI
 		</label>
 	);
 }
-
-ElInput.defaultProps = {
-	register: null,
-	margin: '',
-};

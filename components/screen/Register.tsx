@@ -68,13 +68,18 @@ export default function ScreenRegister() {
 		<section>
 			<h2>회원가입</h2>
 			<form onSubmit={handleSubmit(handleRegister)}>
-				<ElInput id="email" label="email" type="text" register={register('email')} />
+				<ElInput id="email" type="text" placeholder="이메일을 입력해주세요" register={register('email')} />
 				<p className="text-[red]">{errors.email?.message}</p>
-				<ElInput id="password" label="password" type="password" register={register('password')} />
+				<ElInput id="password" type="password" placeholder="비밀번호를 입력해주세요" register={register('password')} />
 				<p className="text-[red]">{errors.password?.message}</p>
-				<ElInput id="passwordConfirm" label="password 확인" type="password" register={register('passwordConfirm')} />
+				<ElInput
+					id="passwordConfirm"
+					type="password"
+					placeholder="비밀번호를 재입력해주세요"
+					register={register('passwordConfirm')}
+				/>
 				<p className="text-[red]">{errors.passwordConfirm?.message}</p>
-				<ElInput id="name" label="이름" type="text" register={register('name')} />
+				<ElInput id="name" type="text" placeholder="이름을 입력해주세요" register={register('name')} />
 				<p className="text-[red]">{errors.name?.message}</p>
 				<button
 					className="bg-[#ff7777] disabled:bg-[#c9c9cb]"
