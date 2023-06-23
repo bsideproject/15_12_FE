@@ -1,11 +1,17 @@
 'use client';
 
 import { Auth } from 'aws-amplify';
+import { useState } from 'react';
 
 import clsxm from '@/service/mergeStyle';
-import Back from 'public/images/back-s-icon.svg';
+import Back from 'public/images/back-sm-icon.svg';
 
 import ElInput from '../elements/ElInput';
+import PasswordField from '../modules/PasswordField';
+
+interface ShowState {
+	[key: string]: boolean;
+}
 
 export default function ScreenForgotPassword() {
 	const forgotPassword = async () => {
@@ -50,6 +56,20 @@ export default function ScreenForgotPassword() {
 	const formClasses = clsxm('flex', 'flex-col', 'justify-between', 'grow');
 	const submitClasses = clsxm('bg-blue050', 'text-h7', 'leading-[3rem]', 'rounded', 'w-full');
 
+	const [show, setShow] = useState<ShowState>({ password: false, passwordConfirm: false });
+
+	const handleInputType = (name: string) => {
+		if (show[name]) {
+			setShow((prev) => {
+				return { ...prev, [name]: false };
+			});
+		} else {
+			setShow((prev) => {
+				return { ...prev, [name]: true };
+			});
+		}
+	};
+
 	return (
 		<section className={sectionClasses}>
 			<div>
@@ -70,9 +90,22 @@ export default function ScreenForgotPassword() {
 			</div>
 			<form className={formClasses}>
 				<div>
-					<ElInput id="code" type="text" placeholder="인증 코드 입력" />
-					<ElInput id="password" type="password" placeholder="비밀번호를 입력해주세요" />
-					<ElInput id="passwordConfirm" type="password" placeholder="비밀번호를 재입력해주세요" />
+					<ElInput id="code" type="text" placeholder="인증 코드 입력" margin="mb-[2.56%]" />
+					<PasswordField name="password" show={show.password} handleInputType={handleInputType}>
+						<ElInput
+							id="password"
+							type={show.password ? 'text' : 'password'}
+							placeholder="비밀번호를 입력해주세요"
+							margin="mb-[2.56%]"
+						/>
+					</PasswordField>
+					<PasswordField name="passwordConfirm" show={show.passwordConfirm} handleInputType={handleInputType}>
+						<ElInput
+							id="passwordConfirm"
+							type={show.passwordConfirm ? 'text' : 'password'}
+							placeholder="비밀번호를 재입력해주세요"
+						/>
+					</PasswordField>
 				</div>
 				<button type="submit" className={`${submitClasses} text-white`}>
 					비밀번호 변경
