@@ -3,6 +3,7 @@
 import GameInputs from '@/components/modules/GameInputs';
 import apiClient from '@/core';
 import useNavigation from '@/hooks/useNavigation';
+import useNotify from '@/hooks/useNotify';
 import clsxm from '@/service/mergeStyle';
 import AddIcon from 'public/images/add-icon.svg';
 import CheckIcon from 'public/images/check-icon.svg';
@@ -12,6 +13,7 @@ import SaveIcon from 'public/images/save-icon.svg';
 
 export default function ScreenSpeedGame() {
 	const navigation = useNavigation();
+	const toast = useNotify();
 
 	const sectionClasses = clsxm('pb-[29.17%]');
 	const headerClasses = clsxm('flex', 'items-center', 'justify-between', 'px-[6.67%]', 'py-[3.33%]');
@@ -38,7 +40,9 @@ export default function ScreenSpeedGame() {
 			/>
 			<div className={addClasses}>
 				<AddIcon className={addIconClasses} />
-				<p className="text-p1 text-gray070">문제 추가하기</p>
+				<button type="button" className="text-p1 text-gray070">
+					문제 추가하기
+				</button>
 			</div>
 			<div className={bottomClasses}>
 				<button
@@ -59,7 +63,11 @@ export default function ScreenSpeedGame() {
 				>
 					만들기
 				</button>
-				<button type="button" className={`${buttonClasses} flex-0 px-[5.56%] py-[3.33%]`}>
+				<button
+					type="button"
+					className={`${buttonClasses} flex-0 px-[5.56%] py-[3.33%]`}
+					onClick={() => toast.success('템플릿이 저장되었습니다.')}
+				>
 					<SaveIcon />
 				</button>
 			</div>

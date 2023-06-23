@@ -1,19 +1,21 @@
 'use client';
 
 import useNavigation from '@/hooks/useNavigation';
+import useNotify from '@/hooks/useNotify';
 import clsxm from '@/service/mergeStyle';
 import PersonIcon from 'public/images/person-icon.svg';
 
 export default function ScreenStartGame() {
 	const router = useNavigation();
+	const toast = useNotify();
 	const currentUrl = router.path;
 
 	const copyUrl = async () => {
 		try {
 			await navigator.clipboard.writeText(currentUrl());
-			window.alert('링크를 복사했습니다.');
+			toast.success('링크를 복사했습니다.');
 		} catch (e) {
-			window.alert('링크 복사에 실패했습니다.');
+			toast.error('링크 복사에 실패했습니다.');
 		}
 	};
 
