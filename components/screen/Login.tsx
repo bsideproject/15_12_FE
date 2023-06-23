@@ -117,7 +117,7 @@ export default function ScreenLogin() {
 				>
 					회원가입 하기
 				</button>
-				<button className="text-p2 text-gray070" type="button" onClick={() => navigation.push('/forgot-password')}>
+				<button className="text-p2 text-gray070" type="button" onClick={() => navigation.push('/forgot-pwd')}>
 					비밀번호를 잊으셨나요?
 				</button>
 			</div>
