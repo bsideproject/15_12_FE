@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
+import useNotify from '@/hooks/useNotify';
 import clsxm from '@/service/mergeStyle';
 import Close from 'public/images/close-icon.svg';
 import Google from 'public/images/google-icon.svg';
@@ -23,6 +24,7 @@ interface LoginError extends Error {
 
 export default function ScreenLogin() {
 	const navigation = useNavigation();
+	const test = useNotify();
 
 	const { register, handleSubmit, watch } = useForm<LoginState>();
 
@@ -31,7 +33,7 @@ export default function ScreenLogin() {
 
 		try {
 			await Auth.signIn(email, password);
-
+			test.success('로그인 성공!');
 			navigation.push('/home');
 		} catch (err: unknown) {
 			const loginError = err as LoginError;
