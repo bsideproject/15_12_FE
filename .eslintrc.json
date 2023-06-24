@@ -39,6 +39,7 @@
 				"extensions": [".ts", ".tsx"]
 			}
 		],
+		"react/require-default-props": "off",
 		"no-useless-catch": "off",
 		"import/no-cycle": "off",
 		"no-param-reassign": ["error", { "props": false }],

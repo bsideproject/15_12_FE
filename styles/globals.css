@@ -1,7 +1,10 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.7/static/pretendard.css');
+@import url('https://unpkg.com/pretendard@1.3.7/dist/web/static/pretendard.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
 
 @layer base {
 	html,
@@ -11,7 +14,9 @@
 	}
 
 	html {
-		font-family: 'Pretendard-Regular';
+		font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+			'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+			'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 	}
 
 	body {
@@ -26,11 +31,7 @@
 
 @layer components {
 	.layout {
-		max-width: 480px;
-		margin: 0 auto;
-		width: auto;
-		min-height: 100%;
-		box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+		@apply max-w-[480px] w-auto min-h-full mx-auto overflow-x-hidden shadow-lg;
 	}
 
 	.custom_bullet {
@@ -40,8 +41,8 @@
 	.custom-bullet-active {
 		@apply w-[28px] bg-blue050 rounded-lg duration-300;
 	}
+}
 
-	.activity01 {
-		@apply bg-[#E1DEBF];
-	}
+.swiper-pagination {
+	bottom: 15% !important;
 }

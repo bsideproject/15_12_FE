@@ -30,12 +30,15 @@ const onErrorResponse = async (error: AxiosError): Promise<AxiosError> => {
 		try {
 			const session = await getUserSession();
 
-			originalConfig.headers.Authorization = `Bearer ${session?.getAccessToken().getJwtToken()}`;
+			if (session) {
+				originalConfig.headers.Authorization = `Bearer ${session?.getAccessToken().getJwtToken()}`;
+				return await apiClient.request(originalConfig);
+			}
 
-			return await apiClient.request(originalConfig);
-		} catch (err) {
-			window.location.href = '/';
 			alert('로그인 시간이 만료되었습니다. 다시 로그인 해 주세요.');
+			window.location.href = '/login';
+		} catch (err) {
+			throw err;
 		}
 		return Promise.reject(error);
 	}

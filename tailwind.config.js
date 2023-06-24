@@ -7,6 +7,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			height: {
+				'real-screen': 'calc(var(--vh) * 100)',
+			},
 			colors: {
 				gray010: '#E7EAEE',
 				gray020: '#DBDCDD',
@@ -24,84 +27,88 @@ module.exports = {
 					`${28 / 16}rem`,
 					{
 						fontWeight: '700',
-						lineHeight: `${42 / 16}rem`,
+						lineHeight: '150%',
 					},
 				],
 				h2: [
 					`${26 / 16}rem`,
 					{
 						fontWeight: '700',
+						lineHeight: '150%',
 					},
 				],
 				h3: [
 					`${24 / 16}rem`,
 					{
 						fontWeight: '700',
-						lineHeight: `${36 / 16}rem`,
+						lineHeight: '150%',
 					},
 				],
 				h4: [
 					`${22 / 16}rem`,
 					{
 						fontWeight: '700',
+						lineHeight: '150%',
 					},
 				],
 				h5: [
 					`${20 / 16}rem`,
 					{
 						fontWeight: '700',
+						lineHeight: '150%',
 					},
 				],
 				h6: [
 					`${18 / 16}rem`,
 					{
 						fontWeight: '700',
-						lineHeight: `${22 / 16}rem`,
+						lineHeight: '150%',
 					},
 				],
 				h7: [
 					`${16 / 16}rem`,
 					{
 						fontWeight: '700',
-						lineHeight: `${19 / 16}rem`,
+						lineHeight: '150%',
 					},
 				],
 				sh1: [
 					`${18 / 16}rem`,
 					{
 						fontWeight: '500',
-						lineHeight: `${30 / 16}rem`,
+						lineHeight: '150%',
 					},
 				],
 				sh3: [
 					`${14 / 16}rem`,
 					{
 						fontWeight: '500',
-						lineHeight: `${17 / 16}rem`,
+						lineHeight: '150%',
 					},
 				],
 				p1: [
 					`${16 / 16}rem`,
 					{
 						fontWeight: '400',
-						lineHeight: `${24 / 16}rem`,
+						lineHeight: '150%',
 					},
 				],
 				p2: [
 					`${14 / 16}rem`,
 					{
 						fontWeight: '400',
-						lineHeight: `${17 / 16}rem`,
+						lineHeight: '150%',
 					},
 				],
 				c: [
 					`${12 / 16}rem`,
 					{
 						fontWeight: '400',
+						lineHeight: '150%',
 					},
 				],
 				button: [
-					`${20 / 16}rem`,
+					`${19 / 16}rem`,
 					{
 						fontWeight: '800',
 						lineHeight: `${54 / 16}rem`,
