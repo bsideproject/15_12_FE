@@ -28,7 +28,6 @@ export default function PwdField({
 				id={name}
 				type={show ? 'text' : 'password'}
 				placeholder={name === 'password' ? '비밀번호를 입력해주세요' : '비밀번호를 재입력해주세요'}
-				padding="py-[4.65%] pl-[7.69%] pr-[15.38%]"
 				register={register}
 			/>
 			<button type="button" className={buttonClasses} onClick={() => handleInputType(name)}>

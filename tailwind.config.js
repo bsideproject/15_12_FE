@@ -21,6 +21,7 @@ module.exports = {
 				blue050: '#004AE4',
 				blue060: '#0B40AE',
 				orange050: '#EE6E38',
+				green050: '#35C910',
 			},
 			fontSize: {
 				h1: [
