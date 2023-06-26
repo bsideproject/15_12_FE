@@ -10,10 +10,11 @@ import Back from 'public/images/back-icon.svg';
 interface SidebarProps {
 	isSidebar: boolean;
 	handleToggleSide: () => void;
-	userinfo: { [key: string]: string | boolean };
+	userInfo: { [key: string]: string | boolean };
+	handleUserInfo: () => Promise<void>;
 }
 
-export default function Sidebar({ isSidebar, handleToggleSide, userinfo }: SidebarProps) {
+export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleUserInfo }: SidebarProps) {
 	const navigation = useNavigation();
 
 	useEffect(() => {
@@ -37,14 +38,15 @@ export default function Sidebar({ isSidebar, handleToggleSide, userinfo }: Sideb
 	const logout = async () => {
 		try {
 			await Auth.signOut();
-			alert('로그아웃!');
+			handleUserInfo();
+			handleToggleSide();
 		} catch (error) {
 			console.log('error signing out: ', error);
 		}
 	};
 
 	const handleMenuClick = () => {
-		if (userinfo.email) {
+		if (userInfo.email) {
 			logout();
 		} else {
 			navigation.push('/login');
@@ -66,14 +68,14 @@ export default function Sidebar({ isSidebar, handleToggleSide, userinfo }: Sideb
 					<Back />
 				</button>
 				<div className="ml-[10.08%]">
-					{userinfo.email && (
+					{userInfo.email && (
 						<div>
-							<h3>{userinfo.nickname}</h3>
-							<span>{userinfo.email}</span>
+							<h3>{userInfo.nickname}</h3>
+							<span>{userInfo.email}</span>
 						</div>
 					)}
 					<button type="button" className={`${menuClasses} text-p1`} onClick={handleMenuClick}>
-						{!userinfo.email ? '로그인/회원가입' : '로그아웃'}
+						{!userInfo.email ? '로그인/회원가입' : '로그아웃'}
 					</button>
 				</div>
 			</div>

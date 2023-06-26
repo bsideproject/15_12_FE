@@ -17,13 +17,16 @@ interface UserInfoState {
 
 export default function ScreenHome() {
 	const navigation = useNavigation();
-	const [userinfo, setUserInfo] = useState<UserInfoState>({ email: '', nickname: '' });
+	const [userInfo, setUserInfo] = useState<UserInfoState>({ email: '', nickname: '' });
 	const [isSidebar, setIsSidebar] = useState<boolean>(false);
 
 	const handleUserInfo = async () => {
-		const info = await getUserAttributes();
-
-		setUserInfo({ email: info.email, nickname: info.nickname });
+		try {
+			const info = await getUserAttributes();
+			setUserInfo({ email: info.email, nickname: info.nickname });
+		} catch (err) {
+			setUserInfo({ email: '', nickname: '' });
+		}
 	};
 
 	useEffect(() => {
@@ -43,13 +46,6 @@ export default function ScreenHome() {
 		'flex justify-between items-center flex-wrap [&>li:not(:nth-child(3),:nth-child(4))]:mb-[5.13%]',
 	);
 
-	const datatest = [
-		{ activity_id: 1, display_name: '스피드게임', description: '자유 퀴즈를 만들고 정답을 맞혀보세요' },
-		{ activity_id: 2, display_name: '기분 체크인', description: '참여자의 기분을 점수로 확인해 보세요' },
-		{ activity_id: 3, display_name: '감사 서클', description: '서로에게 감사한 일을 전해보세요' },
-		{ activity_id: 4, display_name: '미니 네트워킹', description: '소규모 네트워킹을 진행보세요' },
-	];
-
 	return (
 		<section className={sectionClasses}>
 			<div className="flex items-center justify-between mb-[8.17%]">
@@ -67,7 +63,7 @@ export default function ScreenHome() {
 				원하는 액티비티를 <br /> 선택하세요
 			</h2>
 			<ul className={activityContentClasses}>
-				{datatest?.map((activity: any) => {
+				{data?.map((activity: any) => {
 					return (
 						<li
 							key={activity.activity_id}
@@ -87,7 +83,12 @@ export default function ScreenHome() {
 					);
 				})}
 			</ul>
-			<Sidebar isSidebar={isSidebar} handleToggleSide={handleToggleSide} userinfo={userinfo} />
+			<Sidebar
+				isSidebar={isSidebar}
+				handleToggleSide={handleToggleSide}
+				userInfo={userInfo}
+				handleUserInfo={handleUserInfo}
+			/>
 		</section>
 	);
 }
