@@ -52,7 +52,7 @@ export default function ScreenOnBoarding() {
 	return (
 		<section className={sectionClasses}>
 			<div className="text-right mb-[12.82%]">
-				<button type="button" className="text-p2 text-gray080" onClick={() => navigation.push('/home')}>
+				<button type="button" className="text-p2 text-blue050" onClick={() => navigation.push('/home')}>
 					Skip
 				</button>
 			</div>
