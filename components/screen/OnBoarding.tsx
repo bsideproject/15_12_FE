@@ -25,7 +25,7 @@ export default function ScreenOnBoarding() {
 	};
 
 	return (
-		<ElGrid>
+		<ElGrid between>
 			<div className="text-right mb-[12.82%]">
 				<button type="button" className="text-p3 text-blue050" onClick={() => navigation.push('/home')}>
 					Skip

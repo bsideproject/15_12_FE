@@ -13,31 +13,23 @@ interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	disabled?: boolean;
 }
 
-export default function ElInput({
-	id,
-	type,
-	register,
-	_onChange,
-	placeholder,
-	margin,
-	padding = 'py-[4.65%] px-[7.69%]',
-	disabled,
-}: ElInputProps) {
+export default function ElInput({ id, type, register, _onChange, placeholder, margin, disabled }: ElInputProps) {
 	const inputClasses = clsxm(
 		'w-full',
+		'py-[4.65%]',
+		'px-[7.69%]',
 		'rounded',
 		'border',
-		'placeholder:text-gray020',
-		'disabled:bg-[#DFE3EC]',
-		'focus:!outline-none',
+		'focus:border-blue050',
+		'placeholder:text-gray010',
+		'disabled:bg-blue010',
 	);
 
 	return (
 		<label htmlFor={id} className="w-full">
 			{register ? (
 				<input
-					className={`${inputClasses} ${margin} ${padding} border-blue030 disabled:border-[#B9CAEC]
-					disabled:text-[#7D8DAE]`}
+					className={`${inputClasses} ${margin} border-gray020 disabled:text-blueGray050 focus:!outline-none`}
 					id={id}
 					type={type}
 					placeholder={placeholder}
@@ -47,8 +39,7 @@ export default function ElInput({
 				/>
 			) : (
 				<input
-					className={`${inputClasses} ${margin} ${padding} border-blue030 disabled:border-[#B9CAEC]
-					disabled:text-[#7D8DAE]`}
+					className={`${inputClasses} ${margin} border-gray020 disabled:text-blueGray050 focus:!outline-none`}
 					id={id}
 					type={type}
 					placeholder={placeholder}

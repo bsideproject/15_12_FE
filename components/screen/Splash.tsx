@@ -10,7 +10,7 @@ export default function ScreenSplash() {
 	const navigation = useNavigation();
 
 	return (
-		<ElGrid>
+		<ElGrid between>
 			<div className="text-center mt-[27.88%]">
 				<Logo className="mx-auto w-[41.67%]" />
 				<h2 className="text-h1 text-gray090 mt-[9.62%] mb-[3.85%]">어색한 사이 이제 끝!</h2>
