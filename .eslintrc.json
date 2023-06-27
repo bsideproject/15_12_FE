@@ -39,6 +39,7 @@
 				"extensions": [".ts", ".tsx"]
 			}
 		],
+		"react/button-has-type": "off",
 		"react/require-default-props": "off",
 		"no-useless-catch": "off",
 		"import/no-cycle": "off",
