@@ -1,18 +1,13 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Pagination } from 'swiper';
-import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
+import { SwiperRef } from 'swiper/react';
 
-import 'swiper/css/pagination';
-import 'swiper/css';
-import ON_BOARDING_TEXT from '@/constants/onBoardingText';
 import useNavigation from '@/hooks/useNavigation';
-import clsxm from '@/service/mergeStyle';
-import Test from 'public/images/test-img.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
+import Slider from '../modules/Slider';
 
 export default function ScreenOnBoarding() {
 	const navigation = useNavigation();
@@ -21,45 +16,23 @@ export default function ScreenOnBoarding() {
 
 	const swiperRef = useRef<SwiperRef>(null);
 
-	const settings = {
-		ref: swiperRef,
-		slidesPerView: 1,
-		pagination: {
-			clickable: true,
-			bulletClass: 'custom_bullet',
-			bulletActiveClass: 'custom-bullet-active',
-			renderBullet(index: number, className: string) {
-				return `<span class="${className}">${index + 1}</span>`;
-			},
-		},
-		modules: [Pagination],
-		onActiveIndexChange: ({ activeIndex }: { activeIndex: number }) => setSliderIndex(activeIndex),
+	const onActiveChangIndex = (activeIndex: number) => {
+		setSliderIndex(activeIndex);
 	};
 
-	const nextButton = () => {
+	const onNextButton = () => {
 		return sliderIndex === 2 ? navigation.push('/home') : swiperRef.current?.swiper.slideNext();
 	};
-
-	const textClasses = clsxm('whitespace-pre-wrap', 'text-center', 'text-p1');
 
 	return (
 		<ElGrid>
 			<div className="text-right mb-[12.82%]">
-				<button type="button" className="text-p2 text-blue050" onClick={() => navigation.push('/home')}>
+				<button type="button" className="text-p3 text-blue050" onClick={() => navigation.push('/home')}>
 					Skip
 				</button>
 			</div>
-			<Swiper {...settings} className="w-full h-full mb-[11.54%]">
-				{ON_BOARDING_TEXT.map((text) => {
-					return (
-						<SwiperSlide key={text} className="!flex flex-col justify-between">
-							<Test />
-							<p className={`${textClasses} text-gray090`}>{text}</p>
-						</SwiperSlide>
-					);
-				})}
-			</Swiper>
-			<ElButton type="button" _onClick={nextButton}>
+			<Slider swiperRef={swiperRef} onActiveChangIndex={onActiveChangIndex} />
+			<ElButton type="button" _onClick={onNextButton}>
 				{sliderIndex === 2 ? '시작하기' : '다음'}
 			</ElButton>
 		</ElGrid>
