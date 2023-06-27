@@ -4,9 +4,10 @@ import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 
 import useNavigation from '@/hooks/useNavigation';
-import clsxm from '@/service/mergeStyle';
 import Back from 'public/images/back-sm-icon.svg';
 
+import ElButton from '../elements/ElButton';
+import ElGrid from '../elements/ElGrid';
 import ElInput from '../elements/ElInput';
 import ForgotPwdForm from '../modules/ForgotPwdForm';
 
@@ -34,14 +35,10 @@ export default function ScreenForgotPwd() {
 		}
 	};
 
-	const sectionClasses = clsxm('pt-[3.33%]', 'px-[6.67%]', 'pb-[8.33%]', 'flex', 'flex-col');
-	const buttonClasses = clsxm('border-blue050', 'bg-transparent', 'text-h7', 'rounded', 'w-[26.60%]', 'ml-[2.56%]');
-	const submitClasses = clsxm('bg-blue050', 'text-h7', 'leading-[3rem]', 'rounded', 'w-full', 'disabled:bg-gray030');
-
 	return (
-		<section className={`${sectionClasses} ${!sendEmail ? 'justify-between h-real-screen' : ''}`}>
+		<ElGrid autoHeight={sendEmail} between={!sendEmail} bottomSm>
 			<div>
-				<div className="flex items-center mb-[10.26%]">
+				<div className="flex items-center mb-[8.97%]">
 					<button type="button" onClick={() => navigation.push('/login')}>
 						<Back />
 					</button>
@@ -50,7 +47,7 @@ export default function ScreenForgotPwd() {
 				<h2 className="text-h3 text-gray090 mb-[2.56%]">
 					{!sendEmail ? '비밀번호를 잊으셨나요?' : '인증코드 발송 완료.'}
 				</h2>
-				<p className="text-p2 text-gray070 mb-[7.69%]">
+				<p className="text-p3 text-gray070 mb-[7.69%]">
 					{!sendEmail
 						? '이메일 주소를 입력하세요. 입력하신 메일로 인증코드가 발송됩니다.'
 						: '이메일로 받은 인증코드를 입력하세요.'}
@@ -65,24 +62,26 @@ export default function ScreenForgotPwd() {
 						padding={sendEmail ? 'px-[10%] py-[6.04%]' : 'py-[4.65%] px-[7.69%]'}
 					/>
 					{sendEmail && (
-						<button type="button" className={`${buttonClasses} border text-blue050`} onClick={submitEmailCode}>
+						<ElButton
+							type="button"
+							_onClick={submitEmailCode}
+							outline
+							lineHeight="leading-none"
+							margin="ml-[2.56%]"
+							width="w-[26.60%]"
+						>
 							재전송
-						</button>
+						</ElButton>
 					)}
 				</div>
 			</div>
 			{!sendEmail ? (
-				<button
-					type="button"
-					className={`${submitClasses} border text-white`}
-					onClick={submitEmailCode}
-					disabled={!userEmail}
-				>
+				<ElButton type="button" _onClick={submitEmailCode} disabled={!userEmail}>
 					인증코드 발송
-				</button>
+				</ElButton>
 			) : (
 				<ForgotPwdForm userEmail={userEmail} />
 			)}
-		</section>
+		</ElGrid>
 	);
 }
