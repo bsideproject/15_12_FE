@@ -11,17 +11,21 @@ module.exports = {
 				'real-screen': 'calc(var(--vh) * 100)',
 			},
 			colors: {
+				gray000: '#FFFFFF',
 				gray010: '#E7EAEE',
 				gray020: '#DBDCDD',
 				gray030: '#CECECE',
 				gray070: '#5F6468',
 				gray080: '#3B4248',
 				gray090: '#26272F',
+				blue010: '#DFE3EC',
 				blue030: '#B9CAEC',
+				blue040: '#709AEF',
 				blue050: '#004AE4',
 				blue060: '#0B40AE',
 				orange050: '#EE6E38',
 				green050: '#35C910',
+				blueGray050: '#7D8DAE',
 			},
 			fontSize: {
 				h1: [
@@ -88,13 +92,20 @@ module.exports = {
 					},
 				],
 				p1: [
-					`${16 / 16}rem`,
+					`${18 / 16}rem`,
 					{
 						fontWeight: '400',
 						lineHeight: '150%',
 					},
 				],
 				p2: [
+					`${16 / 16}rem`,
+					{
+						fontWeight: '400',
+						lineHeight: '150%',
+					},
+				],
+				p3: [
 					`${14 / 16}rem`,
 					{
 						fontWeight: '400',
@@ -106,13 +117,6 @@ module.exports = {
 					{
 						fontWeight: '400',
 						lineHeight: '150%',
-					},
-				],
-				button: [
-					`${19 / 16}rem`,
-					{
-						fontWeight: '800',
-						lineHeight: `${54 / 16}rem`,
 					},
 				],
 			},

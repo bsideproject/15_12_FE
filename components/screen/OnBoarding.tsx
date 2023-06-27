@@ -11,6 +11,9 @@ import useNavigation from '@/hooks/useNavigation';
 import clsxm from '@/service/mergeStyle';
 import Test from 'public/images/test-img.svg';
 
+import ElButton from '../elements/ElButton';
+import ElGrid from '../elements/ElGrid';
+
 export default function ScreenOnBoarding() {
 	const navigation = useNavigation();
 
@@ -37,20 +40,10 @@ export default function ScreenOnBoarding() {
 		return sliderIndex === 2 ? navigation.push('/home') : swiperRef.current?.swiper.slideNext();
 	};
 
-	const sectionClasses = clsxm(
-		'pt-[4.44%]',
-		'px-[6.67%]',
-		'pb-[8.33%]',
-		'flex',
-		'flex-col',
-		'justify-between',
-		'h-real-screen',
-	);
 	const textClasses = clsxm('whitespace-pre-wrap', 'text-center', 'text-p1');
-	const buttonClasses = clsxm('bg-blue050', 'text-h7', 'leading-[3rem]', 'rounded', 'w-full');
 
 	return (
-		<section className={sectionClasses}>
+		<ElGrid>
 			<div className="text-right mb-[12.82%]">
 				<button type="button" className="text-p2 text-blue050" onClick={() => navigation.push('/home')}>
 					Skip
@@ -66,9 +59,9 @@ export default function ScreenOnBoarding() {
 					);
 				})}
 			</Swiper>
-			<button type="button" className={`${buttonClasses} text-white`} onClick={nextButton}>
+			<ElButton type="button" _onClick={nextButton}>
 				{sliderIndex === 2 ? '시작하기' : '다음'}
-			</button>
-		</section>
+			</ElButton>
+		</ElGrid>
 	);
 }
