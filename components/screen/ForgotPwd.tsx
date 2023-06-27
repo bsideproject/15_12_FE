@@ -3,17 +3,13 @@
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 
-import useNavigation from '@/hooks/useNavigation';
-import Back from 'public/images/back-sm-icon.svg';
-
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
 import ElInput from '../elements/ElInput';
+import BackHead from '../modules/BackHead';
 import ForgotPwdForm from '../modules/ForgotPwdForm';
 
 export default function ScreenForgotPwd() {
-	const navigation = useNavigation();
-
 	const [userEmail, setUserEmail] = useState<string>('');
 	const [sendEmail, setSendEmail] = useState<boolean>(false);
 
@@ -38,12 +34,7 @@ export default function ScreenForgotPwd() {
 	return (
 		<ElGrid autoHeight={sendEmail} between={!sendEmail} bottomSm>
 			<div>
-				<div className="flex items-center mb-[8.97%]">
-					<button type="button" onClick={() => navigation.push('/login')}>
-						<Back />
-					</button>
-					<span className="text-p1 text-gray090 ml-[2.56%]">비밀번호 찾기</span>
-				</div>
+				<BackHead>비밀번호 찾기</BackHead>
 				<h2 className="text-h3 text-gray090 mb-[2.56%]">
 					{!sendEmail ? '비밀번호를 잊으셨나요?' : '인증코드 발송 완료.'}
 				</h2>
