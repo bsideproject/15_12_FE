@@ -47,7 +47,7 @@ export default function ScreenHome() {
 	];
 
 	return (
-		<ElGrid styleClass="!pb-[8.33%] relative">
+		<ElGrid styleClass="!justify-start !pb-[8.33%] relative">
 			<HomeHead handleToggleSide={handleToggleSide} />
 			<h2 className="text-h3 text-gray090 mb-[7.69%]">
 				원하는 액티비티를 <br /> 선택하세요

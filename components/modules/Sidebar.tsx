@@ -32,14 +32,12 @@ export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleU
 		};
 	}, [isSidebar]);
 
-	/**
-	 * 로그아웃
-	 */
-	const logout = async () => {
+	const handleLogout = async () => {
 		try {
 			await Auth.signOut();
 			handleUserInfo();
 			handleToggleSide();
+			alert('로그아웃!');
 		} catch (error) {
 			console.log('error signing out: ', error);
 		}
@@ -47,43 +45,49 @@ export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleU
 
 	const handleMenuClick = () => {
 		if (userInfo.email) {
-			logout();
+			handleLogout();
 		} else {
 			navigation.push('/login');
 		}
 	};
 
+	const sidebarBgClasses = clsxm(
+		` w-screen h-real-screen fixed top-0 left-0  bg-[#000] opacity-50 ${isSidebar ? 'block' : 'hidden'}`,
+	);
 	const sidebarClasses = clsxm(
-		`flex flex-col justify-between absolute top-0 right-0 w-[75%] h-real-screen bg-white ease-in-out duration-300 pt-[13.33%] pb-[8.33%] ${
-			isSidebar ? 'translate-x-0 visible' : 'translate-x-full invisible'
+		` h-real-screen flex flex-col justify-between absolute top-0 w-[75%] bg-white ease-in-out duration-300 pt-[16.30%] px-[8.89%] pb-[11.11%] ${
+			isSidebar ? 'right-0' : 'right-[-75%]'
 		}`,
 	);
-	const menuClasses = clsxm('text-gray090 mb-[8.88%]');
-	const copylightClasses = clsxm('block text-[#828282] leading-[1.0625rem]');
+	const menuClasses = clsxm('text-p2 text-gray090 mb-[8.88%]');
+	const copylightClasses = clsxm('block text-gray070');
 
 	return (
-		<aside className={sidebarClasses}>
-			<div>
-				<button type="button" onClick={handleToggleSide} className="mb-[16.81%] ml-[5.93%]">
-					<Back />
-				</button>
-				<div className="ml-[10.08%]">
-					{userInfo.email && (
-						<div>
-							<h3>{userInfo.nickname}</h3>
-							<span>{userInfo.email}</span>
-						</div>
-					)}
-					<button type="button" className={`${menuClasses} text-p1`} onClick={handleMenuClick}>
-						{!userInfo.email ? '로그인/회원가입' : '로그아웃'}
+		<>
+			<div className={sidebarBgClasses} />
+			<aside className={sidebarClasses}>
+				<div>
+					<button type="button" onClick={handleToggleSide} className="mb-[21.36%]">
+						<Back />
 					</button>
+					<div>
+						{userInfo.email && (
+							<div className="text-p2">
+								<h3>{userInfo.nickname}</h3>
+								<span>{userInfo.email}</span>
+							</div>
+						)}
+						<button type="button" className={`${menuClasses} text-p2`} onClick={handleMenuClick}>
+							{!userInfo.email ? '로그인/회원가입' : '로그아웃'}
+						</button>
+					</div>
 				</div>
-			</div>
-			<div className="ml-[11.11%]">
-				<h2 className="text-h7 text-gray090 mb-[3.36%]">얼음땡 팀</h2>
-				<span className={`${copylightClasses} text-c`}>Copyright ©2023 얼음땡 Inc.</span>
-				<span className={`${copylightClasses} text-c`}>All rights reserved.</span>
-			</div>
-		</aside>
+				<div>
+					<h2 className="text-h7 text-gray090 mb-[3.36%]">얼음땡 팀</h2>
+					<span className={`${copylightClasses} text-c`}>Copyright ©2023 얼음땡 Inc.</span>
+					<span className={`${copylightClasses} text-c`}>All rights reserved.</span>
+				</div>
+			</aside>
+		</>
 	);
 }
