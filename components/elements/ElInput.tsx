@@ -10,6 +10,7 @@ interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	placeholder: string;
 	margin?: string;
 	padding?: string;
+	disabled?: boolean;
 }
 
 export default function ElInput({
@@ -19,27 +20,43 @@ export default function ElInput({
 	_onChange,
 	placeholder,
 	margin,
-	padding = 'py-[4.65%] px-[7.69%]',
+	padding,
+	disabled,
 }: ElInputProps) {
-	const inputClasses = clsxm('w-full', 'rounded', 'border', 'placeholder:text-gray020', 'focus:!outline-none');
+	const inputClasses = clsxm(
+		'w-full',
+		'rounded',
+		'border',
+		'focus:border-blue050',
+		'placeholder:text-gray010',
+		'disabled:bg-blue010',
+	);
 
 	return (
 		<label htmlFor={id} className="w-full">
 			{register ? (
 				<input
-					className={`${inputClasses} ${margin} ${padding} border-blue030`}
+					className={`${inputClasses} ${margin} ${
+						padding || 'py-[4.65%] px-[7.69%]'
+					} border-gray020 disabled:text-blueGray050 focus:!outline-none`}
 					id={id}
 					type={type}
 					placeholder={placeholder}
 					{...register}
+					disabled={disabled}
+					autoComplete="off"
 				/>
 			) : (
 				<input
-					className={`${inputClasses} ${margin} ${padding} border-blue030`}
+					className={`${inputClasses} ${margin} ${
+						padding || 'py-[4.65%] px-[7.69%]'
+					} border-gray020 disabled:text-blueGray050 focus:!outline-none`}
 					id={id}
 					type={type}
 					placeholder={placeholder}
 					onChange={_onChange}
+					disabled={disabled}
+					autoComplete="off"
 				/>
 			)}
 		</label>

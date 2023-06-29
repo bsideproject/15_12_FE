@@ -2,12 +2,19 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Amplify, Auth } from 'aws-amplify';
+import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 
 import ElInput from '@/components/elements/ElInput';
 import useNavigation from '@/hooks/useNavigation';
 import awsConfig from 'aws-exports';
+
+import ElButton from '../elements/ElButton';
+import ElGrid from '../elements/ElGrid';
+import BackHead from '../modules/BackHead';
+import FormField from '../modules/FormField';
+import PwdField from '../modules/PwdField';
 
 Amplify.configure(awsConfig);
 
@@ -31,6 +38,10 @@ const registerSchema = yup
 	.required();
 
 type UserInfo = yup.InferType<typeof registerSchema>;
+
+interface ShowIconState {
+	[key: string]: boolean;
+}
 
 export default function ScreenRegister() {
 	const navigation = useNavigation();
@@ -64,25 +75,75 @@ export default function ScreenRegister() {
 		}
 	};
 
+	const [show, setShow] = useState<ShowIconState>({ password: false, passwordConfirm: false });
+
+	const handleInputType = (name: string) => {
+		if (show[name]) {
+			setShow((prev) => {
+				return { ...prev, [name]: false };
+			});
+		} else {
+			setShow((prev) => {
+				return { ...prev, [name]: true };
+			});
+		}
+	};
+
 	return (
-		<section>
-			<h2>회원가입</h2>
+		<ElGrid autoHeight bottomSm>
+			<BackHead>회원가입</BackHead>
 			<form onSubmit={handleSubmit(handleRegister)}>
-				<ElInput id="email" type="text" placeholder="이메일을 입력해주세요" register={register('email')} />
-				<p className="text-[red]">{errors.email?.message}</p>
-				<ElInput id="password" type="password" placeholder="비밀번호를 입력해주세요" register={register('password')} />
-				<p className="text-[red]">{errors.password?.message}</p>
-				<ElInput
-					id="passwordConfirm"
-					type="password"
-					placeholder="비밀번호를 재입력해주세요"
-					register={register('passwordConfirm')}
-				/>
-				<p className="text-[red]">{errors.passwordConfirm?.message}</p>
-				<ElInput id="name" type="text" placeholder="이름을 입력해주세요" register={register('name')} />
-				<p className="text-[red]">{errors.name?.message}</p>
-				<button
-					className="bg-[#ff7777] disabled:bg-[#c9c9cb]"
+				<FormField
+					tilte="이메일"
+					textHelper={!watch().email || errors.email ? 'text-gray070' : 'text-green050'}
+					iconHelper={!watch().email || errors.email ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'}
+					helper={errors.email?.message || '이메일을 입력해 주세요.'}
+					margin="mb-[7.69%]"
+				>
+					<ElInput id="email" type="text" placeholder="이메일을 입력해주세요" register={register('email')} />
+				</FormField>
+				<FormField
+					tilte="비밀번호"
+					textHelper={!watch().password || errors.password ? 'text-gray070' : 'text-green050'}
+					iconHelper={!watch().password || errors.password ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'}
+					helper="대소문자, 숫자, 특수문자 포함 8~20자 내로 입력해주세요"
+					margin="mb-[7.69%]"
+				>
+					<PwdField
+						name="password"
+						show={show.password}
+						handleInputType={handleInputType}
+						register={register('password')}
+					/>
+				</FormField>
+				<FormField
+					tilte="비밀번호 확인"
+					textHelper={!watch().passwordConfirm || errors.passwordConfirm ? 'text-gray070' : 'text-green050'}
+					iconHelper={
+						!watch().passwordConfirm || errors.passwordConfirm ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'
+					}
+					helper={
+						!watch().passwordConfirm || errors.passwordConfirm ? '입력한 비밀번호를 한번 더 확인할게요' : '일치합니다'
+					}
+					margin="mb-[7.69%]"
+				>
+					<PwdField
+						name="passwordConfirm"
+						show={show.passwordConfirm}
+						handleInputType={handleInputType}
+						register={register('passwordConfirm')}
+					/>
+				</FormField>
+				<FormField
+					tilte="이름"
+					textHelper={!watch().name || errors.name ? 'text-gray070' : 'text-green050'}
+					iconHelper={!watch().name || errors.name ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'}
+					helper={errors.name?.message || '한글 혹은 영어만 입력 가능합니다.'}
+					margin="mb-[7.69%]"
+				>
+					<ElInput id="name" type="text" placeholder="이름을 입력해주세요" register={register('name')} />
+				</FormField>
+				<ElButton
 					type="submit"
 					disabled={
 						Object.entries(errors).length > 0 ||
@@ -90,9 +151,9 @@ export default function ScreenRegister() {
 						Object.values(watch()).includes('')
 					}
 				>
-					sign up
-				</button>
+					가입하기
+				</ElButton>
 			</form>
-		</section>
+		</ElGrid>
 	);
 }
