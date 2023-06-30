@@ -108,8 +108,8 @@ export default function ScreenSpeedGame() {
 			<GameIcon className={imageClasses} />
 			{questions.map((item, inx) => {
 				return (
-					<>
-						<div className={containerClasses} key={`question_${item.number}}`}>
+					<div key={`speed-question-${item.number}}`}>
+						<div className={containerClasses}>
 							<p className="font-bold">문제</p>
 							<div className={inputWrapClasses}>
 								<p className={inputIconClasses}>Q{item.number}</p>
@@ -129,10 +129,24 @@ export default function ScreenSpeedGame() {
 						</div>
 						<div className={containerClasses}>
 							<p className="font-bold">Q{item.number} 답안</p>
-							<div className={inputWrapClasses}>
-								<p className={inputIconClasses}>
-									<CheckIcon />
-								</p>
+							<div
+								className={inputWrapClasses}
+								onDoubleClick={() => {
+									setQuestions(
+										produce((draft) => {
+											draft[inx].answers[0].correct_answer = true;
+											draft[inx].answers[1].correct_answer = false;
+											draft[inx].answers[2].correct_answer = false;
+											draft[inx].answers[3].correct_answer = false;
+										}),
+									);
+								}}
+							>
+								{questions[inx].answers[0].correct_answer && (
+									<p className={inputIconClasses}>
+										<CheckIcon />
+									</p>
+								)}
 								<input
 									className={inputClasses}
 									placeholder="입력해 주세요."
@@ -146,7 +160,24 @@ export default function ScreenSpeedGame() {
 									required
 								/>
 							</div>
-							<div className={inputWrapClasses}>
+							<div
+								className={inputWrapClasses}
+								onDoubleClick={() => {
+									setQuestions(
+										produce((draft) => {
+											draft[inx].answers[1].correct_answer = true;
+											draft[inx].answers[0].correct_answer = false;
+											draft[inx].answers[2].correct_answer = false;
+											draft[inx].answers[3].correct_answer = false;
+										}),
+									);
+								}}
+							>
+								{questions[inx].answers[1].correct_answer && (
+									<p className={inputIconClasses}>
+										<CheckIcon />
+									</p>
+								)}
 								<input
 									className={inputClasses}
 									placeholder="입력해 주세요."
@@ -160,7 +191,24 @@ export default function ScreenSpeedGame() {
 									required
 								/>
 							</div>
-							<div className={inputWrapClasses}>
+							<div
+								className={inputWrapClasses}
+								onDoubleClick={() => {
+									setQuestions(
+										produce((draft) => {
+											draft[inx].answers[2].correct_answer = true;
+											draft[inx].answers[0].correct_answer = false;
+											draft[inx].answers[1].correct_answer = false;
+											draft[inx].answers[3].correct_answer = false;
+										}),
+									);
+								}}
+							>
+								{questions[inx].answers[2].correct_answer && (
+									<p className={inputIconClasses}>
+										<CheckIcon />
+									</p>
+								)}
 								<input
 									className={inputClasses}
 									placeholder="입력해 주세요."
@@ -172,7 +220,24 @@ export default function ScreenSpeedGame() {
 									required
 								/>
 							</div>
-							<div className={inputWrapClasses}>
+							<div
+								className={inputWrapClasses}
+								onDoubleClick={() => {
+									setQuestions(
+										produce((draft) => {
+											draft[inx].answers[3].correct_answer = true;
+											draft[inx].answers[0].correct_answer = false;
+											draft[inx].answers[1].correct_answer = false;
+											draft[inx].answers[2].correct_answer = false;
+										}),
+									);
+								}}
+							>
+								{questions[inx].answers[3].correct_answer && (
+									<p className={inputIconClasses}>
+										<CheckIcon />
+									</p>
+								)}
 								<input
 									className={inputClasses}
 									placeholder="입력해 주세요."
@@ -187,7 +252,7 @@ export default function ScreenSpeedGame() {
 								/>
 							</div>
 						</div>
-					</>
+					</div>
 				);
 			})}
 			<div className={addClasses}>
