@@ -1,5 +1,5 @@
-import ScreenSpeedGame from '@/components/screen/speedGame';
+import ScreenSpeedGame from '@/components/screen/SpeedGame';
 
-export default function speedGame() {
+export default function SpeedGame() {
 	return <ScreenSpeedGame />;
 }

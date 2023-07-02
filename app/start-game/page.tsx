@@ -1,5 +1,5 @@
-import ScreenStartGame from '@/components/screen/startGame';
+import ScreenStartGame from '@/components/screen/StartGame';
 
-export default function startGame() {
+export default function StartGame() {
 	return <ScreenStartGame />;
 }
