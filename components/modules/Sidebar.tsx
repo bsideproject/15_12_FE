@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import useNavigation from '@/hooks/useNavigation';
 import clsxm from '@/service/mergeStyle';
 import Back from 'public/images/back-icon.svg';
+import Profile from 'public/images/profile-icon.svg';
 
 interface SidebarProps {
 	isSidebar: boolean;
@@ -52,11 +53,11 @@ export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleU
 	};
 
 	const sidebarBgClasses = clsxm(
-		` w-screen h-real-screen fixed top-0 left-0  bg-[#000] opacity-50 ${isSidebar ? 'block' : 'hidden'}`,
+		` w-full h-real-screen absolute top-0 left-0  bg-[#000] opacity-50 ${isSidebar ? 'block' : 'hidden'}`,
 	);
 	const sidebarClasses = clsxm(
-		` h-real-screen flex flex-col justify-between absolute top-0 w-[75%] bg-white ease-in-out duration-300 pt-[16.30%] px-[8.89%] pb-[11.11%] ${
-			isSidebar ? 'right-0' : 'right-[-75%]'
+		` h-real-screen flex flex-col justify-between absolute top-0 right-0 w-[75%] bg-white ease-in-out duration-300 pt-[16.30%] px-[8.89%] pb-[11.11%] ${
+			isSidebar ? 'translate-x-0 visible' : 'translate-x-full invisible'
 		}`,
 	);
 	const menuClasses = clsxm('text-p2 text-gray090 mb-[8.88%]');
@@ -72,9 +73,12 @@ export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleU
 					</button>
 					<div>
 						{userInfo.email && (
-							<div className="text-p2">
-								<h3>{userInfo.nickname}</h3>
-								<span>{userInfo.email}</span>
+							<div className="flex items-center mb-[11.65%]">
+								<Profile />
+								<div className="ml-[7.77%]">
+									<h3 className="text-h7 text-gray090">{userInfo.nickname}</h3>
+									<span className="text-c text-gray070">{userInfo.email}</span>
+								</div>
 							</div>
 						)}
 						<button type="button" className={`${menuClasses} text-p2`} onClick={handleMenuClick}>

@@ -3,7 +3,6 @@
 import { Pagination } from 'swiper';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
-import ON_BOARDING_TEXT from '@/constants/onBoardingText';
 import clsxm from '@/service/mergeStyle';
 import Test from 'public/images/test-img.svg';
 
@@ -35,14 +34,30 @@ export default function Slider({ swiperRef, onActiveChangIndex }: SliderProps) {
 
 	return (
 		<Swiper {...settings} className="w-full h-full mb-[7.69%]">
-			{ON_BOARDING_TEXT.map((text) => {
-				return (
-					<SwiperSlide key={text} className="!flex flex-col justify-between">
-						<Test />
-						<p className={`${textClasses} text-gray090`}>{text}</p>
-					</SwiperSlide>
-				);
-			})}
+			<SwiperSlide className="!flex flex-col justify-between">
+				<Test />
+				<p className={`${textClasses} text-gray090`}>
+					얼음땡이 추천하는 6개의 <strong>상황별</strong>
+					<br />
+					<strong>아이스브레이킹 액티비티</strong>를 확인하세요.
+				</p>
+			</SwiperSlide>
+			<SwiperSlide className="!flex flex-col justify-between">
+				<Test />
+				<p className={`${textClasses} text-gray090`}>
+					<strong>한 가지를 선택</strong>해
+					<br />
+					액티비티를 만드세요.
+				</p>
+			</SwiperSlide>
+			<SwiperSlide className="!flex flex-col justify-between">
+				<Test />
+				<p className={`${textClasses} text-gray090`}>
+					<strong>QR코드를 공유</strong>해
+					<br />
+					다른 사람을 액티비티에 참여시키세요.
+				</p>
+			</SwiperSlide>
 		</Swiper>
 	);
 }
