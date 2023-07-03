@@ -1,3 +1,5 @@
+import ScreenNotFound from '@/components/screen/NotFound';
+
 export default function NotFound() {
-	return <h2>Not Found</h2>;
+	return <ScreenNotFound />;
 }

@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import clsxm from '@/service/mergeStyle';
+
 interface CheckBoxProps {
 	title: string;
 	span?: string;
@@ -10,6 +12,9 @@ interface CheckBoxProps {
 }
 
 export default function CheckBox({ title, span, check, onChange }: CheckBoxProps) {
+	const checkClasses = clsxm(
+		"appearance-none border border-blue030 rounded-full bg-transparent w-4 h-4 checked:border-green050 checked:bg-[url('/images/check-green-icon.svg')] checked:bg-center checked:bg-no-repeat",
+	);
 	return (
 		<label htmlFor={title}>
 			<div className="flex items-center select-none">
@@ -19,7 +24,7 @@ export default function CheckBox({ title, span, check, onChange }: CheckBoxProps
 					type="checkbox"
 					id={title}
 					name={title}
-					className="appearance-none border border-blue030 rounded-full bg-transparent w-4 h-4 checked:border-green050 checked:bg-[url('/images/check-green-icon.svg')] checked:bg-center checked:bg-no-repeat"
+					className={checkClasses}
 				/>
 				<p className="text-p2 text-gray090 ml-[8px]">
 					{title} {span && <span className="text-gray070">{span}</span>}
