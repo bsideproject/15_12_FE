@@ -205,7 +205,8 @@ export default function RegisterForm() {
 				disabled={
 					Object.entries(errors).length > 0 ||
 					Object.values(watch()).length === 0 ||
-					Object.values(watch()).includes('')
+					Object.values(watch()).includes('') ||
+					checkList.length !== 4
 				}
 			>
 				가입하기
