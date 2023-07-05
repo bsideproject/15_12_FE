@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 
-import useNavigation from '@/hooks/useNavigation';
 import useQueryActivities from '@/queries/queryFn/useQueryActivities';
 import getUserAttributes from '@/service/getUserAttributes';
 
@@ -16,7 +15,6 @@ interface UserInfoState {
 }
 
 export default function ScreenHome() {
-	const navigation = useNavigation();
 	const [userInfo, setUserInfo] = useState<UserInfoState>({ email: '', nickname: '' });
 	const [isSidebar, setIsSidebar] = useState<boolean>(false);
 
@@ -45,7 +43,7 @@ export default function ScreenHome() {
 			<h2 className="text-h3 text-gray090 mb-[7.69%]">
 				원하는 액티비티를 <br /> 선택하세요
 			</h2>
-			<ActivityList data={data} />
+			<ActivityList data={data} user={userInfo.email} />
 			<Sidebar
 				isSidebar={isSidebar}
 				handleToggleSide={handleToggleSide}
