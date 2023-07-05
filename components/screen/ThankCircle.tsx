@@ -1,10 +1,14 @@
 'use client';
 
+import useMutationThankCircle from '@/queries/mutationFn/useMutationThankCircle';
+
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
 import ActivityHead from '../modules/ActivityHead';
 
 export default function ScreenThankCircle() {
+	const createThankCircle = useMutationThankCircle();
+
 	return (
 		<ElGrid between bottomSm>
 			<div>
@@ -15,7 +19,9 @@ export default function ScreenThankCircle() {
 					순서를 랜덤으로 정해드릴게요!
 				</p>
 			</div>
-			<ElButton type="button">참여자 초대하기</ElButton>
+			<ElButton type="button" _onClick={createThankCircle}>
+				참여자 초대하기
+			</ElButton>
 		</ElGrid>
 	);
 }
