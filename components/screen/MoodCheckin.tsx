@@ -1,5 +1,6 @@
 'use client';
 
+import useMutationMoodCheckin from '@/queries/mutationFn/useMutationMoodCheckin';
 import MooodCheckinImg from 'public/images/mood-checkin-img.svg';
 
 import ElButton from '../elements/ElButton';
@@ -7,6 +8,8 @@ import ElGrid from '../elements/ElGrid';
 import ActivityHead from '../modules/ActivityHead';
 
 export default function ScreenMoodCheckin() {
+	const createRoom = useMutationMoodCheckin();
+
 	return (
 		<ElGrid between bottomSm>
 			<ActivityHead title="기분 체크인" />
@@ -18,7 +21,9 @@ export default function ScreenMoodCheckin() {
 					오늘의 기분을 알아보세요!
 				</p>
 			</div>
-			<ElButton type="button">시작하기</ElButton>
+			<ElButton type="button" _onClick={createRoom}>
+				시작하기
+			</ElButton>
 		</ElGrid>
 	);
 }
