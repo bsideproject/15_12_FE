@@ -3,7 +3,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
 import * as yup from 'yup';
 
 import useNavigation from '@/hooks/useNavigation';
@@ -119,21 +119,37 @@ export default function RegisterForm() {
 		}
 	};
 
+	const textHelperColor = (typing: string | undefined, err: FieldError | undefined) => {
+		if (!typing) {
+			return 'text-gray070';
+		}
+		if (err) {
+			return 'text-orange050';
+		}
+		return 'text-green050';
+	};
+
 	return (
 		<form onSubmit={handleSubmit(handleRegister)}>
 			<FormField
 				tilte="이메일"
-				textHelper={!watch().email || errors.email ? 'text-gray070' : 'text-green050'}
-				iconHelper={!watch().email || errors.email ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'}
-				helper={errors.email?.message || '이메일을 입력해 주세요.'}
+				textHelper={textHelperColor(watch().email, errors.email)}
+				iconHelper={!!(watch().email && !errors.email)}
+				helper="이메일을 입력해 주세요."
 				margin="mb-[7.69%]"
 			>
-				<ElInput id="email" type="text" placeholder="이메일을 입력해주세요" register={register('email')} />
+				<ElInput
+					id="email"
+					type="text"
+					placeholder="이메일을 입력해주세요"
+					err={!!errors.email}
+					register={register('email')}
+				/>
 			</FormField>
 			<FormField
 				tilte="비밀번호"
-				textHelper={!watch().password || errors.password ? 'text-gray070' : 'text-green050'}
-				iconHelper={!watch().password || errors.password ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'}
+				textHelper={textHelperColor(watch().password, errors.password)}
+				iconHelper={!!(watch().password && !errors.password)}
 				helper="대소문자, 숫자, 특수문자 포함 8~20자 내로 입력해주세요"
 				margin="mb-[7.69%]"
 			>
@@ -141,15 +157,14 @@ export default function RegisterForm() {
 					name="password"
 					show={show.password}
 					handleInputType={handleInputType}
+					err={!!errors.password}
 					register={register('password')}
 				/>
 			</FormField>
 			<FormField
 				tilte="비밀번호 확인"
-				textHelper={!watch().passwordConfirm || errors.passwordConfirm ? 'text-gray070' : 'text-green050'}
-				iconHelper={
-					!watch().passwordConfirm || errors.passwordConfirm ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'
-				}
+				textHelper={textHelperColor(watch().passwordConfirm, errors.passwordConfirm)}
+				iconHelper={!!(watch().passwordConfirm && !errors.passwordConfirm)}
 				helper={
 					!watch().passwordConfirm || errors.passwordConfirm ? '입력한 비밀번호를 한번 더 확인할게요' : '일치합니다'
 				}
@@ -159,20 +174,27 @@ export default function RegisterForm() {
 					name="passwordConfirm"
 					show={show.passwordConfirm}
 					handleInputType={handleInputType}
+					err={!!errors.passwordConfirm}
 					register={register('passwordConfirm')}
 				/>
 			</FormField>
 			<FormField
 				tilte="이름"
-				textHelper={!watch().name || errors.name ? 'text-gray070' : 'text-green050'}
-				iconHelper={!watch().name || errors.name ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'}
-				helper={errors.name?.message || '한글 혹은 영어만 입력 가능합니다.'}
+				textHelper={textHelperColor(watch().name, errors.name)}
+				iconHelper={!!(watch().name && !errors.name)}
+				helper="한글 혹은 영어만 입력 가능합니다."
 				margin="mb-[7.69%]"
 			>
-				<ElInput id="name" type="text" placeholder="이름을 입력해주세요" register={register('name')} />
+				<ElInput
+					id="name"
+					type="text"
+					placeholder="이름을 입력해주세요"
+					err={!!errors.name}
+					register={register('name')}
+				/>
 			</FormField>
 			<hr className="border-none w-full h-[1px] bg-blue030 mb-[7.69%]" />
-			<div className="mb-[7.69%]">
+			<div className="mb-[7.69%] [&>div:not(:last-child)]:mb-[2.56%]">
 				<h3 className="text-h7 text-gray090 mb-[2.56%]">이용약관동의</h3>
 				<CheckBox onChange={handleAllCheck} check={checkList.length === 4} title="전체 동의합니다." />
 				<CheckBox

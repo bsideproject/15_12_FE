@@ -3,7 +3,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import useNavigation from '@/hooks/useNavigation';
@@ -74,6 +74,16 @@ export default function ForgotPwdForm({ userEmail }: { userEmail: string }) {
 	const formClasses = clsxm('flex', 'flex-col', 'justify-between', 'grow');
 	const labelClasses = clsxm('text-gray090', 'mb-[1.28%]');
 
+	const textHelperColor = (typing: string | undefined, err: FieldError | undefined) => {
+		if (!typing) {
+			return 'text-gray070';
+		}
+		if (err) {
+			return 'text-orange050';
+		}
+		return 'text-green050';
+	};
+
 	return (
 		<form className={formClasses} onSubmit={handleSubmit(submitForgotPassword)}>
 			<div>
@@ -81,8 +91,8 @@ export default function ForgotPwdForm({ userEmail }: { userEmail: string }) {
 				<ElInput id="code" type="text" placeholder="인증 코드 입력" register={register('code')} />
 				<FormField
 					tilte="새 비밀번호"
-					textHelper={!watch().password || errors.password ? 'text-gray070' : 'text-green050'}
-					iconHelper={!watch().password || errors.password ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'}
+					textHelper={textHelperColor(watch().password, errors.password)}
+					iconHelper={!!(watch().password && !errors.password)}
 					helper="대소문자, 숫자, 특수문자 포함 8~20자 내로 입력해주세요"
 					margin="my-[7.69%]"
 				>
@@ -90,15 +100,14 @@ export default function ForgotPwdForm({ userEmail }: { userEmail: string }) {
 						name="password"
 						show={show.password}
 						handleInputType={handleInputType}
+						err={!!errors.password}
 						register={register('password')}
 					/>
 				</FormField>
 				<FormField
 					tilte="새 비밀번호 확인"
-					textHelper={!watch().passwordConfirm || errors.passwordConfirm ? 'text-gray070' : 'text-green050'}
-					iconHelper={
-						!watch().passwordConfirm || errors.passwordConfirm ? '[&>path]:stroke-gray070' : '[&>path]:stroke-green050'
-					}
+					textHelper={textHelperColor(watch().passwordConfirm, errors.passwordConfirm)}
+					iconHelper={!!(watch().passwordConfirm && !errors.passwordConfirm)}
 					helper={
 						!watch().passwordConfirm || errors.passwordConfirm ? '입력한 비밀번호를 한번 더 확인할게요' : '일치합니다'
 					}
@@ -108,6 +117,7 @@ export default function ForgotPwdForm({ userEmail }: { userEmail: string }) {
 						name="passwordConfirm"
 						show={show.passwordConfirm}
 						handleInputType={handleInputType}
+						err={!!errors.passwordConfirm}
 						register={register('passwordConfirm')}
 					/>
 				</FormField>
