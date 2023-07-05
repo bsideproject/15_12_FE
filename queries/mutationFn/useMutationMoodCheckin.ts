@@ -1,15 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+
+import useNavigation from '@/hooks/useNavigation';
 
 import apiKeys from '../apiKeys';
 
 const useMutationMoodCheckin = () => {
-	const router = useRouter();
+	const navigation = useNavigation();
 	const { mutate } = useMutation(apiKeys.createMoodCheckin, {
-		onSuccess(data, variables, context) {
-			console.log(data);
+		onSuccess(data) {
+			navigation.push(`/mood-checkin/start-game?${data?.data.room_name}`);
 		},
-		onError(error, variables, context) {
+		onError(error) {
 			console.log(error);
 		},
 	});

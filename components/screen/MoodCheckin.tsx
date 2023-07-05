@@ -14,7 +14,7 @@ export default function ScreenMoodCheckin() {
 		<ElGrid between bottomSm>
 			<ActivityHead title="기분 체크인" />
 			<div className="text-center mx-auto">
-				<MooodCheckinImg className="mb-[11.22%]" />
+				<MooodCheckinImg className="mb-[20.96%]" />
 				<p className="text-p2 text-gray090">
 					참여자의
 					<br />
