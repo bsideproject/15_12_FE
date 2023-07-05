@@ -12,14 +12,16 @@ export default function ScreenMoodCheckin() {
 
 	return (
 		<ElGrid between bottomSm>
-			<ActivityHead title="기분 체크인" />
-			<div className="text-center mx-auto">
-				<MooodCheckinImg className="mb-[20.96%]" />
-				<p className="text-p2 text-gray090">
-					참여자의
-					<br />
-					오늘의 기분을 알아보세요!
-				</p>
+			<div>
+				<ActivityHead title="기분 체크인" />
+				<div className="text-center mt-[34.62%]">
+					<MooodCheckinImg className="mb-[10.58%] mx-auto" />
+					<p className="text-p2 text-gray090">
+						참여자의
+						<br />
+						오늘의 기분을 알아보세요!
+					</p>
+				</div>
 			</div>
 			<ElButton type="button" _onClick={createRoom}>
 				시작하기
