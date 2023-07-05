@@ -1,6 +1,6 @@
 'use client';
 
-import { produce } from 'immer';
+import SpeedGameIcon from 'public/images/activity01-sm-icon.svg';
 import { useState } from 'react';
 
 import apiClient from '@/core';
@@ -8,16 +8,28 @@ import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
 import clsxm from '@/service/mergeStyle';
 import AddIcon from 'public/images/add-icon.svg';
-import CheckIcon from 'public/images/check-icon.svg';
-import CloseIcon from 'public/images/close-icon.svg';
-import GameIcon from 'public/images/game-icon.svg';
 import SaveIcon from 'public/images/save-icon.svg';
+
+import ElButton from '../elements/ElButton';
+import ElGrid from '../elements/ElGrid';
+import ActivityHead from '../modules/ActivityHead';
+import SpeedGameInputs from '../modules/SpeedGameInputs';
+
+export interface QuestionProps {
+	number: number;
+	questionText: string;
+	answers: {
+		number: number;
+		answer_text: string;
+		correct_answer: boolean;
+	}[];
+}
 
 export default function ScreenSpeedGame() {
 	const navigation = useNavigation();
 	const toast = useNotify();
 	const [total, setTotal] = useState<number>(1);
-	const defaultQuestion = [
+	const defaultQuestion: QuestionProps[] = [
 		{
 			number: 1,
 			questionText: '-',
@@ -47,7 +59,7 @@ export default function ScreenSpeedGame() {
 	];
 	let copyQuestion = [...defaultQuestion];
 
-	const [questions, setQuestions] = useState(copyQuestion);
+	const [questions, setQuestions] = useState<QuestionProps[]>(copyQuestion);
 
 	const newQuestion = (inx: number) => {
 		return {
@@ -78,202 +90,50 @@ export default function ScreenSpeedGame() {
 		};
 	};
 
-	const sectionClasses = clsxm('pb-[29.17%]');
-	const headerClasses = clsxm('flex', 'items-center', 'justify-between', 'px-[6.67%]', 'py-[3.33%]');
-	const imageClasses = clsxm('my-[22.22%]', 'mx-auto');
-	const addClasses = clsxm('flex', 'mx-auto', 'text-p1', 'justify-center', 'items-center');
-	const addIconClasses = clsxm('mr-[2.22%]');
+	const imageClasses = clsxm('my-[13.33%]', 'mx-auto');
+	const notlineClasses = clsxm('flex', 'w-full', 'mx-auto', 'pb-[29.17%]', 'text-p1', 'justify-center', 'items-center');
 	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-[6.67%]');
-	const buttonClasses = clsxm('bg-blue050', 'text-button', 'rounded');
-	const containerClasses = clsxm('w-full', 'bg-white', 'px-[6.67%]', 'py-[6.39%]', 'mb-[4.44%]');
-	const inputWrapClasses = clsxm(
-		'px-[6.67%]',
-		'py-[4.17%]',
-		'rounded',
-		'flex',
-		'items-center',
-		'mt-[2.22%]',
-		'border',
-		'border-blue030',
-	);
-	const inputIconClasses = clsxm('text-h4', 'mr-[2.78%]', 'text-gray070');
-	const inputClasses = clsxm('w-full', 'text-p2', 'outline-none');
 
 	return (
-		<section className={sectionClasses}>
-			<header className={headerClasses}>
-				<h2 className="text-h2">스피드 게임</h2>
-				<CloseIcon />
-			</header>
-			<GameIcon className={imageClasses} />
+		<ElGrid pxNone>
+			<div className="px-[6.67%] py-[3.33%]">
+				<ActivityHead title="스피드 게임" />
+			</div>
+			<div className="bg-[#E1DEBF]">
+				<SpeedGameIcon className={imageClasses} />
+			</div>
 			{questions.map((item, inx) => {
 				return (
-					<div key={`speed-question-${item.number}}`}>
-						<div className={containerClasses}>
-							<p className="font-bold">문제</p>
-							<div className={inputWrapClasses}>
-								<p className={inputIconClasses}>Q{item.number}</p>
-								<input
-									className={inputClasses}
-									placeholder="문제를 입력해 주세요."
-									onChange={(e) => {
-										setQuestions(
-											produce((draft) => {
-												draft[inx].questionText = e.target.value;
-											}),
-										);
-									}}
-									required
-								/>
-							</div>
-						</div>
-						<div className={containerClasses}>
-							<p className="font-bold">Q{item.number} 답안</p>
-							<div
-								className={inputWrapClasses}
-								onDoubleClick={() => {
-									setQuestions(
-										produce((draft) => {
-											draft[inx].answers[0].correct_answer = true;
-											draft[inx].answers[1].correct_answer = false;
-											draft[inx].answers[2].correct_answer = false;
-											draft[inx].answers[3].correct_answer = false;
-										}),
-									);
-								}}
-							>
-								{questions[inx].answers[0].correct_answer && (
-									<p className={inputIconClasses}>
-										<CheckIcon />
-									</p>
-								)}
-								<input
-									className={inputClasses}
-									placeholder="입력해 주세요."
-									onChange={(e) => {
-										setQuestions(
-											produce((draft) => {
-												draft[inx].answers[0].answer_text = e.target.value;
-											}),
-										);
-									}}
-									required
-								/>
-							</div>
-							<div
-								className={inputWrapClasses}
-								onDoubleClick={() => {
-									setQuestions(
-										produce((draft) => {
-											draft[inx].answers[1].correct_answer = true;
-											draft[inx].answers[0].correct_answer = false;
-											draft[inx].answers[2].correct_answer = false;
-											draft[inx].answers[3].correct_answer = false;
-										}),
-									);
-								}}
-							>
-								{questions[inx].answers[1].correct_answer && (
-									<p className={inputIconClasses}>
-										<CheckIcon />
-									</p>
-								)}
-								<input
-									className={inputClasses}
-									placeholder="입력해 주세요."
-									onChange={(e) => {
-										setQuestions(
-											produce((draft) => {
-												draft[inx].answers[1].answer_text = e.target.value;
-											}),
-										);
-									}}
-									required
-								/>
-							</div>
-							<div
-								className={inputWrapClasses}
-								onDoubleClick={() => {
-									setQuestions(
-										produce((draft) => {
-											draft[inx].answers[2].correct_answer = true;
-											draft[inx].answers[0].correct_answer = false;
-											draft[inx].answers[1].correct_answer = false;
-											draft[inx].answers[3].correct_answer = false;
-										}),
-									);
-								}}
-							>
-								{questions[inx].answers[2].correct_answer && (
-									<p className={inputIconClasses}>
-										<CheckIcon />
-									</p>
-								)}
-								<input
-									className={inputClasses}
-									placeholder="입력해 주세요."
-									onChange={(e) => {
-										produce((draft) => {
-											draft[inx].answers[2].answer_text = e.target.value;
-										});
-									}}
-									required
-								/>
-							</div>
-							<div
-								className={inputWrapClasses}
-								onDoubleClick={() => {
-									setQuestions(
-										produce((draft) => {
-											draft[inx].answers[3].correct_answer = true;
-											draft[inx].answers[0].correct_answer = false;
-											draft[inx].answers[1].correct_answer = false;
-											draft[inx].answers[2].correct_answer = false;
-										}),
-									);
-								}}
-							>
-								{questions[inx].answers[3].correct_answer && (
-									<p className={inputIconClasses}>
-										<CheckIcon />
-									</p>
-								)}
-								<input
-									className={inputClasses}
-									placeholder="입력해 주세요."
-									onChange={(e) => {
-										setQuestions(
-											produce((draft) => {
-												draft[inx].answers[3].answer_text = e.target.value;
-											}),
-										);
-									}}
-									required
-								/>
-							</div>
-						</div>
+					<div key={`speedGame-question-${item.number}}`}>
+						<SpeedGameInputs
+							inx={inx}
+							number={item.number}
+							questions={questions}
+							setQuestions={setQuestions}
+							description="정답인 경우, 체크표시가 뜨도록 두 번 눌러주세요."
+						/>
 					</div>
 				);
 			})}
-			<div className={addClasses}>
-				<AddIcon className={addIconClasses} />
-				<button
-					type="button"
-					className="text-p1 text-gray070"
-					onClick={() => {
-						setTotal(total + 1);
-						copyQuestion = [...copyQuestion, newQuestion(total + 1)];
-						setQuestions([...questions, newQuestion(total + 1)]);
-					}}
-				>
-					문제 추가하기
-				</button>
-			</div>
+			<button
+				type="button"
+				className={notlineClasses}
+				onClick={() => {
+					setTotal(total + 1);
+					copyQuestion = [...copyQuestion, newQuestion(total + 1)];
+					setQuestions([...questions, newQuestion(total + 1)]);
+				}}
+			>
+				<AddIcon className="mr-[2.22%]" />
+				<p className="text-p1 text-gray070">문제 추가하기</p>
+			</button>
 			<div className={bottomClasses}>
-				<button
+				<ElButton
 					type="submit"
-					className={`${buttonClasses} flex-1 mr-[3.89%] text-white`}
-					onClick={async () => {
+					margin="mr-[3.89%]"
+					flex="flex-1"
+					width="w-auto"
+					_onClick={async () => {
 						await apiClient
 							.post(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame`, { questions })
 							.then((res) => {
@@ -286,15 +146,17 @@ export default function ScreenSpeedGame() {
 					}}
 				>
 					만들기
-				</button>
-				<button
+				</ElButton>
+				<ElButton
 					type="button"
-					className={`${buttonClasses} flex-0 px-[5.56%] py-[3.33%]`}
-					onClick={() => toast.success('템플릿이 저장되었습니다.')}
+					padding="px-[5.56%] py-[3.33%]"
+					flex="flex-0"
+					width="w-auto"
+					_onClick={() => toast.info('템플릿 기능 준비 중입니다.')}
 				>
 					<SaveIcon />
-				</button>
+				</ElButton>
 			</div>
-		</section>
+		</ElGrid>
 	);
 }
