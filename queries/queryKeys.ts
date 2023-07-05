@@ -1,6 +1,6 @@
 const queryKeys = {
 	activities: () => ['activities'],
-	moodCheckin: () => ['moodCheckin'],
+	moodCheckin: (room: string) => ['moodCheckin', room],
 };
 
 export default queryKeys;
