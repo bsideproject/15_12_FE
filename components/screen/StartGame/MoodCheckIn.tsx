@@ -16,19 +16,17 @@ export default function StartMoodCheckIn() {
 
 	const { data } = useQueryMoodCheckin(activity, room);
 
-	const { connect, disconnect, payload } = useTest(`/topic/moodcheckin/${data?.room_name}/user-count`);
+	const { connect, disconnect, payload } = useTest(`/topic/moodcheckin/${room}/user-count`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
-		connect(`${session?.getAccessToken().getJwtToken()}`);
+		connect({ Autorization: `${session?.getAccessToken().getJwtToken()}` });
 	};
 
 	useEffect(() => {
 		userToken();
-		return () => {
-			disconnect();
-		};
-	}, []);
+		return () => disconnect();
+	}, [room]);
 
 	console.log(payload);
 

@@ -4,7 +4,12 @@ import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useRef, useState } from 'react';
 import SockJS from 'sockjs-client';
 
+interface ConnectAuthorizationType {
+	[key: string]: string;
+}
+
 const useTest = (soketUrl: string) => {
+	console.log(soketUrl);
 	const [payload, setPayload] = useState<string>('');
 	const client = useRef<CompatClient>();
 
@@ -21,15 +26,19 @@ const useTest = (soketUrl: string) => {
 		}
 	};
 
-	const connect = (accessToken?: string) => {
+	const connect = (authorization: ConnectAuthorizationType, nickname?: string) => {
 		client.current = Stomp.over(() => {
 			const sock = new SockJS(`/ws`);
 			return sock;
 		});
 		if (client.current) {
-			client.current.connect(accessToken ? { Authorization: accessToken } : {}, () => {
+			client.current.connect(authorization, () => {
 				console.log('success');
-				subscribe();
+				if (nickname) {
+					subscribe(nickname);
+				} else {
+					subscribe();
+				}
 			});
 		}
 		client.current.activate();
