@@ -14,11 +14,13 @@ export default function PwdField({
 	show,
 	handleInputType,
 	register,
+	err,
 }: {
 	name: 'password' | 'passwordConfirm';
 	show: boolean;
 	handleInputType: (name: string) => void;
 	register: UseFormRegisterReturn;
+	err: boolean;
 }) {
 	const buttonClasses = clsxm('absolute', 'top-[50%]', 'translate-y-[-50%]', 'right-[7.69%]');
 
@@ -29,6 +31,7 @@ export default function PwdField({
 				type={show ? 'text' : 'password'}
 				placeholder={name === 'password' ? '비밀번호를 입력해주세요' : '비밀번호를 재입력해주세요'}
 				register={register}
+				err={err}
 			/>
 			<button type="button" className={buttonClasses} onClick={() => handleInputType(name)}>
 				{show ? <Hide /> : <Show />}

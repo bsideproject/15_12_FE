@@ -1,3 +1,5 @@
+import ScreenLoading from '@/components/screen/Loading';
+
 export default function Loading() {
-	return <h2>Loading...</h2>;
+	return <ScreenLoading />;
 }
