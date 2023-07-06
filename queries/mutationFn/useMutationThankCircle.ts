@@ -8,7 +8,7 @@ const useMutationThankCircle = () => {
 	const navigation = useNavigation();
 	const { mutate } = useMutation(apiKeys.createThankCircle, {
 		onSuccess: (data) => {
-			navigation.push(`/thank-circle/start-game?room=${data?.data.room_name}`);
+			navigation.push(`/thank-circle/start-game/room?room=${data?.data.room_name}`);
 		},
 		onError: (error) => {
 			console.log(error);
