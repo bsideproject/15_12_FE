@@ -2,17 +2,30 @@
 
 import React, { useState } from 'react';
 
+import useNavigation from '@/hooks/useNavigation';
+import useTest from '@/hooks/useTest';
+
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
 import ElInput from '../elements/ElInput';
 import FormField from '../modules/FormField';
 
 export default function ScreenParticipantNickname() {
+	const navigation = useNavigation();
+
 	const [nickname, setNickname] = useState<string>();
 
 	const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNickname(e.target.value);
 	};
+
+	const roomName = navigation.path().split('/')[2];
+
+	console.log(roomName);
+
+	// const onStart = () => {
+	// 	const { payload } = useTest(`/topic/moodcheckin/${data?.room_name}/user-count`, token);
+	// };
 
 	return (
 		<ElGrid between bottomSm>
@@ -27,7 +40,9 @@ export default function ScreenParticipantNickname() {
 					<ElInput id="nickname" type="text" placeholder="입력해주세요" _onChange={handleNickname} />
 				</FormField>
 			</div>
-			<ElButton type="button">입장하기</ElButton>
+			{/* <ElButton type="button" _onClick={() => useTest(`/topic/moodcheckin/${data?.room_name}/user-count`, token)}>
+				입장하기
+			</ElButton> */}
 		</ElGrid>
 	);
 }
