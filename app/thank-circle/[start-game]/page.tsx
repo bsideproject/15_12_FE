@@ -1,5 +1,5 @@
-import ScreenStartGames from '@/components/screen/StartGames';
+import StartThankCircle from '@/components/screen/StartGame/ThankCircle';
 
 export default function StartGame() {
-	return <ScreenStartGames />;
+	return <StartThankCircle />;
 }
