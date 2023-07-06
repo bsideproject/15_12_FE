@@ -1,5 +1,5 @@
-import ScreenStartGames from '@/components/screen/StartGames';
+import StartMoodCheckIn from '@/components/screen/StartGame/MoodCheckIn';
 
 export default function StartGame() {
-	return <ScreenStartGames />;
+	return <StartMoodCheckIn />;
 }

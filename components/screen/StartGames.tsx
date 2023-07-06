@@ -13,5 +13,7 @@ export default function ScreenStartGames() {
 	const { data: moodChackin } = useQueryMoodCheckin(activity, room);
 	const { data: thankCircle } = useQueryThankCircle(activity, room);
 
+	console.log(moodChackin);
+
 	return <div>테스트</div>;
 }

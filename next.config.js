@@ -7,6 +7,16 @@ const nextConfig = {
 	experimental: {
 		appDir: true,
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'me2.do',
+				port: '',
+				pathname: '/**',
+			},
+		],
+	},
 	webpack: (config) => {
 		config.module.rules.push({
 			test: /\.svg$/i,
