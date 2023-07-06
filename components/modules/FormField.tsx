@@ -6,9 +6,9 @@ import Check from 'public/images/check-sm-icon.svg';
 interface FormFieldProps {
 	tilte: string;
 	children: React.ReactNode;
-	textHelper: string;
-	iconHelper: boolean;
-	helper: string;
+	textHelper?: string;
+	iconHelper?: boolean;
+	helper?: string;
 	margin?: string;
 }
 
