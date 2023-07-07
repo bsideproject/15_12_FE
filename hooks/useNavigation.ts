@@ -9,6 +9,7 @@ const useNavigation = () => {
 
 	const navigation = {
 		push: (href: string) => router.push(href),
+		replace: (href: string) => router.replace(href),
 		back: () => router.back(),
 		path: () => pathname,
 		params: (query: string) => searchParams.get(query),

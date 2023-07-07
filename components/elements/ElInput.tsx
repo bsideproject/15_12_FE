@@ -11,6 +11,7 @@ interface ElInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	margin?: string;
 	padding?: string;
 	disabled?: boolean;
+	err?: boolean;
 }
 
 export default function ElInput({
@@ -22,23 +23,17 @@ export default function ElInput({
 	margin,
 	padding,
 	disabled,
+	err,
 }: ElInputProps) {
-	const inputClasses = clsxm(
-		'w-full',
-		'rounded',
-		'border',
-		'focus:border-blue050',
-		'placeholder:text-gray010',
-		'disabled:bg-blue010',
-	);
+	const inputClasses = clsxm('w-full', 'rounded', 'border', 'placeholder:text-gray010', 'disabled:bg-blue010');
 
 	return (
 		<label htmlFor={id} className="w-full">
 			{register ? (
 				<input
-					className={`${inputClasses} ${margin} ${
-						padding || 'py-[4.65%] px-[7.69%]'
-					} border-gray020 disabled:text-blueGray050 focus:!outline-none`}
+					className={`${inputClasses} ${margin} ${padding || 'py-[4.65%] px-[7.69%]'} ${
+						err ? 'focus:border-orange050 border-orange050' : 'focus:border-blue050 border-gray020'
+					} disabled:text-blueGray050 focus:!outline-none`}
 					id={id}
 					type={type}
 					placeholder={placeholder}
@@ -48,9 +43,9 @@ export default function ElInput({
 				/>
 			) : (
 				<input
-					className={`${inputClasses} ${margin} ${
-						padding || 'py-[4.65%] px-[7.69%]'
-					} border-gray020 disabled:text-blueGray050 focus:!outline-none`}
+					className={`${inputClasses} ${margin} ${padding || 'py-[4.65%] px-[7.69%]'} ${
+						err ? 'focus:border-orange050 border-orange050' : 'focus:border-blue050 border-gray020'
+					} disabled:text-blueGray050 focus:!outline-none`}
 					id={id}
 					type={type}
 					placeholder={placeholder}

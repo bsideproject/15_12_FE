@@ -120,6 +120,15 @@ module.exports = {
 					},
 				],
 			},
+			keyframes: {
+				loading: {
+					from: { transform: 'translateX(0)' },
+					to: { transform: 'translateX(10px) rotateY(10deg)' },
+				},
+			},
+			animation: {
+				loading: 'loading 0.5s ease-in-out infinite alternate',
+			},
 		},
 	},
 	plugins: [],
