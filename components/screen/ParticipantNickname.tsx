@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
+import localStorage from '@/service/localStorage';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -19,12 +20,21 @@ export default function ScreenParticipantNickname() {
 		setNickname(e.target.value);
 	};
 
-	const roomName = navigation.path().split('/')[2];
+	const roomName = navigation.path().split('/');
 
-	const { connect, disconnect, payload } = useTest(` /topic/moodcheckin/${roomName}`);
+	const { connect, disconnect, payload } = useTest(` /topic/moodcheckin/${roomName[2]}`);
 
 	const connectHaner = () => {
 		connect({}, nickname);
+		localStorage.set('participant');
+
+		switch (roomName[1]) {
+			case 'mood-checkin':
+				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
+				break;
+			default:
+				break;
+		}
 	};
 
 	useEffect(() => {
