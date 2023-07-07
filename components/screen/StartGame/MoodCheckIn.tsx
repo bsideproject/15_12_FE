@@ -28,5 +28,5 @@ export default function StartMoodCheckIn() {
 		return () => disconnect();
 	}, [data]);
 
-	return <StartTemplate data={data} />;
+	return <StartTemplate data={data} activity={activity} room={room} />;
 }

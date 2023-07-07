@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 
+import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
+import localStorage from '@/service/localStorage';
 import clsxm from '@/service/mergeStyle';
 import PersonIcon from 'public/images/person-icon.svg';
 
@@ -17,8 +19,17 @@ interface StartTemplateProps {
 	short_url: string;
 }
 
-export default function StartTemplate({ data }: { data: StartTemplateProps }) {
+export default function StartTemplate({
+	data,
+	activity,
+	room,
+}: {
+	data: StartTemplateProps;
+	activity: string;
+	room: string;
+}) {
 	const toast = useNotify();
+	const navigation = useNavigation();
 
 	const copyUrl = async () => {
 		try {
@@ -49,6 +60,18 @@ export default function StartTemplate({ data }: { data: StartTemplateProps }) {
 	const participantWrapClasses = clsxm('flex', 'items-center', 'justify-center');
 	const participantClasses = clsxm('text-center', 'text-gray070', 'ml-[2.22%]');
 
+	const onNext = () => {
+		localStorage.set('organizer');
+
+		switch (activity) {
+			case 'mood-checkin':
+				navigation.push(`${activity}/${room}/wait`);
+				break;
+			default:
+				break;
+		}
+	};
+
 	return (
 		<ElGrid between bottomSm>
 			<div>
@@ -76,7 +99,9 @@ export default function StartTemplate({ data }: { data: StartTemplateProps }) {
 					<span className={`${participantClasses} text-7`}>참여자 {data?.participant_count}명</span>
 				</div>
 			</div>
-			<ElButton type="button">시작</ElButton>
+			<ElButton type="button" _onClick={onNext}>
+				시작
+			</ElButton>
 		</ElGrid>
 	);
 }
