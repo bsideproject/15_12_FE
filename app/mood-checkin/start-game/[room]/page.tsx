@@ -1,4 +1,4 @@
-import StartMoodCheckIn from '@/components/screen/StartGame/MoodCheckIn';
+import StartMoodCheckIn from '@/components/screen/startGame/MoodCheckIn';
 
 export default function StartGame() {
 	return <StartMoodCheckIn />;

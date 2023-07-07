@@ -65,7 +65,7 @@ export default function StartTemplate({
 
 		switch (activity) {
 			case 'mood-checkin':
-				navigation.push(`${activity}/${room}/wait`);
+				navigation.push(`${activity}/${room}/progress`);
 				break;
 			default:
 				break;
