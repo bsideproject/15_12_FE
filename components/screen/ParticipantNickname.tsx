@@ -25,7 +25,6 @@ export default function ScreenParticipantNickname() {
 
 	const connectHaner = () => {
 		connect({}, nickname);
-		console.log(payload);
 	};
 
 	useEffect(() => {

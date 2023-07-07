@@ -16,7 +16,7 @@ export default function StartMoodCheckIn() {
 
 	const { data } = useQueryMoodCheckin(activity, room);
 
-	const { connect, disconnect, payload } = useTest(`/topic/moodcheckin/${room}/user-count`);
+	const { connect, disconnect, payload } = useTest(`/topic/moodcheckin/${data?.room_name}/user-count`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
@@ -26,9 +26,7 @@ export default function StartMoodCheckIn() {
 	useEffect(() => {
 		userToken();
 		return () => disconnect();
-	}, [room]);
-
-	console.log(payload);
+	}, [data]);
 
 	return <StartTemplate data={data} />;
 }

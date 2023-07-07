@@ -9,19 +9,21 @@ interface ConnectAuthorizationType {
 }
 
 const useTest = (soketUrl: string) => {
-	console.log(soketUrl);
 	const [payload, setPayload] = useState<string>('');
 	const client = useRef<CompatClient>();
 
 	const subscribe = (nickname?: string) => {
+		console.log('1');
 		if (client.current) {
+			console.log('2');
 			client.current.subscribe(
 				soketUrl,
-				(body) => {
-					const jsonBody = JSON.parse(body.body);
-					setPayload(jsonBody);
+				(response) => {
+					const jsonBody = JSON.parse(response.body);
+					console.log(jsonBody);
+					// setPayload(jsonBody);
 				},
-				nickname ? { nickname } : {},
+				nickname ? { nickname } : undefined,
 			);
 		}
 	};
