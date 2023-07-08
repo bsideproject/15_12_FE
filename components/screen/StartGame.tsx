@@ -22,7 +22,7 @@ interface IRoomProps {
 
 export default function ScreenStartGame() {
 	const searchParams = useSearchParams();
-	const roomCode = searchParams.get('roomCode');
+	const room = searchParams.get('room');
 	const toast = useNotify();
 	const [roomData, setRoomData] = useState<IRoomProps>();
 
@@ -38,7 +38,7 @@ export default function ScreenStartGame() {
 	useEffect(() => {
 		const init = () => {
 			apiClient
-				.get(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame/${roomCode}`)
+				.get(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame/${room}`)
 				.then((res) => {
 					setRoomData(res.data);
 				})
@@ -47,7 +47,7 @@ export default function ScreenStartGame() {
 				});
 		};
 		init();
-	}, [roomCode]);
+	}, [room]);
 
 	const boldTextClasses = clsxm('mb-[1.11%]', 'font-bold', 'text-center');
 	const normalTextClasses = clsxm('mb-[8.89%]', 'text-center', 'text-gray070', 'text-p2');

@@ -138,7 +138,7 @@ export default function ScreenSpeedGame() {
 							.post(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame`, { questions })
 							.then((res) => {
 								const roomCode = res.data.room_code;
-								navigation.push(`/start-game?roomCode=${roomCode}`);
+								navigation.push(`/start-game?room=${roomCode}`);
 							})
 							.catch((err) => {
 								console.log('err..', err);
