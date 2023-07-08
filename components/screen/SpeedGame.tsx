@@ -8,11 +8,11 @@ import useNotify from '@/hooks/useNotify';
 import clsxm from '@/service/mergeStyle';
 import SpeedGameIcon from 'public/images/activity01-sm-icon.svg';
 import AddIcon from 'public/images/add-icon.svg';
-import CloseIcon from 'public/images/close-icon.svg';
 import SaveIcon from 'public/images/save-icon.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
+import ActivityHead from '../modules/ActivityHead';
 import SpeedGameInputs from '../modules/SpeedGameInputs';
 
 export interface QuestionProps {
@@ -90,17 +90,15 @@ export default function ScreenSpeedGame() {
 		};
 	};
 
-	const headerClasses = clsxm('flex', 'items-center', 'justify-between', 'px-[6.67%]', 'py-[3.33%]');
 	const imageClasses = clsxm('my-[13.33%]', 'mx-auto');
 	const notlineClasses = clsxm('flex', 'w-full', 'mx-auto', 'pb-[29.17%]', 'text-p1', 'justify-center', 'items-center');
 	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-[6.67%]');
 
 	return (
 		<ElGrid pxNone>
-			<header className={headerClasses}>
-				<h2 className="text-h2">스피드 게임</h2>
-				<CloseIcon />
-			</header>
+			<div className="px-[6.67%] py-[3.33%]">
+				<ActivityHead title="스피드 게임" />
+			</div>
 			<div className="bg-[#E1DEBF]">
 				<SpeedGameIcon className={imageClasses} />
 			</div>
@@ -140,7 +138,7 @@ export default function ScreenSpeedGame() {
 							.post(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame`, { questions })
 							.then((res) => {
 								const roomCode = res.data.room_code;
-								navigation.push(`/start-game?roomCode=${roomCode}`);
+								navigation.push(`/start-game?room=${roomCode}`);
 							})
 							.catch((err) => {
 								console.log('err..', err);
