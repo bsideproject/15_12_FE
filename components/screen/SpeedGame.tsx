@@ -1,12 +1,12 @@
 'use client';
 
-import SpeedGameIcon from 'public/images/activity01-sm-icon.svg';
 import { useState } from 'react';
 
 import apiClient from '@/core';
 import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
 import clsxm from '@/service/mergeStyle';
+import SpeedGameIcon from 'public/images/activity01-sm-icon.svg';
 import AddIcon from 'public/images/add-icon.svg';
 import SaveIcon from 'public/images/save-icon.svg';
 
@@ -96,7 +96,7 @@ export default function ScreenSpeedGame() {
 
 	return (
 		<ElGrid pxNone>
-			<div className="px-[6.67%] py-[3.33%]">
+			<div className="px-[6.67%] mb-[3.33%]">
 				<ActivityHead title="스피드 게임" />
 			</div>
 			<div className="bg-[#E1DEBF]">
