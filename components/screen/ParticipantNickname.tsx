@@ -30,7 +30,7 @@ export default function ScreenParticipantNickname() {
 
 		switch (roomName[1]) {
 			case 'mood-checkin':
-				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
+				navigation.push(`${roomName[1]}/${roomName[2]}/pick`);
 				break;
 			default:
 				break;
