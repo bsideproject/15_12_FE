@@ -39,12 +39,12 @@ export default function MoodPick({ handleStep }: { handleStep: (value: string) =
 	}, []);
 
 	return (
-		<ElGrid autoHeight pxNone bottomSm>
+		<ElGrid between pxNone bottomSm>
 			<div className="mb-[8.89%]">
 				<div className="px-[6.67%]">
 					<ActivityHead title="기분 체크인" />
 					<p className="text-p2 text-gray070 mt-[4.49%] mb-[13.46%]">오늘의 기분을 말해주세요</p>
-					<Logo className="mx-auto mb-[13.62%]" />
+					<Logo className="mx-auto mb-[9.72%]" />
 				</div>
 				<ul className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>li:not(:last-child)]:mb-[1%]">
 					{moodCheckinArr.map((el, i) => {

@@ -18,7 +18,7 @@ export default function Wait({ position, handleStep }: WaitProps) {
 		<ElGrid between bottomSm>
 			<div className="text-center">
 				<WaitImg className="mt-[28.21%] mx-auto mb-[7.69%]" />
-				<h3 className="text-h3 text-gray090 mb-[0.64%]">
+				<h3 className="text-h3 text-gray090">
 					참여자를
 					<br />
 					기다리고 있어요.
