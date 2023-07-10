@@ -52,10 +52,14 @@ const useTest = (soketUrl: string) => {
 		}
 	};
 
-	const publish = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const publish = (
+		sendUrl: string,
+		value: { [key: string]: number | string },
+		e?: React.FormEvent<HTMLFormElement>,
+	) => {
+		if (e) e.preventDefault();
 		if (!client.current?.connected) return;
-		client.current?.send(soketUrl, {}, JSON.stringify({}));
+		client.current?.send(sendUrl, {}, JSON.stringify(value));
 	};
 
 	return { connect, disconnect, publish, payload };

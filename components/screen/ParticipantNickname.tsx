@@ -22,7 +22,7 @@ export default function ScreenParticipantNickname() {
 
 	const roomName = navigation.path().split('/');
 
-	const { connect, disconnect, payload } = useTest(` /topic/moodcheckin/${roomName[2]}`);
+	const { connect, disconnect, payload } = useTest(`/topic/moodcheckin/${roomName[2]}`);
 
 	const connectHaner = () => {
 		connect({}, nickname);

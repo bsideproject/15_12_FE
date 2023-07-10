@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import moodCheckinArr from '@/constants/moodCheckinArr';
+import useNavigation from '@/hooks/useNavigation';
+import useTest from '@/hooks/useTest';
 import Logo from 'public/images/activity-logo.svg';
 
 import ElButton from '../elements/ElButton';
@@ -10,11 +12,30 @@ import ElGrid from '../elements/ElGrid';
 import ActivityHead from '../modules/ActivityHead';
 
 export default function ScreenPick() {
-	const [moodNum, setMoodNum] = useState<string>('');
+	const navigation = useNavigation();
+	const [moodNum, setMoodNum] = useState<number>(0);
 
-	const onChangMood = (value: string) => {
+	const onChangMood = (value: number) => {
 		setMoodNum(value);
 	};
+
+	const { connect, disconnect, publish } = useTest(`/user/queue/reply`);
+
+	const roomName = navigation.path().split('/');
+
+	const onSend = () => {
+		if (moodNum === 0) {
+			alert('선택해 주세요.');
+			return;
+		}
+		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
+		navigation.push(`${roomName[0]}/${roomName[1]}/progress`);
+	};
+
+	useEffect(() => {
+		connect({});
+		return () => disconnect();
+	}, []);
 
 	return (
 		<ElGrid autoHeight pxNone bottomSm>
@@ -30,16 +51,14 @@ export default function ScreenPick() {
 							<li key={`${el.key}`}>
 								<button
 									type="button"
-									onClick={() => onChangMood(`${i + 1}점`)}
+									onClick={() => onChangMood(i + 1)}
 									className={`border border-gray020 rounded px-[5.84%] py-[2.92%] w-full flex items-center ${
-										moodNum === `${i + 1}점`
-											? '!border-blue050 text-h7 text-blue050'
-											: 'border-gray020 text-p2 text-gray020'
+										moodNum === i + 1 ? '!border-blue050 text-h7 text-blue050' : 'border-gray020 text-p2 text-gray020'
 									}`}
 								>
 									<div
 										className={`mr-[8px] ${
-											moodNum === `${i + 1}점`
+											moodNum === i + 1
 												? '[&>svg>path]:fill-blue050 [&>svg>g>path]:fill-blue050'
 												: '[&>svg>path]:fill-gray020 [&>svg>g>path]:fill-gray020'
 										}`}
@@ -54,7 +73,9 @@ export default function ScreenPick() {
 				</ul>
 			</div>
 			<div className="px-[6.67%]">
-				<ElButton type="button">제출하기</ElButton>
+				<ElButton type="button" _onClick={onSend}>
+					제출하기
+				</ElButton>
 			</div>
 		</ElGrid>
 	);
