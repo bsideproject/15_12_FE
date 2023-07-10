@@ -2,12 +2,8 @@
 
 import React, { useState } from 'react';
 
+import moodCheckinArr from '@/constants/moodCheckinArr';
 import Logo from 'public/images/activity-logo.svg';
-import MoodCheckin01 from 'public/images/mood-checkin-icon01.svg';
-import MoodCheckin02 from 'public/images/mood-checkin-icon02.svg';
-import MoodCheckin03 from 'public/images/mood-checkin-icon03.svg';
-import MoodCheckin04 from 'public/images/mood-checkin-icon04.svg';
-import MoodCheckin05 from 'public/images/mood-checkin-icon05.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -20,14 +16,6 @@ export default function ScreenPick() {
 		setMoodNum(value);
 	};
 
-	const iconArr: React.ReactElement<React.SVGProps<SVGSVGElement>>[] = [
-		<MoodCheckin01 key="MoodCheckin01" />,
-		<MoodCheckin02 key="MoodCheckin02" />,
-		<MoodCheckin03 key="MoodCheckin03" />,
-		<MoodCheckin04 key="MoodCheckin04" />,
-		<MoodCheckin05 key="MoodCheckin05" />,
-	];
-
 	return (
 		<ElGrid autoHeight pxNone bottomSm>
 			<div className="mb-[8.89%]">
@@ -37,7 +25,7 @@ export default function ScreenPick() {
 					<Logo className="mx-auto mb-[13.62%]" />
 				</div>
 				<ul className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>li:not(:last-child)]:mb-[1%]">
-					{iconArr.map((el, i) => {
+					{moodCheckinArr.map((el, i) => {
 						return (
 							<li key={`${el.key}`}>
 								<button
