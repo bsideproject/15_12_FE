@@ -64,7 +64,7 @@ export default function StartTemplate({
 		localStorage.set('organizer');
 
 		switch (activity) {
-			case 'mood-checkin':
+			case 'moodcheckin':
 				navigation.push(`${activity}/${room}/progress`);
 				break;
 			default:

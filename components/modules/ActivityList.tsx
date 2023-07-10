@@ -26,10 +26,10 @@ export default function ActivityList({ data, user }: ActivityListProps) {
 					navigation.push('/speed-game');
 					break;
 				case '기분 체크인':
-					navigation.push('/mood-checkin');
+					navigation.push('/moodcheckin');
 					break;
 				case '감사 서클':
-					navigation.push('/thank-circle');
+					navigation.push('/thankcircle');
 					break;
 				case '미니 네트워킹':
 					alert('준비 중...');

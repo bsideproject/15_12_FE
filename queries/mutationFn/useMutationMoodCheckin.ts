@@ -8,7 +8,7 @@ const useMutationMoodCheckin = () => {
 	const navigation = useNavigation();
 	const { mutate } = useMutation(apiKeys.createMoodCheckin, {
 		onSuccess(data) {
-			navigation.push(`/mood-checkin/start-game/room?room=${data?.data.room_name}`);
+			navigation.push(`/moodcheckin/start-game/room?room=${data?.data.room_name}`);
 		},
 		onError(error) {
 			console.log(error);

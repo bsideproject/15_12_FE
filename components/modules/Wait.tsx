@@ -8,9 +8,10 @@ import ElGrid from '../elements/ElGrid';
 
 interface WaitProps {
 	position: string;
+	handleStep: (value: string) => void;
 }
 
-export default function Wait({ position }: WaitProps) {
+export default function Wait({ position, handleStep }: WaitProps) {
 	const textClasses = clsxm('text-p2');
 
 	return (

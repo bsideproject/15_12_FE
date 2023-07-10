@@ -9,9 +9,10 @@ import Logo from 'public/images/activity-logo.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
-import ActivityHead from '../modules/ActivityHead';
 
-export default function ScreenPick() {
+import ActivityHead from './ActivityHead';
+
+export default function MoodPick({ handleStep }: { handleStep: (value: string) => void }) {
 	const navigation = useNavigation();
 	const [moodNum, setMoodNum] = useState<number>(0);
 
@@ -23,15 +24,13 @@ export default function ScreenPick() {
 
 	const roomName = navigation.path().split('/');
 
-	console.log(roomName);
-
 	const onSend = () => {
 		if (moodNum === 0) {
 			alert('선택해 주세요.');
 			return;
 		}
 		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
-		navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
+		handleStep('WAITING');
 	};
 
 	useEffect(() => {

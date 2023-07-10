@@ -20,7 +20,7 @@ const useTest = (soketUrl: string) => {
 				soketUrl,
 				(response) => {
 					const jsonBody = JSON.parse(response.body);
-					alert(jsonBody);
+					alert(JSON.stringify(jsonBody));
 					// setPayload(jsonBody);
 				},
 				nickname ? { nickname } : undefined,
@@ -30,7 +30,7 @@ const useTest = (soketUrl: string) => {
 
 	const connect = (authorization: ConnectAuthorizationType, nickname?: string) => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
+			const sock = new SockJS(`/ws`);
 			return sock;
 		});
 		if (client.current) {
