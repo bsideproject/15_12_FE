@@ -12,5 +12,5 @@ export default function StartThankCircle() {
 
 	const { data } = useQueryThankCircle(activity, room);
 
-	return <StartTemplate data={data} />;
+	return <StartTemplate data={data} activity={activity} room={room} />;
 }
