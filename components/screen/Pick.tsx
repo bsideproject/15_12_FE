@@ -23,13 +23,15 @@ export default function ScreenPick() {
 
 	const roomName = navigation.path().split('/');
 
+	console.log(roomName);
+
 	const onSend = () => {
 		if (moodNum === 0) {
 			alert('선택해 주세요.');
 			return;
 		}
 		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
-		navigation.push(`${roomName[0]}/${roomName[1]}/progress`);
+		navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 	};
 
 	useEffect(() => {

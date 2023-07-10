@@ -9,7 +9,7 @@ interface ElGridProps {
 }
 
 export default function ElGrid({ children, autoHeight, between, bottomSm, pxNone }: ElGridProps) {
-	const sectionClasses = clsxm('pt-[3.33%]', 'flex', 'flex-col');
+	const sectionClasses = clsxm('pt-[3.33%]', 'flex', 'flex-col', 'relative');
 
 	return (
 		<section
