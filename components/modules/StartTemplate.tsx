@@ -45,6 +45,7 @@ export default function StartTemplate({
 	const inputWrapClasses = clsxm(
 		'flex',
 		'items-center',
+		'justify-center',
 		'border',
 		'border-gray020',
 		'w-[83.97%]',
@@ -55,8 +56,8 @@ export default function StartTemplate({
 		'px-[11.70%]',
 		'py-[4.33%]',
 	);
-	const inputClasses = clsxm('w-full', 'outline-none', 'text-gray090', 'bg-transparent');
-	const copyClasses = clsxm('ml-[5.3%]', 'break-keep', 'text-blue050');
+	const inputClasses = clsxm('w-auto', 'outline-none', 'text-gray090', 'bg-transparent');
+	const copyClasses = clsxm('ml-[10px]', 'break-keep', 'text-blue050');
 	const participantWrapClasses = clsxm('flex', 'items-center', 'justify-center');
 	const participantClasses = clsxm('text-center', 'text-gray070', 'ml-[2.22%]');
 
@@ -64,7 +65,10 @@ export default function StartTemplate({
 		localStorage.set('organizer');
 
 		switch (activity) {
-			case 'mood-checkin':
+			case 'moodcheckin':
+				navigation.push(`${activity}/${room}/progress`);
+				break;
+			case 'thankcircle':
 				navigation.push(`${activity}/${room}/progress`);
 				break;
 			default:
@@ -96,8 +100,9 @@ export default function StartTemplate({
 				</div>
 				<div className={participantWrapClasses}>
 					<PersonIcon />
-					<span className={`${participantClasses} text-7`}>참여자 {data?.participant_count}명</span>
+					<span className={`${participantClasses} text-h7`}>참여자 {data?.participant_count}명</span>
 				</div>
+				<p className="text-p3 text-gray030 text-center">참여자들이 모두 들어오면 &apos;시작&apos;을 눌러주세요</p>
 			</div>
 			<ElButton type="button" _onClick={onNext}>
 				시작

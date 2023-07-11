@@ -9,9 +9,10 @@ import Logo from 'public/images/activity-logo.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
-import ActivityHead from '../modules/ActivityHead';
 
-export default function ScreenPick() {
+import ActivityHead from './ActivityHead';
+
+export default function MoodPick({ handleStep }: { handleStep: (value: string) => void }) {
 	const navigation = useNavigation();
 	const [moodNum, setMoodNum] = useState<number>(0);
 
@@ -29,7 +30,7 @@ export default function ScreenPick() {
 			return;
 		}
 		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
-		navigation.push(`${roomName[0]}/${roomName[1]}/progress`);
+		handleStep('WAITING');
 	};
 
 	useEffect(() => {
@@ -38,12 +39,12 @@ export default function ScreenPick() {
 	}, []);
 
 	return (
-		<ElGrid autoHeight pxNone bottomSm>
+		<ElGrid between pxNone bottomSm>
 			<div className="mb-[8.89%]">
 				<div className="px-[6.67%]">
 					<ActivityHead title="기분 체크인" />
 					<p className="text-p2 text-gray070 mt-[4.49%] mb-[13.46%]">오늘의 기분을 말해주세요</p>
-					<Logo className="mx-auto mb-[13.62%]" />
+					<Logo className="mx-auto mb-[9.72%]" />
 				</div>
 				<ul className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>li:not(:last-child)]:mb-[1%]">
 					{moodCheckinArr.map((el, i) => {

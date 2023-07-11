@@ -10,21 +10,21 @@ interface ConnectAuthorizationType {
 
 const useTest = (soketUrl: string) => {
 	const [payload, setPayload] = useState<string>('');
+	const [isConnect, setIsConnect] = useState<boolean>(false);
 	const client = useRef<CompatClient>();
 
 	const subscribe = (nickname?: string) => {
-		console.log('1');
 		if (client.current) {
-			console.log('2');
 			client.current.subscribe(
 				soketUrl,
 				(response) => {
 					const jsonBody = JSON.parse(response.body);
-					alert(jsonBody);
-					// setPayload(jsonBody);
+					alert(JSON.stringify(jsonBody));
+					setPayload(jsonBody);
 				},
 				nickname ? { nickname } : undefined,
 			);
+			setIsConnect(true);
 		}
 	};
 
@@ -35,7 +35,6 @@ const useTest = (soketUrl: string) => {
 		});
 		if (client.current) {
 			client.current.connect(authorization, () => {
-				console.log('success');
 				if (nickname) {
 					subscribe(nickname);
 				} else {
@@ -54,15 +53,15 @@ const useTest = (soketUrl: string) => {
 
 	const publish = (
 		sendUrl: string,
-		value: { [key: string]: number | string },
+		value?: { [key: string]: number | string },
 		e?: React.FormEvent<HTMLFormElement>,
 	) => {
 		if (e) e.preventDefault();
 		if (!client.current?.connected) return;
-		client.current?.send(sendUrl, {}, JSON.stringify(value));
+		client.current?.send(sendUrl, {}, value ? JSON.stringify(value) : '');
 	};
 
-	return { connect, disconnect, publish, payload };
+	return { connect, disconnect, publish, payload, isConnect };
 };
 
 export default useTest;

@@ -16,7 +16,7 @@ export default function ScreenMoodCheckin() {
 				<ActivityHead title="기분 체크인" />
 				<div className="text-center mt-[34.62%]">
 					<MooodCheckinImg className="mb-[10.58%] mx-auto" />
-					<p className="text-p2 text-gray090">
+					<p className="text-h6 text-gray090">
 						참여자의
 						<br />
 						오늘의 기분을 알아보세요!
