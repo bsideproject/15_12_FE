@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import ThankList from '@/components/modules/ThankList';
+import ThankMixing from '@/components/modules/ThankMixing';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
@@ -12,7 +14,7 @@ export default function ProgressThankCircle() {
 	const navigation = useNavigation();
 
 	const [position, setPosition] = useState<string>('');
-	const [step, setStep] = useState<string>('WAITING');
+	const [step, setStep] = useState<string>('READY');
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -25,7 +27,7 @@ export default function ProgressThankCircle() {
 
 	const userToken = async () => {
 		const session = await getUserSession();
-		connect(position === 'organizer' ? { Autorization: `${session?.getAccessToken().getJwtToken()}` } : {});
+		connect(position === 'organizer' ? { Autorization: `${session?.getAccessToken().getJwtToken()}` } : {}, 'test');
 	};
 
 	useEffect(() => {
@@ -40,7 +42,8 @@ export default function ProgressThankCircle() {
 	return (
 		<>
 			{step === 'WAITING' && <Wait position={position} />}
-			{step === 'READY' && <div />}
+			{step === 'READY' && <ThankList position={position} handleStep={handleStep} />}
+			{step === 'MIXING' && <ThankMixing />}
 		</>
 	);
 }
