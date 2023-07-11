@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import ThankList from '@/components/modules/ThankList';
-import ThankMixing from '@/components/modules/ThankMixing';
+import ThankTo from '@/components/modules/ThankTo';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
@@ -15,6 +15,7 @@ export default function ProgressThankCircle() {
 
 	const [position, setPosition] = useState<string>('');
 	const [step, setStep] = useState<string>('READY');
+	const [isMixing, setIsMixing] = useState<boolean>(true);
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -42,12 +43,17 @@ export default function ProgressThankCircle() {
 		setStep(value);
 	};
 
+	const handleIsMixing = () => {
+		setIsMixing(false);
+	};
+
 	return (
 		<>
 			{step === 'WAITING' && <Wait position={position} />}
 			{step === 'READY' && <ThankList position={position} handleStep={handleStep} />}
-			{step === 'MIXING' && <ThankMixing handleStep={handleStep} />}
-			{step === 'GUIDE_THANKS_TO' && <div>ㅎ하</div>}
+			{step === 'GUIDE_THANKS_TO' && (
+				<ThankTo position={position} handleStep={handleStep} handleIsMixing={handleIsMixing} isMixing={isMixing} />
+			)}
 		</>
 	);
 }

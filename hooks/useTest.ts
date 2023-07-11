@@ -8,7 +8,7 @@ interface ConnectAuthorizationType {
 	[key: string]: string;
 }
 
-const useTest = (soketUrl: string, publishUrl: string) => {
+const useTest = (soketUrl: string, publishUrl?: string) => {
 	const [payload, setPayload] = useState<string>('');
 	const client = useRef<CompatClient>();
 

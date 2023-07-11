@@ -6,7 +6,7 @@ import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
 import MixingImg from 'public/images/mixing-img.svg';
 
-export default function ThankMixing({ handleStep }: { handleStep: (value: string) => void }) {
+export default function ThankMixing() {
 	const navigation = useNavigation();
 
 	const roomName = navigation.path().split('/')[2];
@@ -17,16 +17,6 @@ export default function ThankMixing({ handleStep }: { handleStep: (value: string
 		connect({});
 		return () => disconnect();
 	}, [roomName]);
-
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			handleStep('GUIDE_THANKS_TO');
-		}, 2000);
-
-		return () => {
-			clearTimeout(timer);
-		};
-	}, []);
 
 	return (
 		<div className="flex justify-center items-center h-real-screen">
