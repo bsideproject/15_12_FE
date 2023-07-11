@@ -14,7 +14,7 @@ export default function ProgressThankCircle() {
 	const navigation = useNavigation();
 
 	const [position, setPosition] = useState<string>('');
-	const [step, setStep] = useState<string>('WAITING');
+	const [step, setStep] = useState<string>('READY');
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -23,7 +23,10 @@ export default function ProgressThankCircle() {
 
 	const roomName = navigation.path().split('/')[2];
 
-	const { connect, disconnect } = useTest(`/topic/thankcircle/${roomName}`);
+	const { connect, disconnect, publish } = useTest(
+		`/topic/thankcircle/${roomName}`,
+		`/app/thankcircle/${roomName}/start`,
+	);
 
 	const userToken = async () => {
 		const session = await getUserSession();
@@ -33,7 +36,7 @@ export default function ProgressThankCircle() {
 	useEffect(() => {
 		userToken();
 		return () => disconnect();
-	}, []);
+	}, [position]);
 
 	const handleStep = (value: string) => {
 		setStep(value);

@@ -39,7 +39,7 @@ export default function ThankList({ position, handleStep }: ThankListProps) {
 			</div>
 			{position === 'organizer' && (
 				<div className="px-[6.67%]">
-					<ElButton type="button" _onClick={() => handleStep('MIXING')}>
+					<ElButton type="button" _onClick={() => handleStep('GUIDE_THANKS_TO')}>
 						순서 섞기
 					</ElButton>
 				</div>
