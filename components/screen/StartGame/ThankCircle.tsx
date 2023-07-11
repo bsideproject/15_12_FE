@@ -28,5 +28,7 @@ export default function StartThankCircle() {
 		return () => disconnect();
 	}, [data]);
 
+	console.log(payload);
+
 	return <StartTemplate data={data} activity={activity} room={room} />;
 }

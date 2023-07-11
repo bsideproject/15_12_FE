@@ -8,8 +8,9 @@ interface ConnectAuthorizationType {
 	[key: string]: string;
 }
 
-const useTest = (soketUrl: string, publishUrl?: string) => {
+const useTest = (soketUrl: string) => {
 	const [payload, setPayload] = useState<string>('');
+	const [isConnect, setIsConnect] = useState<boolean>(false);
 	const client = useRef<CompatClient>();
 
 	const subscribe = (nickname?: string) => {
@@ -23,14 +24,13 @@ const useTest = (soketUrl: string, publishUrl?: string) => {
 				},
 				nickname ? { nickname } : undefined,
 			);
-			// eslint-disable-next-line @typescript-eslint/no-use-before-define
-			if (publishUrl) publish(publishUrl);
+			setIsConnect(true);
 		}
 	};
 
 	const connect = (authorization: ConnectAuthorizationType, nickname?: string) => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`/ws`);
+			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
 			return sock;
 		});
 		if (client.current) {
@@ -61,7 +61,7 @@ const useTest = (soketUrl: string, publishUrl?: string) => {
 		client.current?.send(sendUrl, {}, value ? JSON.stringify(value) : '');
 	};
 
-	return { connect, disconnect, publish, payload };
+	return { connect, disconnect, publish, payload, isConnect };
 };
 
 export default useTest;

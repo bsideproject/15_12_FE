@@ -13,9 +13,9 @@ import localStorage from '@/service/localStorage';
 export default function ProgressThankCircle() {
 	const navigation = useNavigation();
 
+	const [isMixing, setIsMixing] = useState<boolean>(true);
 	const [position, setPosition] = useState<string>('');
 	const [step, setStep] = useState<string>('READY');
-	const [isMixing, setIsMixing] = useState<boolean>(true);
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -24,10 +24,7 @@ export default function ProgressThankCircle() {
 
 	const roomName = navigation.path().split('/')[2];
 
-	const { connect, disconnect, publish } = useTest(
-		`/topic/thankcircle/${roomName}`,
-		`/app/thankcircle/${roomName}/start`,
-	);
+	const { connect, disconnect, publish, isConnect } = useTest(`/topic/thankcircle/${roomName}`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
@@ -38,6 +35,10 @@ export default function ProgressThankCircle() {
 		userToken();
 		return () => disconnect();
 	}, [position]);
+
+	useEffect(() => {
+		publish(`/app/thankcircle/${roomName}/start`);
+	}, [isConnect]);
 
 	const handleStep = (value: string) => {
 		setStep(value);
