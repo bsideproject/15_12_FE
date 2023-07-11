@@ -22,7 +22,7 @@ export default function ScreenParticipantNickname() {
 
 	const roomName = navigation.path().split('/');
 
-	const { connect, disconnect } = useTest(`/topic/moodcheckin/${roomName[2]}`);
+	const { connect, disconnect } = useTest(`/topic/${roomName[1]}/${roomName[2]}`);
 
 	const connectHaner = () => {
 		connect({}, nickname);
@@ -30,6 +30,9 @@ export default function ScreenParticipantNickname() {
 
 		switch (roomName[1]) {
 			case 'moodcheckin':
+				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
+				break;
+			case 'thankcircle':
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
 			default:

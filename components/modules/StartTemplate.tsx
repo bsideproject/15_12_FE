@@ -68,6 +68,9 @@ export default function StartTemplate({
 			case 'moodcheckin':
 				navigation.push(`${activity}/${room}/progress`);
 				break;
+			case 'thankcircle':
+				navigation.push(`${activity}/${room}/progress`);
+				break;
 			default:
 				break;
 		}
