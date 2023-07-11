@@ -14,7 +14,7 @@ export default function ProgressThankCircle() {
 	const navigation = useNavigation();
 
 	const [position, setPosition] = useState<string>('');
-	const [step, setStep] = useState<string>('READY');
+	const [step, setStep] = useState<string>('WAITING');
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -43,7 +43,8 @@ export default function ProgressThankCircle() {
 		<>
 			{step === 'WAITING' && <Wait position={position} />}
 			{step === 'READY' && <ThankList position={position} handleStep={handleStep} />}
-			{step === 'MIXING' && <ThankMixing />}
+			{step === 'MIXING' && <ThankMixing handleStep={handleStep} />}
+			{step === 'GUIDE_THANKS_TO' && <div>ㅎ하</div>}
 		</>
 	);
 }
