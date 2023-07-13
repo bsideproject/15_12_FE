@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
 import localStorage from '@/service/localStorage';
@@ -10,6 +8,7 @@ import PersonIcon from 'public/images/person-icon.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
+import ElQrImage from '../elements/ElQrImage';
 
 interface StartTemplateProps {
 	participant_count: number;
@@ -41,7 +40,6 @@ export default function StartTemplate({
 	};
 
 	const titleTextClasses = clsxm('text-gray090 text-center mb-[23.08%]');
-	const imageClasses = clsxm('bg-gray030', 'object-cover', 'mb-[2.56%]', 'mx-auto');
 	const inputWrapClasses = clsxm(
 		'flex',
 		'items-center',
@@ -84,14 +82,7 @@ export default function StartTemplate({
 			<div>
 				<h2 className={`${titleTextClasses} text-h3`}>우리 같이 얼음땡 해요!</h2>
 				<div className="mb-[10.26%] text-center">
-					<Image
-						src={data?.qr_code_image_url}
-						alt="큐알_코드"
-						className={imageClasses}
-						priority
-						width={150}
-						height={150}
-					/>
+					<ElQrImage src={data?.qr_code_image_url} />
 					<p className="text-h7 text-gray090">입장을 위한 QR코드</p>
 					<p className="text-p3 text-gray070">QR코드를 스캔해주세요.</p>
 				</div>

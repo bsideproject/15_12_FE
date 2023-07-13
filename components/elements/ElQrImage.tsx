@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
+
 import clsxm from '@/service/mergeStyle';
 
 interface ELQrImageProps {
-	src: string | undefined;
+	src: string;
 }
 
 export default function ElQrImage({ src }: ELQrImageProps) {
@@ -18,11 +20,11 @@ export default function ElQrImage({ src }: ELQrImageProps) {
 		'items-center',
 		'justify-center',
 	);
-	const imageClasses = clsxm('w-[125%]', 'h-[125%]', 'max-w-none');
+	const imageClasses = clsxm('bg-gray030', 'object-cover', 'mb-[2.56%]', 'mx-auto', 'w-[125%]', 'h-[125%]');
 
 	return (
 		<div className={hiddenClasses}>
-			<img src={src} alt="큐알_이미지" className={imageClasses} />
+			<Image src={src} alt="큐알_코드" className={imageClasses} priority width={150} height={150} />
 		</div>
 	);
 }
