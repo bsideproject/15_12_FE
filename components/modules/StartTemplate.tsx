@@ -65,6 +65,9 @@ export default function StartTemplate({
 		localStorage.set('organizer');
 
 		switch (activity) {
+			case 'speedgame':
+				navigation.push(`${activity}/${room}/progress`);
+				break;
 			case 'moodcheckin':
 				navigation.push(`${activity}/${room}/progress`);
 				break;
@@ -102,7 +105,7 @@ export default function StartTemplate({
 					<PersonIcon />
 					<span className={`${participantClasses} text-h7`}>참여자 {data?.participant_count}명</span>
 				</div>
-				<p className="text-p3 text-gray030 text-center">참여자들이 모두 들어오면 &apos;시작&apos;을 눌러주세요</p>
+				<p className="text-center text-p3 text-gray030">참여자들이 모두 들어오면 &apos;시작&apos;을 눌러주세요</p>
 			</div>
 			<ElButton type="button" _onClick={onNext}>
 				시작

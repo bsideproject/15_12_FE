@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 
-import apiClient from '@/core';
-import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
+import useQuerySpeedGameCreate from '@/queries/queryFn/useQuerySpeedGameCreate';
 import clsxm from '@/service/mergeStyle';
 import SpeedGameIcon from 'public/images/activity01-sm-icon.svg';
 import AddIcon from 'public/images/add-icon.svg';
@@ -26,7 +25,6 @@ export interface QuestionProps {
 }
 
 export default function ScreenSpeedGame() {
-	const navigation = useNavigation();
 	const toast = useNotify();
 	const [total, setTotal] = useState<number>(1);
 	const defaultQuestion: QuestionProps[] = [
@@ -60,6 +58,7 @@ export default function ScreenSpeedGame() {
 	let copyQuestion = [...defaultQuestion];
 
 	const [questions, setQuestions] = useState<QuestionProps[]>(copyQuestion);
+	const createRoom = useQuerySpeedGameCreate(questions);
 
 	const newQuestion = (inx: number) => {
 		return {
@@ -128,23 +127,7 @@ export default function ScreenSpeedGame() {
 				<p className="text-p1 text-gray070">문제 추가하기</p>
 			</button>
 			<div className={bottomClasses}>
-				<ElButton
-					type="submit"
-					margin="mr-[3.89%]"
-					flex="flex-1"
-					width="w-auto"
-					_onClick={async () => {
-						await apiClient
-							.post(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame`, { questions })
-							.then((res) => {
-								const roomCode = res.data.room_code;
-								navigation.push(`/start-game?room=${roomCode}`);
-							})
-							.catch((err) => {
-								console.log('err..', err);
-							});
-					}}
-				>
+				<ElButton type="submit" margin="mr-[3.89%]" flex="flex-1" width="w-auto" _onClick={() => createRoom}>
 					만들기
 				</ElButton>
 				<ElButton

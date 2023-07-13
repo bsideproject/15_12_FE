@@ -29,6 +29,9 @@ export default function ScreenParticipantNickname() {
 		localStorage.set('participant');
 
 		switch (roomName[1]) {
+			case 'speedgame':
+				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
+				break;
 			case 'moodcheckin':
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
