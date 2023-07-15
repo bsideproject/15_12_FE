@@ -68,8 +68,6 @@ export default function ProgressThankCircle() {
 		setIsMixing(false);
 	};
 
-	console.log(payload);
-
 	return (
 		<>
 			{step === 'WAITING' && position === 'participant' && <Wait position={position} />}

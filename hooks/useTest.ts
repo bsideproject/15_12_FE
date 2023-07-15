@@ -18,7 +18,6 @@ const useTest = (soketUrl: string) => {
 				soketUrl,
 				(response) => {
 					const jsonBody = JSON.parse(response.body);
-					alert(JSON.stringify(jsonBody));
 					setPayload(jsonBody);
 				},
 				nickname ? { nickname } : undefined,
