@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import userNickname from '@/atoms/userNickname';
@@ -16,10 +16,7 @@ export default function ScreenParticipantNickname() {
 	const navigation = useNavigation();
 	const setUserNickname = useSetRecoilState(userNickname);
 
-	const [nickname, setNickname] = useState<string>('');
-
 	const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setNickname(e.target.value);
 		setUserNickname(e.target.value);
 	};
 
