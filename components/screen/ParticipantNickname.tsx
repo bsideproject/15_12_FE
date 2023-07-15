@@ -5,7 +5,6 @@ import { useSetRecoilState } from 'recoil';
 
 import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
-import useTest from '@/hooks/useTest';
 import localStorage from '@/service/localStorage';
 
 import ElButton from '../elements/ElButton';
@@ -26,10 +25,7 @@ export default function ScreenParticipantNickname() {
 
 	const roomName = navigation.path().split('/');
 
-	const { connect } = useTest(`/topic/${roomName[1]}/${roomName[2]}`);
-
 	const connectHaner = () => {
-		connect({}, nickname);
 		localStorage.set('participant');
 
 		switch (roomName[1]) {

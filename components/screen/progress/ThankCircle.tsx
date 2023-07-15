@@ -45,7 +45,15 @@ export default function ProgressThankCircle() {
 	useEffect(() => {
 		userToken();
 		return () => disconnect();
-	}, [position]);
+	}, []);
+
+	useEffect(() => {
+		if (!payload?.type) {
+			setStep('WAITING');
+		} else if (payload?.type === 'READY' || payload?.type === 'GUIDE_THANKS_TO') {
+			setStep(payload.type);
+		}
+	}, [payload]);
 
 	const handleStep = (value: string) => {
 		setStep(value);
@@ -56,6 +64,8 @@ export default function ProgressThankCircle() {
 	};
 
 	console.log(payload);
+
+	// {"type":"READY","message":"","payload":{"nickname_list":["gkdlfnd","gkdlfnd",null]}}
 
 	return (
 		<>

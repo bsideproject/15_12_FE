@@ -23,15 +23,15 @@ export default function Wait({ position, handleStep }: WaitProps) {
 
 	const { connect, disconnect, payload } = useTest(`/topic/thankcircle/${roomName}/user-count`);
 
-	const userToken = async () => {
-		const session = await getUserSession();
-		connect(position === 'organizer' ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {});
-	};
+	// const userToken = async () => {
+	// 	const session = await getUserSession();
+	// 	connect(position === 'organizer' ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {});
+	// };
 
-	useEffect(() => {
-		userToken();
-		return () => disconnect();
-	}, [roomName]);
+	// useEffect(() => {
+	// 	userToken();
+	// 	return () => disconnect();
+	// }, [roomName]);
 
 	const textClasses = clsxm('text-p2');
 
