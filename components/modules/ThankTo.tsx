@@ -12,6 +12,7 @@ import ThankMixing from './ThankMixing';
 interface ThankToProps {
 	position: string;
 	handleStep: () => void;
+	handleClose: () => void;
 	handleIsMixing: () => void;
 	isMixing: boolean;
 	thank: {
@@ -20,7 +21,7 @@ interface ThankToProps {
 	};
 }
 
-export default function ThankTo({ position, handleStep, handleIsMixing, isMixing, thank }: ThankToProps) {
+export default function ThankTo({ position, handleStep, handleClose, handleIsMixing, isMixing, thank }: ThankToProps) {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			handleIsMixing();
@@ -51,7 +52,9 @@ export default function ThankTo({ position, handleStep, handleIsMixing, isMixing
 							<ElButton outline type="button" margin="mb-[2.56%]" _onClick={handleStep}>
 								다른 사람 확인하기
 							</ElButton>
-							<ElButton type="button">완료하기</ElButton>
+							<ElButton type="button" _onClick={handleClose}>
+								완료하기
+							</ElButton>
 						</div>
 					)}
 				</ElGrid>

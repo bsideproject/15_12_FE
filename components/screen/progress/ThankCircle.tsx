@@ -61,15 +61,15 @@ export default function ProgressThankCircle() {
 		publish(`/app/thankcircle/${roomName}/start`);
 	};
 
+	const handleClose = () => {
+		publish(`/app/thankcircle/${roomName}/close`);
+	};
+
 	const handleIsMixing = () => {
 		setIsMixing(false);
 	};
 
 	console.log(payload);
-
-	if (!payload) {
-		return <ScreenLoading />;
-	}
 
 	return (
 		<>
@@ -81,6 +81,7 @@ export default function ProgressThankCircle() {
 				<ThankTo
 					position={position}
 					handleStep={handleStep}
+					handleClose={handleClose}
 					thank={payload?.payload}
 					handleIsMixing={handleIsMixing}
 					isMixing={isMixing}
