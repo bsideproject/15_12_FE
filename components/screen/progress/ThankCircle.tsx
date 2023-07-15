@@ -12,6 +12,8 @@ import useTest from '@/hooks/useTest';
 import getUserSession from '@/service/getUserSession';
 import localStorage from '@/service/localStorage';
 
+import ScreenLoading from '../Loading';
+
 export default function ProgressThankCircle() {
 	const navigation = useNavigation();
 	const nickname = useRecoilValue(userNickname);
@@ -50,7 +52,7 @@ export default function ProgressThankCircle() {
 	useEffect(() => {
 		if (!payload?.type) {
 			setStep('WAITING');
-		} else if (payload?.type === 'READY' || payload?.type === 'GUIDE_THANKS_TO') {
+		} else if (payload?.type === 'READY' || payload?.type === 'GUIDE_THANKS_TO' || payload?.type === 'CLOSED_ROOM') {
 			setStep(payload.type);
 		}
 	}, [payload]);
@@ -65,7 +67,9 @@ export default function ProgressThankCircle() {
 
 	console.log(payload);
 
-	// {"type":"READY","message":"","payload":{"nickname_list":["gkdlfnd","gkdlfnd",null]}}
+	if (!payload) {
+		return <ScreenLoading />;
+	}
 
 	return (
 		<>
@@ -82,6 +86,7 @@ export default function ProgressThankCircle() {
 					isMixing={isMixing}
 				/>
 			)}
+			{step === 'CLOSED_ROOM' && <div>끝</div>}
 		</>
 	);
 }
