@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import userNickname from '@/atoms/userNickname';
 import ThankList from '@/components/modules/ThankList';
 import ThankTo from '@/components/modules/ThankTo';
 import Wait from '@/components/modules/Wait';
@@ -12,6 +14,7 @@ import localStorage from '@/service/localStorage';
 
 export default function ProgressThankCircle() {
 	const navigation = useNavigation();
+	const nickname = useRecoilValue(userNickname);
 
 	const [isMixing, setIsMixing] = useState<boolean>(true);
 	const [position, setPosition] = useState<string>('');
@@ -34,6 +37,8 @@ export default function ProgressThankCircle() {
 				'주최자',
 				`/app/thankcircle/${roomName}/start`,
 			);
+		} else {
+			connect({}, nickname);
 		}
 	};
 

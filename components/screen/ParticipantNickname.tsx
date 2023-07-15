@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 
+import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
 import localStorage from '@/service/localStorage';
@@ -13,11 +15,13 @@ import FormField from '../modules/FormField';
 
 export default function ScreenParticipantNickname() {
 	const navigation = useNavigation();
+	const setUserNickname = useSetRecoilState(userNickname);
 
 	const [nickname, setNickname] = useState<string>('');
 
 	const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNickname(e.target.value);
+		setUserNickname(e.target.value);
 	};
 
 	const roomName = navigation.path().split('/');
