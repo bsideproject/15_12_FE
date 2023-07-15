@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import userNickname from '@/atoms/userNickname';
+import Close from '@/components/modules/Close';
 import ThankList from '@/components/modules/ThankList';
 import ThankTo from '@/components/modules/ThankTo';
 import Wait from '@/components/modules/Wait';
@@ -11,8 +12,6 @@ import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
 import getUserSession from '@/service/getUserSession';
 import localStorage from '@/service/localStorage';
-
-import ScreenLoading from '../Loading';
 
 export default function ProgressThankCircle() {
 	const navigation = useNavigation();
@@ -87,7 +86,7 @@ export default function ProgressThankCircle() {
 					isMixing={isMixing}
 				/>
 			)}
-			{step === 'CLOSED_ROOM' && <div>끝</div>}
+			{step === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
 }
