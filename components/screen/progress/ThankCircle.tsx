@@ -27,7 +27,7 @@ export default function ProgressThankCircle() {
 
 	const roomName = navigation.path().split('/')[2];
 
-	const { connect, disconnect, payload } = useTest(`/topic/thankcircle/${roomName}`);
+	const { connect, disconnect, payload, publish } = useTest(`/topic/thankcircle/${roomName}`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
@@ -55,8 +55,8 @@ export default function ProgressThankCircle() {
 		}
 	}, [payload]);
 
-	const handleStep = (value: string) => {
-		setStep(value);
+	const handleStep = () => {
+		publish(`/app/thankcircle/${roomName}/start`);
 	};
 
 	const handleIsMixing = () => {
@@ -69,10 +69,18 @@ export default function ProgressThankCircle() {
 
 	return (
 		<>
-			{step === 'WAITING' && <Wait position={position} />}
-			{step === 'READY' && <ThankList position={position} handleStep={handleStep} />}
+			{step === 'WAITING' && position === 'participant' && <Wait position={position} />}
+			{step === 'READY' && (
+				<ThankList position={position} handleStep={handleStep} nicknameList={payload?.payload.nickname_list} />
+			)}
 			{step === 'GUIDE_THANKS_TO' && (
-				<ThankTo position={position} handleStep={handleStep} handleIsMixing={handleIsMixing} isMixing={isMixing} />
+				<ThankTo
+					position={position}
+					handleStep={handleStep}
+					thank={payload?.payload}
+					handleIsMixing={handleIsMixing}
+					isMixing={isMixing}
+				/>
 			)}
 		</>
 	);

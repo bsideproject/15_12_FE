@@ -11,12 +11,16 @@ import ThankMixing from './ThankMixing';
 
 interface ThankToProps {
 	position: string;
-	handleStep: (value: string) => void;
+	handleStep: () => void;
 	handleIsMixing: () => void;
 	isMixing: boolean;
+	thank: {
+		thank_from: string;
+		thank_to: string;
+	};
 }
 
-export default function ThankTo({ position, handleStep, handleIsMixing, isMixing }: ThankToProps) {
+export default function ThankTo({ position, handleStep, handleIsMixing, isMixing, thank }: ThankToProps) {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			handleIsMixing();
@@ -35,16 +39,16 @@ export default function ThankTo({ position, handleStep, handleIsMixing, isMixing
 					<div>
 						<ResultImg className="mx-auto my-[9.62%]" />
 						<p className="text-h3 text-gray090 text-center">
-							<strong>닉네임</strong> 님이
+							<strong>{thank?.thank_from}</strong> 님이
 							<br />
-							<strong>닉네임</strong> 님께
+							<strong>{thank?.thank_to}</strong> 님께
 							<br />
 							고마운 마음을 전해요!
 						</p>
 					</div>
 					{position === 'organizer' && (
 						<div>
-							<ElButton outline type="button" margin="mb-[2.56%]">
+							<ElButton outline type="button" margin="mb-[2.56%]" _onClick={handleStep}>
 								다른 사람 확인하기
 							</ElButton>
 							<ElButton type="button">완료하기</ElButton>
