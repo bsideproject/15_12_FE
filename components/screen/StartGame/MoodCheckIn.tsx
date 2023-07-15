@@ -20,7 +20,7 @@ export default function StartMoodCheckIn() {
 
 	const userToken = async () => {
 		const session = await getUserSession();
-		connect({ Autorization: `${session?.getAccessToken().getJwtToken()}` });
+		connect({ Authorization: `${session?.getAccessToken().getJwtToken()}` });
 	};
 
 	useEffect(() => {

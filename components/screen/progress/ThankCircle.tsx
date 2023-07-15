@@ -15,7 +15,7 @@ export default function ProgressThankCircle() {
 
 	const [isMixing, setIsMixing] = useState<boolean>(true);
 	const [position, setPosition] = useState<string>('');
-	const [step, setStep] = useState<string>('READY');
+	const [step, setStep] = useState<string>('WAITING');
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -24,21 +24,23 @@ export default function ProgressThankCircle() {
 
 	const roomName = navigation.path().split('/')[2];
 
-	const { connect, disconnect, publish, isConnect } = useTest(`/topic/thankcircle/${roomName}`);
+	const { connect, disconnect, payload } = useTest(`/topic/thankcircle/${roomName}`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
-		connect(position === 'organizer' ? { Autorization: `${session?.getAccessToken().getJwtToken()}` } : {}, 'test');
+		if (session) {
+			connect(
+				{ Authorization: `${session?.getAccessToken().getJwtToken()}` },
+				'주최자',
+				`/app/thankcircle/${roomName}/start`,
+			);
+		}
 	};
 
 	useEffect(() => {
 		userToken();
 		return () => disconnect();
 	}, [position]);
-
-	useEffect(() => {
-		publish(`/app/thankcircle/${roomName}/start`);
-	}, [isConnect]);
 
 	const handleStep = (value: string) => {
 		setStep(value);
@@ -47,6 +49,8 @@ export default function ProgressThankCircle() {
 	const handleIsMixing = () => {
 		setIsMixing(false);
 	};
+
+	console.log(payload);
 
 	return (
 		<>

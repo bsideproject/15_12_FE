@@ -16,19 +16,16 @@ export default function StartThankCircle() {
 
 	const { data } = useQueryThankCircle(activity, room);
 
-	const { connect, disconnect, payload } = useTest(`/topic/thankcircle/${data?.room_name}/user-count`);
+	const { connect, payload } = useTest(`/topic/thankcircle/${data?.room_name}/user-count`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
-		connect({ Autorization: `${session?.getAccessToken().getJwtToken()}` });
+		connect({ Authorization: `${session?.getAccessToken().getJwtToken()}` });
 	};
 
 	useEffect(() => {
 		userToken();
-		return () => disconnect();
 	}, [data]);
 
-	console.log(payload);
-
-	return <StartTemplate data={data} activity={activity} room={room} />;
+	return <StartTemplate data={data} activity={activity} room={room} payload={payload} />;
 }

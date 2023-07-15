@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
@@ -22,7 +22,7 @@ export default function ScreenParticipantNickname() {
 
 	const roomName = navigation.path().split('/');
 
-	const { connect, disconnect } = useTest(`/topic/${roomName[1]}/${roomName[2]}`);
+	const { connect } = useTest(`/topic/${roomName[1]}/${roomName[2]}`);
 
 	const connectHaner = () => {
 		connect({}, nickname);
@@ -39,10 +39,6 @@ export default function ScreenParticipantNickname() {
 				break;
 		}
 	};
-
-	useEffect(() => {
-		return () => disconnect();
-	}, []);
 
 	return (
 		<ElGrid between bottomSm>

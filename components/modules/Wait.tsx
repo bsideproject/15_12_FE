@@ -25,7 +25,7 @@ export default function Wait({ position, handleStep }: WaitProps) {
 
 	const userToken = async () => {
 		const session = await getUserSession();
-		connect(position === 'organizer' ? { Autorization: `${session?.getAccessToken().getJwtToken()}` } : {});
+		connect(position === 'organizer' ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {});
 	};
 
 	useEffect(() => {
