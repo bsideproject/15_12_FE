@@ -21,7 +21,7 @@ interface StartTemplateProps {
 	};
 	activity: string;
 	room: string;
-	payload: {
+	payload?: {
 		message: string;
 		payload: { nickname: string; current_participant_count: number };
 		type: string;
