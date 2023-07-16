@@ -33,20 +33,31 @@ export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleU
 		};
 	}, [isSidebar]);
 
-	const handleLogout = async () => {
+	const logout = async () => {
 		try {
 			await Auth.signOut();
+			alert('로그아웃!');
 			handleUserInfo();
 			handleToggleSide();
-			alert('로그아웃!');
 		} catch (error) {
 			console.log('error signing out: ', error);
 		}
 	};
 
+	const deleteUser = async () => {
+		try {
+			await Auth.deleteUser();
+			alert('탈퇴가 정상적으로 완료되었습니다.');
+			handleUserInfo();
+			handleToggleSide();
+		} catch (error) {
+			console.log('Error deleting user', error);
+		}
+	};
+
 	const handleMenuClick = () => {
 		if (userInfo.email) {
-			handleLogout();
+			logout();
 		} else {
 			navigation.push('/login');
 		}
@@ -62,6 +73,7 @@ export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleU
 	);
 	const menuClasses = clsxm('text-p2 text-gray090 mb-[8.88%]');
 	const copylightClasses = clsxm('block text-gray070');
+	const navButtonClasses = clsxm('text-gray070 underline');
 
 	return (
 		<>
@@ -90,6 +102,15 @@ export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleU
 					<h2 className="text-h7 text-gray090 mb-[3.36%]">얼음땡 팀</h2>
 					<span className={`${copylightClasses} text-c`}>Copyright ©2023 얼음땡 Inc.</span>
 					<span className={`${copylightClasses} text-c`}>All rights reserved.</span>
+					<div className="mt-[5.8%]">
+						<button className={`${navButtonClasses} text-c`}>개인정보처리방침</button>
+						<button className={`${navButtonClasses} text-c ml-[8px]`}>이용약관</button>
+						{userInfo.email && (
+							<button className={`${navButtonClasses} text-c ml-[8px]`} onClick={deleteUser}>
+								회원탈퇴
+							</button>
+						)}
+					</div>
 				</div>
 			</aside>
 		</>

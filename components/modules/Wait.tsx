@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
 import getUserSession from '@/service/getUserSession';
@@ -13,24 +15,23 @@ import ElGrid from '../elements/ElGrid';
 
 interface WaitProps {
 	position: string;
-	handleStep?: (value: string) => void;
 }
 
-export default function Wait({ position, handleStep }: WaitProps) {
+export default function Wait({ position }: WaitProps) {
 	const navigation = useNavigation();
+	const nickname = useRecoilValue(userNickname);
 
 	const roomName = navigation.path().split('/')[2];
 
-	const { connect, disconnect, payload } = useTest(`/topic/thankcircle/${roomName}/user-count`);
+	const { connect, payload } = useTest(`/topic/thankcircle/${roomName}/user-count`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
-		connect(position === 'organizer' ? { Autorization: `${session?.getAccessToken().getJwtToken()}` } : {});
+		connect(position === 'organizer' ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {}, nickname);
 	};
 
 	useEffect(() => {
 		userToken();
-		return () => disconnect();
 	}, [roomName]);
 
 	const textClasses = clsxm('text-p2');
@@ -44,7 +45,9 @@ export default function Wait({ position, handleStep }: WaitProps) {
 					<br />
 					기다리고 있어요.
 				</h3>
-				<p className={`${textClasses} text-gray070 mb-[20.51%]`}>참여자 명</p>
+				<p className={`${textClasses} text-gray070 mb-[20.51%]`}>
+					참여자 {payload?.payload.current_participant_count}명
+				</p>
 				{position === 'organizer' && <p className={`${textClasses} text-gray070`}>제출자 명</p>}
 			</div>
 			{position === 'organizer' && <ElButton type="button">다음</ElButton>}

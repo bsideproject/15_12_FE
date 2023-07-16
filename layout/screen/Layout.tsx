@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Amplify } from 'aws-amplify';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import { RecoilRoot } from 'recoil';
 
 import useVh from '@/hooks/useVh';
 import awsConfig from 'aws-exports';
@@ -18,19 +19,25 @@ export default function ScreenLayout({ children, className }: { children: React.
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className={className}>{children}</div>
-			<ToastContainer
-				position="bottom-center"
-				autoClose={3000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-			/>
+			<RecoilRoot>
+				<html lang="en">
+					<body>
+						<div className={className}>{children}</div>
+						<ToastContainer
+							position="bottom-center"
+							autoClose={3000}
+							hideProgressBar={false}
+							newestOnTop={false}
+							closeOnClick
+							rtl={false}
+							pauseOnFocusLoss
+							draggable
+							pauseOnHover
+							theme="light"
+						/>
+					</body>
+				</html>
+			</RecoilRoot>
 		</QueryClientProvider>
 	);
 }

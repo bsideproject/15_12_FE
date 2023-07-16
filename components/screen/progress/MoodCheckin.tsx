@@ -22,7 +22,7 @@ export default function ProgressMoodCheckin() {
 	return (
 		<>
 			{step === 'PICK' && <MoodPick handleStep={handleStep} />}
-			{step === 'WAITING' && <Wait position={position} handleStep={handleStep} />}
+			{step === 'WAITING' && <Wait position={position} />}
 		</>
 	);
 }
