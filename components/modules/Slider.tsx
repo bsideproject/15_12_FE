@@ -4,7 +4,9 @@ import { Pagination } from 'swiper';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 import clsxm from '@/service/mergeStyle';
-import Test from 'public/images/test-img.svg';
+import OnBoardingImg01 from 'public/images/onboarding-img01.svg';
+import OnBoardingImg02 from 'public/images/onboarding-img02.svg';
+import OnBoardingImg03 from 'public/images/onboarding-img03.svg';
 
 import 'swiper/css/pagination';
 import 'swiper/css';
@@ -35,7 +37,7 @@ export default function Slider({ swiperRef, onActiveChangIndex }: SliderProps) {
 	return (
 		<Swiper {...settings} className="w-full h-full mb-[7.69%]">
 			<SwiperSlide className="!flex flex-col justify-between">
-				<Test />
+				<OnBoardingImg01 className="mx-auto" />
 				<p className={`${textClasses} text-gray090`}>
 					얼음땡이 추천하는 6개의 <strong>상황별</strong>
 					<br />
@@ -43,7 +45,7 @@ export default function Slider({ swiperRef, onActiveChangIndex }: SliderProps) {
 				</p>
 			</SwiperSlide>
 			<SwiperSlide className="!flex flex-col justify-between">
-				<Test />
+				<OnBoardingImg02 className="mx-auto" />
 				<p className={`${textClasses} text-gray090`}>
 					<strong>한 가지를 선택</strong>해
 					<br />
@@ -51,7 +53,7 @@ export default function Slider({ swiperRef, onActiveChangIndex }: SliderProps) {
 				</p>
 			</SwiperSlide>
 			<SwiperSlide className="!flex flex-col justify-between">
-				<Test />
+				<OnBoardingImg03 className="mx-auto" />
 				<p className={`${textClasses} text-gray090`}>
 					<strong>QR코드를 공유</strong>해
 					<br />

@@ -59,7 +59,7 @@ export default function RegisterForm() {
 		const { email, password, name } = data;
 
 		try {
-			const { user } = await Auth.signUp({
+			await Auth.signUp({
 				username: email,
 				password,
 				attributes: {
@@ -69,9 +69,8 @@ export default function RegisterForm() {
 					enabled: false,
 				},
 			});
-			console.log(user);
 			alert('가입완료! 이메일 인증 후 로그인 하세요.');
-			navigation.push('/');
+			navigation.push('/login');
 		} catch (err: unknown) {
 			const registerError = err as RegisterError;
 

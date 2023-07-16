@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSetRecoilState } from 'recoil';
 
+import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
-import useTest from '@/hooks/useTest';
 import localStorage from '@/service/localStorage';
 
 import ElButton from '../elements/ElButton';
@@ -13,19 +14,15 @@ import FormField from '../modules/FormField';
 
 export default function ScreenParticipantNickname() {
 	const navigation = useNavigation();
-
-	const [nickname, setNickname] = useState<string>('');
+	const setUserNickname = useSetRecoilState(userNickname);
 
 	const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setNickname(e.target.value);
+		setUserNickname(e.target.value);
 	};
 
 	const roomName = navigation.path().split('/');
 
-	const { connect, disconnect } = useTest(`/topic/${roomName[1]}/${roomName[2]}`);
-
 	const connectHaner = () => {
-		connect({}, nickname);
 		localStorage.set('participant');
 
 		switch (roomName[1]) {
@@ -42,10 +39,6 @@ export default function ScreenParticipantNickname() {
 				break;
 		}
 	};
-
-	useEffect(() => {
-		return () => disconnect();
-	}, []);
 
 	return (
 		<ElGrid between bottomSm>

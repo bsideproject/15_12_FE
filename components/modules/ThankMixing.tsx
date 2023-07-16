@@ -1,21 +1,29 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
+import getUserSession from '@/service/getUserSession';
 import MixingImg from 'public/images/mixing-img.svg';
 
-export default function ThankMixing() {
+export default function ThankMixing({ position }: { position: string }) {
 	const navigation = useNavigation();
+	const nickname = useRecoilValue(userNickname);
 
 	const roomName = navigation.path().split('/')[2];
 
-	const { connect, disconnect, payload } = useTest(`/topic/thankcircle/${roomName}/user-count`);
+	const { connect, payload } = useTest(`/topic/thankcircle/${roomName}/user-count`);
+
+	const userToken = async () => {
+		const session = await getUserSession();
+		connect(position === 'organizer' ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {}, nickname);
+	};
 
 	useEffect(() => {
-		connect({});
-		return () => disconnect();
+		userToken();
 	}, [roomName]);
 
 	return (
