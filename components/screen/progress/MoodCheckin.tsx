@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import userNickname from '@/atoms/userNickname';
 import Close from '@/components/modules/Close';
 import MoodPick from '@/components/modules/MoodPick';
+import MoodPickToday from '@/components/modules/MoodPickToday';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
@@ -56,13 +57,15 @@ export default function ProgressMoodCheckin() {
 		setStep('WAITING');
 	};
 
-	console.log(payload);
+	const handleClose = () => {
+		publish(`/app/thankcircle/${roomName}/close`);
+	};
 
 	return (
 		<>
 			{step === 'PICK' && <MoodPick handleWaiting={handleWaiting} />}
 			{step === 'WAITING' && <Wait position={position} handleStep={handleStep} />}
-			{step === 'OPENED_AVERAGE' && <div>rlqnswpcnf</div>}
+			{step === 'OPENED_AVERAGE' && <MoodPickToday position={position} handleClose={handleClose} />}
 			{step === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
