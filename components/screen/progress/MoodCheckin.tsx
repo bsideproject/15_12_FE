@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import userNickname from '@/atoms/userNickname';
-import MoodPick from '@/components/modules/MoodPick';
 import Wait from '@/components/modules/Wait';
+import MoodPick from '@/components/screen/MoodPick';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
 import getUserSession from '@/service/getUserSession';
@@ -45,15 +45,11 @@ export default function ProgressMoodCheckin() {
 		publish(`/app/moodcheckin/${roomName}/start`);
 	};
 
-	const handleWaiting = () => {
-		setStep('WAITING');
-	};
-
 	console.log(payload);
 
 	return (
 		<>
-			{step === 'PICK' && <MoodPick handleWaiting={handleWaiting} />}
+			{step === 'PICK' && <MoodPick />}
 			{step === 'WAITING' && <Wait position={position} handleStep={handleStep} />}
 		</>
 	);

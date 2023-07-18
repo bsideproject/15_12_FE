@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import userNickname from '@/atoms/userNickname';
 import moodCheckinArr from '@/constants/moodCheckinArr';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
@@ -9,11 +11,12 @@ import Logo from 'public/images/activity-logo.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
+import ActivityHead from '../modules/ActivityHead';
 
-import ActivityHead from './ActivityHead';
-
-export default function MoodPick({ handleWaiting }: { handleWaiting: () => void }) {
+export default function ScreenMoodPick() {
 	const navigation = useNavigation();
+	const nickname = useRecoilValue(userNickname);
+
 	const [moodNum, setMoodNum] = useState<number>(0);
 
 	const onChangMood = (value: number) => {
@@ -30,11 +33,11 @@ export default function MoodPick({ handleWaiting }: { handleWaiting: () => void 
 			return;
 		}
 		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
-		handleWaiting();
+		navigation.push(`moodcheckin/${roomName[2]}/progress`);
 	};
 
 	useEffect(() => {
-		connect({});
+		connect({}, nickname || '주최자');
 	}, []);
 
 	return (
