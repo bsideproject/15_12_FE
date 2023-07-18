@@ -12,7 +12,7 @@ import ElGrid from '../elements/ElGrid';
 
 import ActivityHead from './ActivityHead';
 
-export default function MoodPick({ handleStep }: { handleStep: (value: string) => void }) {
+export default function MoodPick({ handleWaiting }: { handleWaiting: () => void }) {
 	const navigation = useNavigation();
 	const [moodNum, setMoodNum] = useState<number>(0);
 
@@ -20,7 +20,7 @@ export default function MoodPick({ handleStep }: { handleStep: (value: string) =
 		setMoodNum(value);
 	};
 
-	const { connect, disconnect, publish } = useTest(`/user/queue/reply`);
+	const { connect, publish } = useTest(`/user/queue/reply`);
 
 	const roomName = navigation.path().split('/');
 
@@ -30,12 +30,11 @@ export default function MoodPick({ handleStep }: { handleStep: (value: string) =
 			return;
 		}
 		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
-		handleStep('WAITING');
+		handleWaiting();
 	};
 
 	useEffect(() => {
 		connect({});
-		return () => disconnect();
 	}, []);
 
 	return (

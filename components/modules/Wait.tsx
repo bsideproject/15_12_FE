@@ -15,15 +15,16 @@ import ElGrid from '../elements/ElGrid';
 
 interface WaitProps {
 	position: string;
+	handleStep?: () => void;
 }
 
-export default function Wait({ position }: WaitProps) {
+export default function Wait({ position, handleStep }: WaitProps) {
 	const navigation = useNavigation();
 	const nickname = useRecoilValue(userNickname);
 
-	const roomName = navigation.path().split('/')[2];
+	const room = navigation.path().split('/');
 
-	const { connect, payload } = useTest(`/topic/thankcircle/${roomName}/user-count`);
+	const { connect, payload } = useTest(`/topic/${room[1]}/${room[2]}/user-count`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
@@ -32,7 +33,13 @@ export default function Wait({ position }: WaitProps) {
 
 	useEffect(() => {
 		userToken();
-	}, [roomName]);
+	}, [room]);
+
+	useEffect(() => {
+		if (position === 'organizer' && handleStep) {
+			handleStep();
+		}
+	}, [position, handleStep]);
 
 	const textClasses = clsxm('text-p2');
 
@@ -50,7 +57,11 @@ export default function Wait({ position }: WaitProps) {
 				</p>
 				{position === 'organizer' && <p className={`${textClasses} text-gray070`}>제출자 명</p>}
 			</div>
-			{position === 'organizer' && <ElButton type="button">다음</ElButton>}
+			{position === 'organizer' && (
+				<ElButton type="button" _onClick={handleStep}>
+					다음
+				</ElButton>
+			)}
 		</ElGrid>
 	);
 }

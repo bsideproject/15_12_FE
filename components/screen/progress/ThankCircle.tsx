@@ -46,7 +46,7 @@ export default function ProgressThankCircle() {
 	useEffect(() => {
 		userToken();
 		return () => disconnect();
-	}, []);
+	}, [roomName, nickname]);
 
 	useEffect(() => {
 		if (!payload?.type) {

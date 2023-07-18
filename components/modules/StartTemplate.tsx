@@ -21,7 +21,7 @@ interface StartTemplateProps {
 	};
 	activity: string;
 	room: string;
-	payload?: {
+	payload: {
 		message: string;
 		payload: { nickname: string; current_participant_count: number };
 		type: string;
@@ -102,7 +102,7 @@ export default function StartTemplate({ data, activity, room, payload }: StartTe
 				<div className={participantWrapClasses}>
 					<PersonIcon />
 					<span className={`${participantClasses} text-h7`}>
-						참여자 {payload?.payload.current_participant_count || data?.participant_count}명
+						참여자 {payload?.payload.current_participant_count || data?.participant_count || 0}명
 					</span>
 				</div>
 				<p className="text-p3 text-gray030 text-center">참여자들이 모두 들어오면 &apos;시작&apos;을 눌러주세요</p>
