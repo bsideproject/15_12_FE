@@ -49,9 +49,7 @@ export default function ProgressThankCircle() {
 	}, [roomName, nickname]);
 
 	useEffect(() => {
-		if (!payload?.type) {
-			setStep('WAITING');
-		} else if (payload?.type === 'READY' || payload?.type === 'GUIDE_THANKS_TO' || payload?.type === 'CLOSED_ROOM') {
+		if (payload?.type === 'READY' || payload?.type === 'GUIDE_THANKS_TO' || payload?.type === 'CLOSED_ROOM') {
 			setStep(payload.type);
 		}
 	}, [payload]);

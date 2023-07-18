@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import userNickname from '@/atoms/userNickname';
+import Close from '@/components/modules/Close';
+import MoodPick from '@/components/modules/MoodPick';
 import Wait from '@/components/modules/Wait';
-import MoodPick from '@/components/screen/MoodPick';
 import useNavigation from '@/hooks/useNavigation';
 import useTest from '@/hooks/useTest';
 import getUserSession from '@/service/getUserSession';
@@ -41,16 +42,28 @@ export default function ProgressMoodCheckin() {
 		return () => disconnect();
 	}, [roomName, nickname]);
 
+	useEffect(() => {
+		if (payload?.type === 'OPENED_AVERAGE' || payload?.type === 'CLOSED_ROOM') {
+			setStep(payload.type);
+		}
+	}, [payload]);
+
 	const handleStep = () => {
 		publish(`/app/moodcheckin/${roomName}/start`);
+	};
+
+	const handleWaiting = () => {
+		setStep('WAITING');
 	};
 
 	console.log(payload);
 
 	return (
 		<>
-			{step === 'PICK' && <MoodPick />}
+			{step === 'PICK' && <MoodPick handleWaiting={handleWaiting} />}
 			{step === 'WAITING' && <Wait position={position} handleStep={handleStep} />}
+			{step === 'OPENED_AVERAGE' && <div>rlqnswpcnf</div>}
+			{step === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
 }

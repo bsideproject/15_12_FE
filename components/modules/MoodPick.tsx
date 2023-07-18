@@ -11,9 +11,10 @@ import Logo from 'public/images/activity-logo.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
-import ActivityHead from '../modules/ActivityHead';
 
-export default function ScreenMoodPick() {
+import ActivityHead from './ActivityHead';
+
+export default function ScreenMoodPick({ handleWaiting }: { handleWaiting: () => void }) {
 	const navigation = useNavigation();
 	const nickname = useRecoilValue(userNickname);
 
@@ -33,7 +34,7 @@ export default function ScreenMoodPick() {
 			return;
 		}
 		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
-		navigation.push(`moodcheckin/${roomName[2]}/progress`);
+		handleWaiting();
 	};
 
 	useEffect(() => {

@@ -39,7 +39,7 @@ export default function Wait({ position, handleStep }: WaitProps) {
 		if (position === 'organizer' && handleStep) {
 			handleStep();
 		}
-	}, [position, handleStep]);
+	}, []);
 
 	const textClasses = clsxm('text-p2');
 
