@@ -38,7 +38,7 @@ export default function ScreenParticipantNickname() {
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
 			case 'thankcircle':
-				connect(`/topic/${roomName[1]}/${roomName[2]}`, {}, nickname);
+				connect(`${roomName[1]}/${roomName[2]}`, {}, nickname);
 
 				setPublish(() => publish);
 				setDisconnect(() => disconnect);

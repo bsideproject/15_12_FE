@@ -1,7 +1,9 @@
 'use client';
 
 import Image from 'next/image';
+import { useRecoilValue } from 'recoil';
 
+import { useCount } from '@/atoms/socketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
 import localStorage from '@/service/localStorage';
@@ -21,16 +23,14 @@ interface StartTemplateProps {
 	};
 	activity: string;
 	room: string;
-	payload: {
-		message: string;
-		payload: { nickname: string; current_participant_count: number };
-		type: string;
-	};
 }
 
-export default function StartTemplate({ data, activity, room, payload }: StartTemplateProps) {
+export default function StartTemplate({ data, activity, room }: StartTemplateProps) {
 	const toast = useNotify();
+
 	const navigation = useNavigation();
+
+	const count = useRecoilValue(useCount);
 
 	const copyUrl = async () => {
 		try {
@@ -101,9 +101,7 @@ export default function StartTemplate({ data, activity, room, payload }: StartTe
 				</div>
 				<div className={participantWrapClasses}>
 					<PersonIcon />
-					<span className={`${participantClasses} text-h7`}>
-						참여자 {payload?.payload.current_participant_count || data?.participant_count || 0}명
-					</span>
+					<span className={`${participantClasses} text-h7`}>참여자 {count}명</span>
 				</div>
 				<p className="text-p3 text-gray030 text-center">참여자들이 모두 들어오면 &apos;시작&apos;을 눌러주세요</p>
 			</div>

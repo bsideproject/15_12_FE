@@ -1,11 +1,11 @@
 'use client';
 
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
-import { usePayload } from '@/atoms/socketAtoms';
+import { useCount, usePayload } from '@/atoms/socketAtoms';
 
 interface ConnectAuthorizationType {
 	[key: string]: string;
@@ -13,18 +13,28 @@ interface ConnectAuthorizationType {
 
 const UseSocket = () => {
 	const client = useRef<CompatClient>();
-	const [payload, setPayload] = useState<any>();
-	const setUsePayload = useSetRecoilState(usePayload);
+	const setPayload = useSetRecoilState(usePayload);
+	const setCount = useSetRecoilState(useCount);
 
 	const subscribe = (socketUrl: string, nickname?: string) => {
 		if (client.current) {
 			client.current.subscribe(
-				socketUrl,
+				`/topic/${socketUrl}`,
 				(response) => {
 					const jsonBody = JSON.parse(response.body);
 					console.log(response.body);
+
 					setPayload(jsonBody);
-					setUsePayload(jsonBody);
+				},
+				nickname ? { nickname } : undefined,
+			);
+			client.current.subscribe(
+				`/topic/${socketUrl}/user-count`,
+				(response) => {
+					const jsonBody = JSON.parse(response.body);
+					console.log(jsonBody, jsonBody.payload.current_participant_count);
+
+					setCount(jsonBody.payload.current_participant_count);
 				},
 				nickname ? { nickname } : undefined,
 			);
@@ -60,7 +70,7 @@ const UseSocket = () => {
 		client.current?.send(sendUrl, {}, value ? JSON.stringify(value) : '');
 	};
 
-	return { connect, disconnect, publish, payload };
+	return { connect, disconnect, publish };
 };
 
 export default UseSocket;

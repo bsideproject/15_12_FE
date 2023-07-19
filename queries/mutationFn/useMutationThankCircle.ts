@@ -17,11 +17,11 @@ const useMutationThankCircle = () => {
 
 	const { connect, publish, disconnect } = useSocket();
 
-	const test = async (data: AxiosResponse<any, any>) => {
+	const connectOrganizer = async (data: AxiosResponse<any, any>) => {
 		const session = await getUserSession();
 
 		connect(
-			`/topic/thankcircle/${data?.data.room_name}`,
+			`thankcircle/${data?.data.room_name}`,
 			{ Authorization: `${session?.getAccessToken().getJwtToken()}` },
 			'주최자',
 		);
@@ -29,7 +29,7 @@ const useMutationThankCircle = () => {
 
 	const { mutate } = useMutation(apiKeys.createThankCircle, {
 		onSuccess: (data) => {
-			test(data);
+			connectOrganizer(data);
 
 			setPublish(() => publish);
 			setDisconnect(() => disconnect);

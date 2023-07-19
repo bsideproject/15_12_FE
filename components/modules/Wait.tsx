@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { useCount } from '@/atoms/socketAtoms';
 import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
@@ -20,24 +21,8 @@ interface WaitProps {
 
 export default function Wait({ position, handleStep }: WaitProps) {
 	const navigation = useNavigation();
-	const nickname = useRecoilValue(userNickname);
 
-	const room = navigation.path().split('/');
-
-	const { connect, payload } = useSocket();
-
-	const userToken = async () => {
-		const session = await getUserSession();
-		connect(
-			`/topic/${room[1]}/${room[2]}/user-count`,
-			position === 'organizer' ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {},
-			nickname || undefined,
-		);
-	};
-
-	useEffect(() => {
-		if (room) userToken();
-	}, [room]);
+	const count = useRecoilValue(useCount);
 
 	const textClasses = clsxm('text-p2');
 
@@ -50,9 +35,7 @@ export default function Wait({ position, handleStep }: WaitProps) {
 					<br />
 					기다리고 있어요.
 				</h3>
-				<p className={`${textClasses} text-gray070 mb-[20.51%]`}>
-					참여자 {payload?.payload.current_participant_count}명
-				</p>
+				<p className={`${textClasses} text-gray070 mb-[20.51%]`}>참여자 {count}명</p>
 				{position === 'organizer' && <p className={`${textClasses} text-gray070`}>제출자 명</p>}
 			</div>
 			{position === 'organizer' && (
