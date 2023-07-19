@@ -16,7 +16,7 @@ export default function StartThankCircle() {
 
 	const { data } = useQueryThankCircle(activity, room);
 
-	const { connect, payload } = useTest(`/topic/thankcircle/${data?.room_name}/user-count`);
+	const { connect, payload, disconnect } = useTest(`/topic/thankcircle/${data?.room_name}/user-count`);
 
 	const userToken = async () => {
 		const session = await getUserSession();

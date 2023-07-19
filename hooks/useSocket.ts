@@ -1,35 +1,51 @@
 'use client';
 
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
+import { usePayload } from '@/atoms/socketAtoms';
+
+interface ConnectAuthorizationType {
+	[key: string]: string;
+}
+
 const UseSocket = () => {
-	/**
-	 * soket 구현
-	 */
-	const [messageList, setMessageList] = useState<string[]>([]);
-	const [message, setMessage] = useState<string>('');
+	const [payload, setPayload] = useState<any>();
 	const client = useRef<CompatClient>();
 
-	const subscribe = () => {
+	const setUsePayload = useSetRecoilState(usePayload);
+
+	const subscribe = (socketUrl: string, nickname?: string, sendUrl?: string) => {
 		if (client.current) {
-			client.current.subscribe('/topic/greetings', (body) => {
-				const jsonBody = JSON.parse(body.body);
-				setMessageList((prev) => [...prev, jsonBody.content]);
-			});
+			client.current.subscribe(
+				socketUrl,
+				(response) => {
+					const jsonBody = JSON.parse(response.body);
+					console.log(response.body);
+					setPayload(jsonBody);
+					setUsePayload(jsonBody);
+				},
+				nickname ? { nickname } : undefined,
+			);
+			if (sendUrl) client.current?.send(sendUrl, {}, '');
 		}
 	};
 
-	const connect = () => {
+	// ${process.env.NEXT_PUBLIC_API_SOCKET_URL}
+	const connect = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string, sendUrl?: string) => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
+			const sock = new SockJS(`/ws`);
 			return sock;
 		});
 		if (client.current) {
-			client.current.connect({}, () => {
-				console.log('success');
-				subscribe();
+			client.current.connect(authorization, () => {
+				if (nickname) {
+					subscribe(socketUrl, nickname, sendUrl);
+				} else {
+					subscribe(socketUrl, sendUrl);
+				}
 			});
 		}
 		client.current.activate();
@@ -41,25 +57,12 @@ const UseSocket = () => {
 		}
 	};
 
-	const publish = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const publish = (sendUrl: string, value?: { [key: string]: number | string }) => {
 		if (!client.current?.connected) return;
-		client.current?.send(
-			'/app/hello',
-			{},
-			JSON.stringify({
-				name: message,
-			}),
-		);
-		setMessage('');
+		client.current?.send(sendUrl, {}, value ? JSON.stringify(value) : '');
 	};
 
-	useEffect(() => {
-		connect();
-		return () => {
-			disconnect();
-		};
-	}, []);
+	return { connect, disconnect, publish, payload };
 };
 
 export default UseSocket;

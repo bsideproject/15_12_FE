@@ -58,7 +58,7 @@ export default function ProgressMoodCheckin() {
 	};
 
 	const handleClose = () => {
-		publish(`/app/thankcircle/${roomName}/close`);
+		publish(`/app/moodcheckin/${roomName}/close`);
 	};
 
 	return (
