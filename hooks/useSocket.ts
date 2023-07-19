@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
-import { useCount, usePayload } from '@/atoms/socketAtoms';
+import { useCount, usePayload } from '@/atoms/useSocketAtoms';
 
 interface ConnectAuthorizationType {
 	[key: string]: string;

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
 
-import { useCount } from '@/atoms/socketAtoms';
+import { useCount } from '@/atoms/useSocketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
 import localStorage from '@/service/localStorage';

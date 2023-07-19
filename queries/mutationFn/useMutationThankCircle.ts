@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { useSetRecoilState } from 'recoil';
 
-import { usePublish, useDisconnect } from '@/atoms/socketAtoms';
+import { usePublish, useDisconnect } from '@/atoms/useSocketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
 import getUserSession from '@/service/getUserSession';

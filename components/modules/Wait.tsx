@@ -3,8 +3,8 @@
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { useCount } from '@/atoms/socketAtoms';
 import userNickname from '@/atoms/userNickname';
+import { useCount } from '@/atoms/useSocketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
 import getUserSession from '@/service/getUserSession';

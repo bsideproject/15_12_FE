@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { usePayload, usePublish } from '@/atoms/socketAtoms';
+import { usePayload, usePublish } from '@/atoms/useSocketAtoms';
 import Close from '@/components/modules/Close';
 import ThankList from '@/components/modules/ThankList';
 import ThankTo from '@/components/modules/ThankTo';
