@@ -5,7 +5,6 @@ import queryKeys from '../queryKeys';
 
 const useQueryActivities = () => {
 	return useQuery(queryKeys.activities(), () => apiKeys.getActivities(), {
-		select: (data) => data.data,
 		staleTime: Infinity,
 		retry: false,
 	});
