@@ -1,10 +1,12 @@
 'use client';
 
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import userNickname from '@/atoms/userNickname';
+import { usePublish, useDisconnect } from '@/atoms/useSocketAtoms';
 import useNavigation from '@/hooks/useNavigation';
+import useSocket from '@/hooks/useSocket';
 import localStorage from '@/service/localStorage';
 
 import ElButton from '../elements/ElButton';
@@ -14,10 +16,16 @@ import FormField from '../modules/FormField';
 
 export default function ScreenParticipantNickname() {
 	const navigation = useNavigation();
-	const setUserNickname = useSetRecoilState(userNickname);
+
+	const [nickname, setNickname] = useRecoilState(userNickname);
+
+	const setPublish = useSetRecoilState(usePublish);
+	const setDisconnect = useSetRecoilState(useDisconnect);
+
+	const { connect, publish, disconnect } = useSocket();
 
 	const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setUserNickname(e.target.value);
+		setNickname(e.target.value);
 	};
 
 	const roomName = navigation.path().split('/');
@@ -33,6 +41,11 @@ export default function ScreenParticipantNickname() {
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
 			case 'thankcircle':
+				connect(`${roomName[1]}/${roomName[2]}`, {}, nickname);
+
+				setPublish(() => publish);
+				setDisconnect(() => disconnect);
+
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
 			default:

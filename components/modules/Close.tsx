@@ -1,5 +1,8 @@
 'use client';
 
+import { useRecoilValue } from 'recoil';
+
+import { useDisconnect } from '@/atoms/useSocketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import CloseImg from 'public/images/close-img.svg';
 
@@ -8,6 +11,8 @@ import ElGrid from '../elements/ElGrid';
 
 export default function Close() {
 	const navigation = useNavigation();
+
+	const disconnect = useRecoilValue(useDisconnect);
 
 	return (
 		<ElGrid between bottomSm>
@@ -20,7 +25,13 @@ export default function Close() {
 					남은 시간도 즐겁게!
 				</p>
 			</div>
-			<ElButton type="button" _onClick={() => navigation.push('/home')}>
+			<ElButton
+				type="button"
+				_onClick={() => {
+					navigation.push('/home');
+					disconnect();
+				}}
+			>
 				완료하기
 			</ElButton>
 		</ElGrid>

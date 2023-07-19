@@ -18,6 +18,7 @@ const useTest = (soketUrl: string) => {
 				soketUrl,
 				(response) => {
 					const jsonBody = JSON.parse(response.body);
+					console.log(response.body);
 					setPayload(jsonBody);
 				},
 				nickname ? { nickname } : undefined,
@@ -26,9 +27,10 @@ const useTest = (soketUrl: string) => {
 		}
 	};
 
+	// ${process.env.NEXT_PUBLIC_API_SOCKET_URL}
 	const connect = (authorization: ConnectAuthorizationType, nickname?: string, sendUrl?: string) => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
+			const sock = new SockJS(`/ws`);
 			return sock;
 		});
 		if (client.current) {

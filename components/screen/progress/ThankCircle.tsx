@@ -3,23 +3,23 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import userNickname from '@/atoms/userNickname';
+import { usePayload, usePublish } from '@/atoms/useSocketAtoms';
 import Close from '@/components/modules/Close';
 import ThankList from '@/components/modules/ThankList';
 import ThankTo from '@/components/modules/ThankTo';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
-import useTest from '@/hooks/useTest';
-import getUserSession from '@/service/getUserSession';
 import localStorage from '@/service/localStorage';
 
 export default function ProgressThankCircle() {
 	const navigation = useNavigation();
-	const nickname = useRecoilValue(userNickname);
+
+	const publish = useRecoilValue(usePublish);
+	const payload = useRecoilValue(usePayload);
 
 	const [isMixing, setIsMixing] = useState<boolean>(true);
 	const [position, setPosition] = useState<string>('');
-	const [step, setStep] = useState<string>('WAITING');
+	const [isWaiting, setIsWaiting] = useState<boolean>(true);
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -28,33 +28,17 @@ export default function ProgressThankCircle() {
 
 	const roomName = navigation.path().split('/')[2];
 
-	const { connect, disconnect, payload, publish } = useTest(`/topic/thankcircle/${roomName}`);
-
-	const userToken = async () => {
-		const session = await getUserSession();
-		if (session) {
-			connect(
-				{ Authorization: `${session?.getAccessToken().getJwtToken()}` },
-				'주최자',
-				`/app/thankcircle/${roomName}/start`,
-			);
-		} else {
-			connect({}, nickname);
+	useEffect(() => {
+		if (position === 'organizer' && publish) {
+			publish(`/app/thankcircle/${roomName}/start`);
 		}
-	};
+	}, [position, publish]);
 
 	useEffect(() => {
-		userToken();
-		return () => disconnect();
-	}, []);
-
-	useEffect(() => {
-		if (!payload?.type) {
-			setStep('WAITING');
-		} else if (payload?.type === 'READY' || payload?.type === 'GUIDE_THANKS_TO' || payload?.type === 'CLOSED_ROOM') {
-			setStep(payload.type);
+		if (payload?.type === 'READY') {
+			setIsWaiting(false);
 		}
-	}, [payload]);
+	}, [payload?.type === 'READY']);
 
 	const handleStep = () => {
 		publish(`/app/thankcircle/${roomName}/start`);
@@ -70,11 +54,11 @@ export default function ProgressThankCircle() {
 
 	return (
 		<>
-			{step === 'WAITING' && position === 'participant' && <Wait position={position} />}
-			{step === 'READY' && (
+			{isWaiting && position === 'participant' && <Wait position={position} />}
+			{payload?.type === 'READY' && (
 				<ThankList position={position} handleStep={handleStep} nicknameList={payload?.payload.nickname_list} />
 			)}
-			{step === 'GUIDE_THANKS_TO' && (
+			{payload?.type === 'GUIDE_THANKS_TO' && (
 				<ThankTo
 					position={position}
 					handleStep={handleStep}
@@ -84,7 +68,7 @@ export default function ProgressThankCircle() {
 					isMixing={isMixing}
 				/>
 			)}
-			{step === 'CLOSED_ROOM' && <Close />}
+			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
 }

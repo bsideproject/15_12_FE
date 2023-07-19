@@ -34,7 +34,7 @@ export default function ThankTo({ position, handleStep, handleClose, handleIsMix
 
 	return (
 		<>
-			{isMixing && <ThankMixing position={position} />}
+			{isMixing && <ThankMixing />}
 			{!isMixing && (
 				<ElGrid between bottomSm>
 					<div>

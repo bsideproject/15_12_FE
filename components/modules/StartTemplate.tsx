@@ -1,5 +1,8 @@
 'use client';
 
+import { useRecoilValue } from 'recoil';
+
+import { useCount } from '@/atoms/useSocketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
 import localStorage from '@/service/localStorage';
@@ -19,17 +22,16 @@ interface StartTemplateProps {
 		short_url: string;
 	};
 	activity: string;
-	room: string;
-	payload?: {
-		message: string;
-		payload: { nickname: string; current_participant_count: number };
-		type: string;
-	};
+	roomName: string;
+	payload?: any;
 }
 
-export default function StartTemplate({ data, activity, room, payload }: StartTemplateProps) {
+export default function StartTemplate({ data, activity, roomName, payload }: StartTemplateProps) {
 	const toast = useNotify();
+
 	const navigation = useNavigation();
+
+	const count = useRecoilValue(useCount);
 
 	const copyUrl = async () => {
 		try {
@@ -65,13 +67,13 @@ export default function StartTemplate({ data, activity, room, payload }: StartTe
 
 		switch (activity) {
 			case 'speedgame':
-				navigation.push(`${activity}/${room}/progress`);
+				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			case 'moodcheckin':
-				navigation.push(`${activity}/${room}/progress`);
+				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			case 'thankcircle':
-				navigation.push(`${activity}/${room}/progress`);
+				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			default:
 				break;
@@ -95,9 +97,7 @@ export default function StartTemplate({ data, activity, room, payload }: StartTe
 				</div>
 				<div className={participantWrapClasses}>
 					<PersonIcon />
-					<span className={`${participantClasses} text-h7`}>
-						참여자 {payload?.payload.current_participant_count || data?.participant_count}명
-					</span>
+					<span className={`${participantClasses} text-h7`}>참여자 {count}명</span>
 				</div>
 				<p className="text-center text-p3 text-gray030">참여자들이 모두 들어오면 &apos;시작&apos;을 눌러주세요</p>
 			</div>

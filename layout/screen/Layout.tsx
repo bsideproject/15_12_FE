@@ -13,7 +13,17 @@ import awsConfig from 'aws-exports';
 Amplify.configure(awsConfig);
 
 export default function ScreenLayout({ children, className }: { children: React.ReactNode; className: string }) {
-	const [queryClient] = useState(() => new QueryClient());
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						refetchOnWindowFocus: false,
+						retry: false,
+					},
+				},
+			}),
+	);
 
 	useVh();
 

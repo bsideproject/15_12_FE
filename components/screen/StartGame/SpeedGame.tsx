@@ -27,5 +27,5 @@ export default function StartSpeedGame() {
 		userToken();
 	}, [data]);
 
-	return <StartTemplate data={data} activity={activity} room={room} payload={payload} />;
+	return <StartTemplate data={data} activity={activity} roomName={room} payload={payload} />;
 }
