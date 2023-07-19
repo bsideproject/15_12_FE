@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
 
 import { useCount } from '@/atoms/useSocketAtoms';
@@ -12,6 +11,7 @@ import PersonIcon from 'public/images/person-icon.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
+import ElQrImage from '../elements/ElQrImage';
 
 interface StartTemplateProps {
 	data: {
@@ -23,9 +23,10 @@ interface StartTemplateProps {
 	};
 	activity: string;
 	roomName: string;
+	payload?: any;
 }
 
-export default function StartTemplate({ data, activity, roomName }: StartTemplateProps) {
+export default function StartTemplate({ data, activity, roomName, payload }: StartTemplateProps) {
 	const toast = useNotify();
 
 	const navigation = useNavigation();
@@ -42,7 +43,6 @@ export default function StartTemplate({ data, activity, roomName }: StartTemplat
 	};
 
 	const titleTextClasses = clsxm('text-gray090 text-center mb-[23.08%]');
-	const imageClasses = clsxm('bg-gray030', 'object-cover', 'mb-[2.56%]', 'mx-auto');
 	const inputWrapClasses = clsxm(
 		'flex',
 		'items-center',
@@ -66,6 +66,9 @@ export default function StartTemplate({ data, activity, roomName }: StartTemplat
 		localStorage.set('organizer');
 
 		switch (activity) {
+			case 'speedgame':
+				navigation.push(`${activity}/${roomName}/progress`);
+				break;
 			case 'moodcheckin':
 				navigation.push(`${activity}/${roomName}/progress`);
 				break;
@@ -82,14 +85,7 @@ export default function StartTemplate({ data, activity, roomName }: StartTemplat
 			<div>
 				<h2 className={`${titleTextClasses} text-h3`}>우리 같이 얼음땡 해요!</h2>
 				<div className="mb-[10.26%] text-center">
-					<Image
-						src={data?.qr_code_image_url}
-						alt="큐알_코드"
-						className={imageClasses}
-						priority
-						width={150}
-						height={150}
-					/>
+					<ElQrImage src={data?.qr_code_image_url} />
 					<p className="text-h7 text-gray090">입장을 위한 QR코드</p>
 					<p className="text-p3 text-gray070">QR코드를 스캔해주세요.</p>
 				</div>
@@ -103,7 +99,7 @@ export default function StartTemplate({ data, activity, roomName }: StartTemplat
 					<PersonIcon />
 					<span className={`${participantClasses} text-h7`}>참여자 {count}명</span>
 				</div>
-				<p className="text-p3 text-gray030 text-center">참여자들이 모두 들어오면 &apos;시작&apos;을 눌러주세요</p>
+				<p className="text-center text-p3 text-gray030">참여자들이 모두 들어오면 &apos;시작&apos;을 눌러주세요</p>
 			</div>
 			<ElButton type="button" _onClick={onNext}>
 				시작

@@ -13,11 +13,12 @@ import SaveIcon from 'public/images/save-icon.svg';
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
 import ActivityHead from '../modules/ActivityHead';
+import GameImage from '../modules/GameImage';
 import SpeedGameInputs from '../modules/SpeedGameInputs';
 
 export interface QuestionProps {
 	number: number;
-	questionText: string;
+	question_text: string;
 	answers: {
 		number: number;
 		answer_text: string;
@@ -26,13 +27,12 @@ export interface QuestionProps {
 }
 
 export default function ScreenSpeedGame() {
-	const navigation = useNavigation();
 	const toast = useNotify();
 	const [total, setTotal] = useState<number>(1);
 	const defaultQuestion: QuestionProps[] = [
 		{
 			number: 1,
-			questionText: '-',
+			question_text: '-',
 			answers: [
 				{
 					number: 1,
@@ -60,11 +60,13 @@ export default function ScreenSpeedGame() {
 	let copyQuestion = [...defaultQuestion];
 
 	const [questions, setQuestions] = useState<QuestionProps[]>(copyQuestion);
+	const navigation = useNavigation();
+	// const createRoom = useQuerySpeedGameCreate(questions);
 
 	const newQuestion = (inx: number) => {
 		return {
 			number: inx,
-			questionText: '',
+			question_text: '',
 			answers: [
 				{
 					number: 1,
@@ -90,7 +92,6 @@ export default function ScreenSpeedGame() {
 		};
 	};
 
-	const imageClasses = clsxm('my-[13.33%]', 'mx-auto');
 	const notlineClasses = clsxm('flex', 'w-full', 'mx-auto', 'pb-[29.17%]', 'text-p1', 'justify-center', 'items-center');
 	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-[6.67%]');
 
@@ -99,9 +100,7 @@ export default function ScreenSpeedGame() {
 			<div className="px-[6.67%] mb-[3.33%]">
 				<ActivityHead title="스피드 게임" />
 			</div>
-			<div className="bg-[#E1DEBF]">
-				<SpeedGameIcon className={imageClasses} />
-			</div>
+			<GameImage bg="bg-[#E1DEBF]" svg={<SpeedGameIcon />} />
 			{questions.map((item, inx) => {
 				return (
 					<div key={`speedGame-question-${item.number}}`}>
@@ -110,7 +109,7 @@ export default function ScreenSpeedGame() {
 							number={item.number}
 							questions={questions}
 							setQuestions={setQuestions}
-							description="정답인 경우, 체크표시가 뜨도록 두 번 눌러주세요."
+							description="정답인 경우, 파란색 체크표시가 뜨도록 눌러주세요."
 						/>
 					</div>
 				);
@@ -138,12 +137,13 @@ export default function ScreenSpeedGame() {
 							.post(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame`, { questions })
 							.then((res) => {
 								const roomCode = res.data.room_code;
-								navigation.push(`/start-game?room=${roomCode}`);
+								navigation.push(`/speedgame/start-game/room?room=${roomCode}`);
 							})
 							.catch((err) => {
 								console.log('err..', err);
 							});
 					}}
+					// _onClick={() => createRoom}
 				>
 					만들기
 				</ElButton>

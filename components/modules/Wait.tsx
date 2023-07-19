@@ -1,13 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import userNickname from '@/atoms/userNickname';
 import { useCount } from '@/atoms/useSocketAtoms';
-import useNavigation from '@/hooks/useNavigation';
-import useSocket from '@/hooks/useSocket';
-import getUserSession from '@/service/getUserSession';
 import clsxm from '@/service/mergeStyle';
 import WaitImg from 'public/images/wait-img.svg';
 
@@ -20,8 +15,6 @@ interface WaitProps {
 }
 
 export default function Wait({ position, handleStep }: WaitProps) {
-	const navigation = useNavigation();
-
 	const count = useRecoilValue(useCount);
 
 	const textClasses = clsxm('text-p2');

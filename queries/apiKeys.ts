@@ -1,3 +1,4 @@
+import { QuestionProps } from '@/components/screen/SpeedGame';
 import apiClient from '@/core';
 
 const apiKeys = {
@@ -20,6 +21,8 @@ const apiKeys = {
 
 		return response;
 	},
+	createSpeedGame: (questions: QuestionProps[]) => apiClient.post('/activity/speedgame', { questions }),
+	getSpeedGame: (room: string) => apiClient.get(`/activity/speedgame/${room}`),
 };
 
 export default apiKeys;
