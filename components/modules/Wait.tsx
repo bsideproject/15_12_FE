@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 
 import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
-import useTest from '@/hooks/useTest';
+import useSocket from '@/hooks/useSocket';
 import getUserSession from '@/service/getUserSession';
 import clsxm from '@/service/mergeStyle';
 import WaitImg from 'public/images/wait-img.svg';
@@ -24,22 +24,20 @@ export default function Wait({ position, handleStep }: WaitProps) {
 
 	const room = navigation.path().split('/');
 
-	const { connect, payload } = useTest(`/topic/${room[1]}/${room[2]}/user-count`);
+	const { connect, payload } = useSocket();
 
 	const userToken = async () => {
 		const session = await getUserSession();
-		connect(position === 'organizer' ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {}, nickname);
+		connect(
+			`/topic/${room[1]}/${room[2]}/user-count`,
+			position === 'organizer' ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {},
+			nickname || undefined,
+		);
 	};
 
 	useEffect(() => {
-		userToken();
+		if (room) userToken();
 	}, [room]);
-
-	useEffect(() => {
-		if (position === 'organizer' && handleStep) {
-			handleStep();
-		}
-	}, []);
 
 	const textClasses = clsxm('text-p2');
 

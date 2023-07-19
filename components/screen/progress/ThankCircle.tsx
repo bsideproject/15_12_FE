@@ -19,6 +19,7 @@ export default function ProgressThankCircle() {
 
 	const [isMixing, setIsMixing] = useState<boolean>(true);
 	const [position, setPosition] = useState<string>('');
+	const [isWaiting, setIsWaiting] = useState<boolean>(true);
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -32,6 +33,12 @@ export default function ProgressThankCircle() {
 			publish(`/app/thankcircle/${roomName}/start`);
 		}
 	}, [position, publish]);
+
+	useEffect(() => {
+		if (payload?.type === 'READY') {
+			setIsWaiting(false);
+		}
+	}, [payload?.type === 'READY']);
 
 	const handleStep = () => {
 		publish(`/app/thankcircle/${roomName}/start`);
@@ -47,9 +54,7 @@ export default function ProgressThankCircle() {
 
 	return (
 		<>
-			{!['READY', 'GUIDE_THANKS_TO', 'CLOSED_ROOM'].includes(payload?.type) && position === 'participant' && (
-				<Wait position={position} />
-			)}
+			{isWaiting && position === 'participant' && <Wait position={position} />}
 			{payload?.type === 'READY' && (
 				<ThankList position={position} handleStep={handleStep} nicknameList={payload?.payload.nickname_list} />
 			)}

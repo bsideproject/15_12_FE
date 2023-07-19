@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import React from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { usePublish, usePayload, useDisconnect } from '@/atoms/socketAtoms';
+import { usePublish, useDisconnect } from '@/atoms/socketAtoms';
+import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
 import localStorage from '@/service/localStorage';
@@ -15,13 +16,13 @@ import FormField from '../modules/FormField';
 
 export default function ScreenParticipantNickname() {
 	const navigation = useNavigation();
+
+	const [nickname, setNickname] = useRecoilState(userNickname);
+
 	const setPublish = useSetRecoilState(usePublish);
-	const setPayload = useSetRecoilState(usePayload);
 	const setDisconnect = useSetRecoilState(useDisconnect);
 
-	const { connect, publish, payload, disconnect } = useSocket();
-
-	const [nickname, setNickname] = useState<string>('');
+	const { connect, publish, disconnect } = useSocket();
 
 	const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNickname(e.target.value);
@@ -40,7 +41,6 @@ export default function ScreenParticipantNickname() {
 				connect(`/topic/${roomName[1]}/${roomName[2]}`, {}, nickname);
 
 				setPublish(() => publish);
-				setPayload(payload);
 				setDisconnect(() => disconnect);
 
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);

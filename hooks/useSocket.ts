@@ -12,12 +12,11 @@ interface ConnectAuthorizationType {
 }
 
 const UseSocket = () => {
-	const [payload, setPayload] = useState<any>();
 	const client = useRef<CompatClient>();
-
+	const [payload, setPayload] = useState<any>();
 	const setUsePayload = useSetRecoilState(usePayload);
 
-	const subscribe = (socketUrl: string, nickname?: string, sendUrl?: string) => {
+	const subscribe = (socketUrl: string, nickname?: string) => {
 		if (client.current) {
 			client.current.subscribe(
 				socketUrl,
@@ -29,12 +28,11 @@ const UseSocket = () => {
 				},
 				nickname ? { nickname } : undefined,
 			);
-			if (sendUrl) client.current?.send(sendUrl, {}, '');
 		}
 	};
 
 	// ${process.env.NEXT_PUBLIC_API_SOCKET_URL}
-	const connect = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string, sendUrl?: string) => {
+	const connect = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string) => {
 		client.current = Stomp.over(() => {
 			const sock = new SockJS(`/ws`);
 			return sock;
@@ -42,9 +40,9 @@ const UseSocket = () => {
 		if (client.current) {
 			client.current.connect(authorization, () => {
 				if (nickname) {
-					subscribe(socketUrl, nickname, sendUrl);
+					subscribe(socketUrl, nickname);
 				} else {
-					subscribe(socketUrl, sendUrl);
+					subscribe(socketUrl);
 				}
 			});
 		}

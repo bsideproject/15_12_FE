@@ -12,7 +12,6 @@ interface ThankListProps {
 }
 
 export default function ThankList({ position, handleStep, nicknameList }: ThankListProps) {
-	console.log(nicknameList);
 	return (
 		<ElGrid between pxNone bottomSm>
 			<div>
