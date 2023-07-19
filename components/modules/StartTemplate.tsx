@@ -22,10 +22,10 @@ interface StartTemplateProps {
 		short_url: string;
 	};
 	activity: string;
-	room: string;
+	roomName: string;
 }
 
-export default function StartTemplate({ data, activity, room }: StartTemplateProps) {
+export default function StartTemplate({ data, activity, roomName }: StartTemplateProps) {
 	const toast = useNotify();
 
 	const navigation = useNavigation();
@@ -67,10 +67,10 @@ export default function StartTemplate({ data, activity, room }: StartTemplatePro
 
 		switch (activity) {
 			case 'moodcheckin':
-				navigation.push(`${activity}/${room}/progress`);
+				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			case 'thankcircle':
-				navigation.push(`${activity}/${room}/progress`);
+				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			default:
 				break;

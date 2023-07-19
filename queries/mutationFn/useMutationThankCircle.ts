@@ -34,7 +34,7 @@ const useMutationThankCircle = () => {
 			setPublish(() => publish);
 			setDisconnect(() => disconnect);
 
-			navigation.push(`/thankcircle/start-game/room?room=${data?.data.room_name}`);
+			navigation.push(`/thankcircle/start-game/${data?.data.room_name}`);
 		},
 		onError: (error) => {
 			console.log(error);

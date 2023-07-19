@@ -4,15 +4,12 @@ import StartTemplate from '@/components/modules/StartTemplate';
 import useNavigation from '@/hooks/useNavigation';
 import useQueryThankCircle from '@/queries/queryFn/useQueryThankCircle';
 
-export default function StartThankCircle({ rooma }: { rooma: string }) {
+export default function StartThankCircle() {
 	const navigation = useNavigation();
 
-	const activity = navigation.path().split('/')[1];
-	const room = navigation.params('room')!;
+	const room = navigation.path().split('/');
 
-	const { data } = useQueryThankCircle(activity, room);
+	const { data } = useQueryThankCircle(room[1], room[3]);
 
-	console.log(rooma);
-
-	return <StartTemplate data={data} activity={activity} room={room} />;
+	return <StartTemplate data={data} activity={room[1]} roomName={room[3]} />;
 }
