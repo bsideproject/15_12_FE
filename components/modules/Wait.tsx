@@ -21,9 +21,9 @@ export default function Wait({ position }: WaitProps) {
 	const navigation = useNavigation();
 	const nickname = useRecoilValue(userNickname);
 
-	const roomName = navigation.path().split('/')[2];
+	const roomName = navigation.path().split('/');
 
-	const { connect, payload } = useTest(`/topic/thankcircle/${roomName}/user-count`);
+	const { connect, payload } = useTest(`/topic/${roomName[1]}/${roomName[2]}/user-count`);
 
 	const userToken = async () => {
 		const session = await getUserSession();
