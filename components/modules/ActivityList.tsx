@@ -22,7 +22,7 @@ export default function ActivityList({ data, user }: ActivityListProps) {
 			navigation.push('/login');
 		} else {
 			switch (activity.display_name) {
-				case '스피드게임':
+				case '스피드 게임':
 					navigation.push('/speedgame');
 					break;
 				case '기분 체크인':
