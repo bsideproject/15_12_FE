@@ -2,39 +2,22 @@
 
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
-
-import { useCount, usePayload } from '@/atoms/socketAtoms';
 
 interface ConnectAuthorizationType {
 	[key: string]: string;
 }
 
-const useSocket = () => {
+const useSingleSocket = () => {
 	const client = useRef<CompatClient>();
-	const setPayload = useSetRecoilState(usePayload);
-	const setCount = useSetRecoilState(useCount);
 
 	const subscribe = (socketUrl: string, nickname?: string) => {
 		if (client.current) {
 			client.current.subscribe(
-				`/topic/${socketUrl}`,
+				socketUrl,
 				(response) => {
 					const jsonBody = JSON.parse(response.body);
-					console.log(response.body);
-
-					setPayload(jsonBody);
-				},
-				nickname ? { nickname } : undefined,
-			);
-			client.current.subscribe(
-				`/topic/${socketUrl}/user-count`,
-				(response) => {
-					const jsonBody = JSON.parse(response.body);
-					console.log(jsonBody, jsonBody.payload.current_participant_count);
-
-					setCount(jsonBody.payload.current_participant_count);
+					console.log(jsonBody);
 				},
 				nickname ? { nickname } : undefined,
 			);
@@ -65,12 +48,12 @@ const useSocket = () => {
 		}
 	};
 
-	const publish = (sendUrl: string, value?: { [key: string]: number | string }) => {
+	const publish = (sendUrl: string, value: { [key: string]: number | string }) => {
 		if (!client.current?.connected) return;
-		client.current?.send(sendUrl, {}, value ? JSON.stringify(value) : '');
+		client.current?.send(sendUrl, {}, JSON.stringify(value));
 	};
 
 	return { connect, disconnect, publish };
 };
 
-export default useSocket;
+export default useSingleSocket;

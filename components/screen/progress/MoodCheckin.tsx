@@ -3,22 +3,22 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import userNickname from '@/atoms/userNickname';
+import { usePayload, usePublish } from '@/atoms/socketAtoms';
 import Close from '@/components/modules/Close';
 import MoodPick from '@/components/modules/MoodPick';
 import MoodPickToday from '@/components/modules/MoodPickToday';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
-import useTest from '@/hooks/useTest';
-import getUserSession from '@/service/getUserSession';
 import localStorage from '@/service/localStorage';
 
 export default function ProgressMoodCheckin() {
 	const navigation = useNavigation();
-	const nickname = useRecoilValue(userNickname);
+
+	const publish = useRecoilValue(usePublish);
+	const payload = useRecoilValue(usePayload);
 
 	const [position, setPosition] = useState<string>('');
-	const [step, setStep] = useState<string>('PICK');
+	const [isWaiting, setIsWaiting] = useState<boolean>(true);
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -27,34 +27,24 @@ export default function ProgressMoodCheckin() {
 
 	const roomName = navigation.path().split('/')[2];
 
-	const { connect, disconnect, payload, publish } = useTest(`/topic/moodcheckin/${roomName}`);
-
-	const userToken = async () => {
-		const session = await getUserSession();
-		if (session) {
-			connect({ Authorization: `${session?.getAccessToken().getJwtToken()}` }, '주최자');
-		} else {
-			connect({}, nickname);
+	useEffect(() => {
+		if (position === 'organizer' && publish) {
+			publish(`/app/moodcheckin/${roomName}/start`);
 		}
+	}, [position, publish]);
+
+	useEffect(() => {
+		if (payload?.type === 'WAITING' || payload?.type === 'OPENED_AVERAGE') {
+			setIsWaiting(false);
+		}
+	}, [payload?.type]);
+
+	const handleIsWaiting = () => {
+		setIsWaiting(true);
 	};
-
-	useEffect(() => {
-		userToken();
-		return () => disconnect();
-	}, [roomName, nickname]);
-
-	useEffect(() => {
-		if (payload?.type === 'OPENED_AVERAGE' || payload?.type === 'CLOSED_ROOM') {
-			setStep(payload.type);
-		}
-	}, [payload]);
 
 	const handleStep = () => {
 		publish(`/app/moodcheckin/${roomName}/start`);
-	};
-
-	const handleWaiting = () => {
-		setStep('WAITING');
 	};
 
 	const handleClose = () => {
@@ -63,10 +53,10 @@ export default function ProgressMoodCheckin() {
 
 	return (
 		<>
-			{step === 'PICK' && <MoodPick handleWaiting={handleWaiting} />}
-			{step === 'WAITING' && <Wait position={position} handleStep={handleStep} />}
-			{step === 'OPENED_AVERAGE' && <MoodPickToday position={position} handleClose={handleClose} />}
-			{step === 'CLOSED_ROOM' && <Close />}
+			{isWaiting && <Wait position={position} handleStep={handleStep} />}
+			{payload?.type === 'WAITING' && <MoodPick handleIsWaiting={handleIsWaiting} />}
+			{payload?.type === 'OPENED_AVERAGE' && <MoodPickToday position={position} handleClose={handleClose} />}
+			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
 }

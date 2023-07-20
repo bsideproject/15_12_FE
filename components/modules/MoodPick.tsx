@@ -6,7 +6,8 @@ import { useRecoilValue } from 'recoil';
 import userNickname from '@/atoms/userNickname';
 import moodCheckinArr from '@/constants/moodCheckinArr';
 import useNavigation from '@/hooks/useNavigation';
-import useTest from '@/hooks/useTest';
+import useSingleSocket from '@/hooks/useSingleSocket';
+import getUserSession from '@/service/getUserSession';
 import Logo from 'public/images/activity-logo.svg';
 
 import ElButton from '../elements/ElButton';
@@ -14,7 +15,7 @@ import ElGrid from '../elements/ElGrid';
 
 import ActivityHead from './ActivityHead';
 
-export default function ScreenMoodPick({ handleWaiting }: { handleWaiting: () => void }) {
+export default function ScreenMoodPick({ handleIsWaiting }: { handleIsWaiting: () => void }) {
 	const navigation = useNavigation();
 	const nickname = useRecoilValue(userNickname);
 
@@ -24,9 +25,23 @@ export default function ScreenMoodPick({ handleWaiting }: { handleWaiting: () =>
 		setMoodNum(value);
 	};
 
-	const { connect, publish } = useTest(`/user/queue/reply`);
+	const { connect, publish } = useSingleSocket();
 
 	const roomName = navigation.path().split('/');
+
+	const connectMoodPick = async () => {
+		const session = await getUserSession();
+
+		connect(
+			'/user/queue/reply',
+			session ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {},
+			session ? '주최자' : nickname,
+		);
+	};
+
+	useEffect(() => {
+		connectMoodPick();
+	}, []);
 
 	const onSend = () => {
 		if (moodNum === 0) {
@@ -34,12 +49,8 @@ export default function ScreenMoodPick({ handleWaiting }: { handleWaiting: () =>
 			return;
 		}
 		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
-		handleWaiting();
+		handleIsWaiting();
 	};
-
-	useEffect(() => {
-		connect({}, nickname || '주최자');
-	}, []);
 
 	return (
 		<ElGrid between pxNone bottomSm>

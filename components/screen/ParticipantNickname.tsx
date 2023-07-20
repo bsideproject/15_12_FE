@@ -33,6 +33,11 @@ export default function ScreenParticipantNickname() {
 	const connectHaner = () => {
 		localStorage.set('participant');
 
+		connect(`${roomName[1]}/${roomName[2]}`, {}, nickname);
+
+		setPublish(() => publish);
+		setDisconnect(() => disconnect);
+
 		switch (roomName[1]) {
 			case 'speedgame':
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
@@ -41,11 +46,6 @@ export default function ScreenParticipantNickname() {
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
 			case 'thankcircle':
-				connect(`${roomName[1]}/${roomName[2]}`, {}, nickname);
-
-				setPublish(() => publish);
-				setDisconnect(() => disconnect);
-
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
 			default:
