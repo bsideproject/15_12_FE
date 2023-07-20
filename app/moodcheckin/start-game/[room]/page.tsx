@@ -1,5 +1,18 @@
-import StartMoodCheckIn from '@/components/screen/StartGame/MoodCheckIn';
+import { dehydrate, Hydrate } from '@tanstack/react-query';
 
-export default function StartGame() {
-	return <StartMoodCheckIn />;
+import getQueryClient from '@/app/getQueryClient';
+import StartMoodCheckIn from '@/components/screen/StartGame/MoodCheckIn';
+import apiKeys from '@/queries/apiKeys';
+import queryKeys from '@/queries/queryKeys';
+
+export default async function StartGame({ params: { room } }: { params: { room: string } }) {
+	const queryClient = getQueryClient();
+	await queryClient.prefetchQuery(queryKeys.moodCheckin(room), () => apiKeys.getMoodCheckin(room));
+	const dehydratedState = dehydrate(queryClient);
+
+	return (
+		<Hydrate state={dehydratedState}>
+			<StartMoodCheckIn />
+		</Hydrate>
+	);
 }

@@ -27,7 +27,7 @@ const useMutationMoodCheckin = () => {
 		);
 	};
 
-	const { mutate } = useMutation(apiKeys.createThankCircle, {
+	const { mutate } = useMutation(apiKeys.createMoodCheckin, {
 		onSuccess: (data) => {
 			connectOrganizer(data);
 

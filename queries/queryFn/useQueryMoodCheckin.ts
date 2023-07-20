@@ -6,7 +6,6 @@ import queryKeys from '../queryKeys';
 const useQueryMoodCheckin = (activity: string, room: string) => {
 	return useQuery(queryKeys.moodCheckin(room), () => apiKeys.getMoodCheckin(room), {
 		enabled: activity === 'moodcheckin',
-		select: (data) => data.data,
 	});
 };
 
