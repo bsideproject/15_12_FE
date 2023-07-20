@@ -3,8 +3,8 @@
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
+import { usePublish, useDisconnect } from '@/atoms/socketAtoms';
 import userNickname from '@/atoms/userNickname';
-import { usePublish, useDisconnect } from '@/atoms/useSocketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
 import localStorage from '@/service/localStorage';

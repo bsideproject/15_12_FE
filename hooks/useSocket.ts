@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
-import { useCount, usePayload } from '@/atoms/useSocketAtoms';
+import { useCount, usePayload } from '@/atoms/socketAtoms';
 
 interface ConnectAuthorizationType {
 	[key: string]: string;
@@ -44,7 +44,7 @@ const UseSocket = () => {
 	// ${process.env.NEXT_PUBLIC_API_SOCKET_URL}
 	const connect = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string) => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
+			const sock = new SockJS(`/ws`);
 			return sock;
 		});
 		if (client.current) {

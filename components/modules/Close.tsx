@@ -2,7 +2,7 @@
 
 import { useRecoilValue } from 'recoil';
 
-import { useDisconnect } from '@/atoms/useSocketAtoms';
+import { useDisconnect } from '@/atoms/socketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import CloseImg from 'public/images/close-img.svg';
 
