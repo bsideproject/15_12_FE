@@ -48,8 +48,10 @@ export default function ProgressMoodCheckin() {
 	return (
 		<>
 			{isWaiting && <Wait position={position} handleStep={handleStep} />}
-			{payload?.type === 'WAITING' && <MoodCheckinPick handleIsWaiting={handleIsWaiting} />}
-			{payload?.type === 'OPENED_AVERAGE' && <MoodCheckinResult position={position} handleClose={handleClose} />}
+			{!isWaiting && payload?.type === 'WAITING' && <MoodCheckinPick handleIsWaiting={handleIsWaiting} />}
+			{!isWaiting && payload?.type === 'OPENED_AVERAGE' && (
+				<MoodCheckinResult position={position} handleClose={handleClose} />
+			)}
 			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
