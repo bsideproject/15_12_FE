@@ -16,12 +16,12 @@ interface ActivityListProps {
 export default function ActivityList({ data, user }: ActivityListProps) {
 	const navigation = useNavigation();
 
-	const activityRoutes = (activity: any) => {
+	const activityRoutes = (activity: string) => {
 		if (!user) {
 			alert('로그인 후 이용 가능합니다!');
 			navigation.push('/login');
 		} else {
-			switch (activity.display_name) {
+			switch (activity) {
 				case '스피드 게임':
 					navigation.push('/speedgame');
 					break;
@@ -32,7 +32,7 @@ export default function ActivityList({ data, user }: ActivityListProps) {
 					navigation.push('/thankcircle');
 					break;
 				case '미니 네트워킹':
-					alert('준비 중...');
+					navigation.push('/mininetworking');
 					break;
 				default:
 					break;
@@ -50,7 +50,7 @@ export default function ActivityList({ data, user }: ActivityListProps) {
 			{data?.map((activity) => {
 				return (
 					<li key={activity.activity_id} className={cardClasses}>
-						<button type="button" className="w-full" onClick={() => activityRoutes(activity)}>
+						<button type="button" className="w-full" onClick={() => activityRoutes(activity.display_name)}>
 							<div
 								className="flex items-center justify-center"
 								style={{ backgroundColor: `${ACTIVITY_FIGCAPTION[activity.display_name]?.color}` }}
