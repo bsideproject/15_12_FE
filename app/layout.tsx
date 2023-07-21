@@ -5,11 +5,8 @@ import ScreenLayout from '@/layout/screen/Layout';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-	title: 'Next.js',
-	description: 'Next.js',
-	/**
-	 * todo: 추후 favicon 작업할 때 경로 바꿔 주기.
-	 */
+	title: '얼음땡 | 어색한 사이 이제 끝!',
+	description: '꽁꽁 얼어붙은 어색함을 부숴줄 아이스 브레이킹 도구 모음',
 	icons: {
 		icon: '/favicon.ico',
 	},
