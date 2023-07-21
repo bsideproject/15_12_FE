@@ -77,6 +77,10 @@ export default function StartTemplate({ data, activity, roomName, payload }: Sta
 				publish(`/app/${activity}/${roomName}/start`);
 				navigation.push(`${activity}/${roomName}/progress`);
 				break;
+			case 'mininetworking':
+				publish(`/app/${activity}/${roomName}/start`);
+				navigation.push(`${activity}/${roomName}/progress`);
+				break;
 			default:
 				break;
 		}
