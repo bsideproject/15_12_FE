@@ -30,6 +30,7 @@ const apiKeys = {
 	},
 	createSpeedGame: (questions: QuestionProps[]) => apiClient.post('/activity/speedgame', { questions }),
 	getSpeedGame: (room: string) => apiClient.get(`/activity/speedgame/${room}`),
+	createMiniNetworking: () => apiClient.post('/activity/mininetworking'),
 };
 
 export default apiKeys;
