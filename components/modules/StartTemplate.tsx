@@ -2,7 +2,7 @@
 
 import { useRecoilValue } from 'recoil';
 
-import { useCount } from '@/atoms/socketAtoms';
+import { useCount, usePublish } from '@/atoms/socketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
 import localStorage from '@/service/localStorage';
@@ -31,6 +31,7 @@ export default function StartTemplate({ data, activity, roomName, payload }: Sta
 
 	const navigation = useNavigation();
 
+	const publish = useRecoilValue(usePublish);
 	const count = useRecoilValue(useCount);
 
 	const copyUrl = async () => {
@@ -73,6 +74,7 @@ export default function StartTemplate({ data, activity, roomName, payload }: Sta
 				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			case 'thankcircle':
+				publish(`/app/${activity}/${roomName}/start`);
 				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			default:

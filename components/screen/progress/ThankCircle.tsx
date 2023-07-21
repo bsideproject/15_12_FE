@@ -29,12 +29,6 @@ export default function ProgressThankCircle() {
 	const roomName = navigation.path().split('/')[2];
 
 	useEffect(() => {
-		if (position === 'organizer' && publish) {
-			publish(`/app/thankcircle/${roomName}/start`);
-		}
-	}, [position, publish]);
-
-	useEffect(() => {
 		if (payload?.type === 'READY') {
 			setIsWaiting(false);
 		}

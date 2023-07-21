@@ -51,6 +51,8 @@ export default function ProgressMoodCheckin() {
 		publish(`/app/moodcheckin/${roomName}/close`);
 	};
 
+	console.log(isWaiting);
+
 	return (
 		<>
 			{isWaiting && <Wait position={position} handleStep={handleStep} />}

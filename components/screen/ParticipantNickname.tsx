@@ -7,6 +7,7 @@ import { usePublish, useDisconnect } from '@/atoms/socketAtoms';
 import userNickname from '@/atoms/userNickname';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
+import useUserCount from '@/hooks/useUserCount';
 import localStorage from '@/service/localStorage';
 
 import ElButton from '../elements/ElButton';
@@ -24,6 +25,8 @@ export default function ScreenParticipantNickname() {
 
 	const { connect, publish, disconnect } = useSocket();
 
+	const { connect: connectCount } = useUserCount();
+
 	const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNickname(e.target.value);
 	};
@@ -37,6 +40,8 @@ export default function ScreenParticipantNickname() {
 
 		setPublish(() => publish);
 		setDisconnect(() => disconnect);
+
+		connectCount(`/app/${roomName[1]}/${roomName[2]}/get-info`, nickname);
 
 		switch (roomName[1]) {
 			case 'speedgame':
