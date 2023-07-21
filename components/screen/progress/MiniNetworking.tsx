@@ -5,8 +5,7 @@ import { useRecoilValue } from 'recoil';
 
 import { usePayload, usePublish } from '@/atoms/socketAtoms';
 import Close from '@/components/modules/Close';
-import ThankList from '@/components/modules/ThankList';
-import ThankTo from '@/components/modules/ThankTo';
+import MiniNetworkingList from '@/components/modules/MiniNetworkingList';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
 import localStorage from '@/service/localStorage';
@@ -19,6 +18,7 @@ export default function ProgressMiniNetworking() {
 
 	const [position, setPosition] = useState<string>('');
 	const [isWaiting, setIsWaiting] = useState<boolean>(true);
+	const [isMatching, setIsMatching] = useState<boolean>(false);
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -41,10 +41,20 @@ export default function ProgressMiniNetworking() {
 		publish(`/app/mininetworking/${roomName}/close`);
 	};
 
+	const handleGropMatching = () => {
+		setIsMatching(true);
+	};
+
 	return (
 		<>
 			{isWaiting && position === 'participant' && <Wait position={position} />}
-			{payload?.type === 'OPENED_PARTICIPANT_LIST' && <div>라스트</div>}
+			{payload?.type === 'OPENED_PARTICIPANT_LIST' && (
+				<MiniNetworkingList
+					position={position}
+					handleGropMatching={handleGropMatching}
+					participantList={payload?.payload}
+				/>
+			)}
 			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
