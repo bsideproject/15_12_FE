@@ -1,5 +1,7 @@
 'use client';
 
+import Logo from 'public/images/activity-logo.svg';
+
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
 
@@ -17,15 +19,11 @@ export default function MiniNetworkingList({ position, handleGropMatching, parti
 			<div>
 				<div className="px-[6.67%]">
 					<ActivityHead title="미니 네트워킹" />
-					<p className="text-p2 text-gray070 mt-[4.49%] mb-[5.45%]">
-						이번주 고마운 일이 있었던 사람에게
-						<br />
-						마음을 전해요!
-					</p>
+					<Logo className="mt-[27.78%] mb-[24.17%] mx-auto" />
 				</div>
 				<div className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>div:not(:last-child)]:mb-[1%]">
 					<h3 className="text-h7 text-gray090 mb-[3.21%]">참여자 리스트 </h3>
-					{participantList?.map((el, i) => {
+					{participantList?.map((el) => {
 						return (
 							<div
 								key={`${el}`}
