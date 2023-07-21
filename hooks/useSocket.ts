@@ -16,7 +16,7 @@ const useSocket = () => {
 	const setPayload = useSetRecoilState(usePayload);
 	const setCount = useSetRecoilState(useCount);
 
-	const subscribe = (socketUrl: string, nickname?: string) => {
+	const subscribe = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string) => {
 		if (client.current) {
 			client.current.subscribe(
 				`/topic/${socketUrl}`,
@@ -38,6 +38,19 @@ const useSocket = () => {
 				},
 				nickname ? { nickname } : undefined,
 			);
+			if (Object.keys(authorization).length === 0 && nickname) {
+				client.current.subscribe(
+					'/user/queue/reply',
+					(response) => {
+						const jsonBody = JSON.parse(response.body);
+						console.log(jsonBody, jsonBody.payload.participant_count);
+
+						setCount(jsonBody.payload.participant_count + 1);
+					},
+					{ nickname },
+				);
+				client.current?.send(`/app/${socketUrl}/get-info`, {});
+			}
 		}
 	};
 
@@ -50,9 +63,9 @@ const useSocket = () => {
 		if (client.current) {
 			client.current.connect(authorization, () => {
 				if (nickname) {
-					subscribe(socketUrl, nickname);
+					subscribe(socketUrl, authorization, nickname);
 				} else {
-					subscribe(socketUrl);
+					subscribe(socketUrl, authorization);
 				}
 			});
 		}
