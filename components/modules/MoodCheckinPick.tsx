@@ -15,7 +15,7 @@ import ElGrid from '../elements/ElGrid';
 
 import ActivityHead from './ActivityHead';
 
-export default function ScreenMoodPick({ handleIsWaiting }: { handleIsWaiting: () => void }) {
+export default function MoodCheckinPick({ handleIsWaiting }: { handleIsWaiting: () => void }) {
 	const navigation = useNavigation();
 	const nickname = useRecoilValue(userNickname);
 

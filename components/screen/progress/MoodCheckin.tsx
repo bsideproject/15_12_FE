@@ -5,8 +5,8 @@ import { useRecoilValue } from 'recoil';
 
 import { usePayload, usePublish } from '@/atoms/socketAtoms';
 import Close from '@/components/modules/Close';
-import MoodPick from '@/components/modules/MoodPick';
-import MoodPickToday from '@/components/modules/MoodPickToday';
+import MoodCheckinPick from '@/components/modules/MoodCheckinPick';
+import MoodCheckinResult from '@/components/modules/MoodCheckinResult';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
 import localStorage from '@/service/localStorage';
@@ -48,8 +48,8 @@ export default function ProgressMoodCheckin() {
 	return (
 		<>
 			{isWaiting && <Wait position={position} handleStep={handleStep} />}
-			{payload?.type === 'WAITING' && <MoodPick handleIsWaiting={handleIsWaiting} />}
-			{payload?.type === 'OPENED_AVERAGE' && <MoodPickToday position={position} handleClose={handleClose} />}
+			{payload?.type === 'WAITING' && <MoodCheckinPick handleIsWaiting={handleIsWaiting} />}
+			{payload?.type === 'OPENED_AVERAGE' && <MoodCheckinResult position={position} handleClose={handleClose} />}
 			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
