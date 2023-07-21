@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { usePayload, usePublish } from '@/atoms/socketAtoms';
 import Close from '@/components/modules/Close';
 import MiniNetworkingList from '@/components/modules/MiniNetworkingList';
+import MiniNetworkingMatching from '@/components/modules/MiniNetworkingMatching';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
 import localStorage from '@/service/localStorage';
@@ -41,17 +42,18 @@ export default function ProgressMiniNetworking() {
 		publish(`/app/mininetworking/${roomName}/close`);
 	};
 
-	const handleGropMatching = () => {
+	const handleGroupMatching = () => {
 		setIsMatching(true);
 	};
 
 	return (
 		<>
 			{isWaiting && position === 'participant' && <Wait position={position} />}
-			{payload?.type === 'OPENED_PARTICIPANT_LIST' && (
+			{isMatching && position === 'organizer' && <MiniNetworkingMatching />}
+			{!isMatching && payload?.type === 'OPENED_PARTICIPANT_LIST' && (
 				<MiniNetworkingList
 					position={position}
-					handleGropMatching={handleGropMatching}
+					handleGroupMatching={handleGroupMatching}
 					participantList={payload?.payload}
 				/>
 			)}
