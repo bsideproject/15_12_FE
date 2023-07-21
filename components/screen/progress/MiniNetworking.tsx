@@ -20,6 +20,7 @@ export default function ProgressMiniNetworking() {
 	const [position, setPosition] = useState<string>('');
 	const [isWaiting, setIsWaiting] = useState<boolean>(true);
 	const [isMatching, setIsMatching] = useState<boolean>(false);
+	const [groupNum, setGroupNum] = useState<number>(0);
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -46,10 +47,17 @@ export default function ProgressMiniNetworking() {
 		setIsMatching(true);
 	};
 
+	// 그룹 구성
+	const onChangeGroupNum = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e) setGroupNum(Number(e.target.value.replace(/[^0-9]/g, '')));
+	};
+
 	return (
 		<>
 			{isWaiting && position === 'participant' && <Wait position={position} />}
-			{isMatching && position === 'organizer' && <MiniNetworkingMatching />}
+			{isMatching && position === 'organizer' && (
+				<MiniNetworkingMatching groupNum={groupNum} onChangeGroupNum={onChangeGroupNum} />
+			)}
 			{!isMatching && payload?.type === 'OPENED_PARTICIPANT_LIST' && (
 				<MiniNetworkingList
 					position={position}
