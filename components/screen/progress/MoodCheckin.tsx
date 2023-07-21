@@ -28,12 +28,6 @@ export default function ProgressMoodCheckin() {
 	const roomName = navigation.path().split('/')[2];
 
 	useEffect(() => {
-		if (position === 'organizer' && publish) {
-			publish(`/app/moodcheckin/${roomName}/start`);
-		}
-	}, [position, publish]);
-
-	useEffect(() => {
 		if (payload?.type === 'WAITING' || payload?.type === 'OPENED_AVERAGE') {
 			setIsWaiting(false);
 		}
@@ -50,8 +44,6 @@ export default function ProgressMoodCheckin() {
 	const handleClose = () => {
 		publish(`/app/moodcheckin/${roomName}/close`);
 	};
-
-	console.log(isWaiting);
 
 	return (
 		<>

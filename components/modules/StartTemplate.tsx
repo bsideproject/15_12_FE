@@ -71,6 +71,7 @@ export default function StartTemplate({ data, activity, roomName, payload }: Sta
 				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			case 'moodcheckin':
+				publish(`/app/${activity}/${roomName}/start`);
 				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			case 'thankcircle':
