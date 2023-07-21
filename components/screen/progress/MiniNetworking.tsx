@@ -7,6 +7,7 @@ import { usePayload, usePublish } from '@/atoms/socketAtoms';
 import Close from '@/components/modules/Close';
 import MiniNetworkingList from '@/components/modules/MiniNetworkingList';
 import MiniNetworkingMatching from '@/components/modules/MiniNetworkingMatching';
+import MiniNetworkingReslut from '@/components/modules/MiniNetworkingReslut';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
 import localStorage from '@/service/localStorage';
@@ -33,10 +34,16 @@ export default function ProgressMiniNetworking() {
 		if (payload?.type === 'OPENED_PARTICIPANT_LIST') {
 			setIsWaiting(false);
 		}
-	}, [payload?.type === 'OPENED_PARTICIPANT_LIST']);
+		if (payload?.type === 'GROUPING') {
+			setIsMatching(false);
+		}
+		if (payload?.type === 'ANSWER_SUBMITTED' && position === 'organizer') {
+			publish(`/app/mininetworking/${roomName}/start`);
+		}
+	}, [payload?.type]);
 
 	const handleStep = () => {
-		publish(`/app/mininetworking/${roomName}/start`);
+		publish(`/app/mininetworking/${roomName}/submit-grouping`, { number: groupNum });
 	};
 
 	const handleClose = () => {
@@ -56,7 +63,7 @@ export default function ProgressMiniNetworking() {
 		<>
 			{isWaiting && position === 'participant' && <Wait position={position} />}
 			{isMatching && position === 'organizer' && (
-				<MiniNetworkingMatching groupNum={groupNum} onChangeGroupNum={onChangeGroupNum} />
+				<MiniNetworkingMatching groupNum={groupNum} onChangeGroupNum={onChangeGroupNum} handleStep={handleStep} />
 			)}
 			{!isMatching && payload?.type === 'OPENED_PARTICIPANT_LIST' && (
 				<MiniNetworkingList
@@ -65,6 +72,7 @@ export default function ProgressMiniNetworking() {
 					participantList={payload?.payload}
 				/>
 			)}
+			{payload?.type === 'GROUPING' && <MiniNetworkingReslut position={position} handleClose={handleClose} />}
 			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
 	);

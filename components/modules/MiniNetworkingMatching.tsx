@@ -15,9 +15,14 @@ import ActivityHead from './ActivityHead';
 interface MiniNetworkingMatchingProps {
 	groupNum: number;
 	onChangeGroupNum: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleStep: () => void;
 }
 
-export default function MiniNetworkingMatching({ groupNum, onChangeGroupNum }: MiniNetworkingMatchingProps) {
+export default function MiniNetworkingMatching({
+	groupNum,
+	onChangeGroupNum,
+	handleStep,
+}: MiniNetworkingMatchingProps) {
 	const count = useRecoilValue(useCount);
 
 	const inputClasses = clsxm(
@@ -57,7 +62,7 @@ export default function MiniNetworkingMatching({ groupNum, onChangeGroupNum }: M
 					)}
 				</div>
 			</div>
-			<ElButton type="button" disabled={groupNum > count - 1}>
+			<ElButton type="button" disabled={groupNum > count - 1} _onClick={handleStep}>
 				그룹 구성하기
 			</ElButton>
 		</ElGrid>
