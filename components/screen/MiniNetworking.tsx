@@ -13,7 +13,7 @@ export default function ScreenMiniNetworking() {
 	return (
 		<ElGrid between bottomSm>
 			<div>
-				<ActivityHead title="감사서클" />
+				<ActivityHead title="미니 네트워킹" />
 				<Logo className="mt-[42.63%] mb-[10.58%] mx-auto" />
 				<h2 className="text-h6 text-gray090 text-center mb-[5.13%]">
 					그룹을 구성하여
