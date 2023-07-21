@@ -48,6 +48,9 @@ export default function ScreenParticipantNickname() {
 			case 'thankcircle':
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
+			case 'mininetworking':
+				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
+				break;
 			default:
 				break;
 		}
