@@ -9,7 +9,7 @@ import getUserSession from '@/service/getUserSession';
 
 import apiKeys from '../apiKeys';
 
-const useMutationMoodCheckin = () => {
+const useMutationMiniNetworking = () => {
 	const navigation = useNavigation();
 
 	const setPublish = useSetRecoilState(usePublish);
@@ -20,21 +20,17 @@ const useMutationMoodCheckin = () => {
 	const connectOrganizer = async (data: AxiosResponse<any, any>) => {
 		const session = await getUserSession();
 
-		connect(
-			`moodcheckin/${data?.data.room_name}`,
-			{ Authorization: `${session?.getAccessToken().getJwtToken()}` },
-			'주최자',
-		);
+		connect(`mininetworking/${data?.data.room_name}`, { Authorization: `${session?.getAccessToken().getJwtToken()}` });
 	};
 
-	const { mutate } = useMutation(apiKeys.createMoodCheckin, {
+	const { mutate } = useMutation(apiKeys.createMiniNetworking, {
 		onSuccess: (data) => {
 			connectOrganizer(data);
 
 			setPublish(() => publish);
 			setDisconnect(() => disconnect);
 
-			navigation.push(`/moodcheckin/start-game/${data?.data.room_name}`);
+			navigation.push(`/mininetworking/start-game/${data?.data.room_name}`);
 		},
 		onError: (error) => {
 			console.log(error);
@@ -44,4 +40,4 @@ const useMutationMoodCheckin = () => {
 	return mutate;
 };
 
-export default useMutationMoodCheckin;
+export default useMutationMiniNetworking;

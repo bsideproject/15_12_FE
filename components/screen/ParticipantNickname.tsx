@@ -3,8 +3,8 @@
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
+import { usePublish, useDisconnect } from '@/atoms/socketAtoms';
 import userNickname from '@/atoms/userNickname';
-import { usePublish, useDisconnect } from '@/atoms/useSocketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
 import localStorage from '@/service/localStorage';
@@ -33,6 +33,11 @@ export default function ScreenParticipantNickname() {
 	const connectHaner = () => {
 		localStorage.set('participant');
 
+		connect(`${roomName[1]}/${roomName[2]}`, {}, nickname);
+
+		setPublish(() => publish);
+		setDisconnect(() => disconnect);
+
 		switch (roomName[1]) {
 			case 'speedgame':
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
@@ -41,11 +46,9 @@ export default function ScreenParticipantNickname() {
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
 			case 'thankcircle':
-				connect(`${roomName[1]}/${roomName[2]}`, {}, nickname);
-
-				setPublish(() => publish);
-				setDisconnect(() => disconnect);
-
+				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
+				break;
+			case 'mininetworking':
 				navigation.push(`${roomName[1]}/${roomName[2]}/progress`);
 				break;
 			default:

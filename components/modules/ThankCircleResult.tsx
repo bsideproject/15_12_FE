@@ -7,9 +7,9 @@ import ResultImg from 'public/images/result-img.svg';
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
 
-import ThankMixing from './ThankMixing';
+import ThankCircleMixing from './ThankCircleMixing';
 
-interface ThankToProps {
+interface ThankCircleResultProps {
 	position: string;
 	handleStep: () => void;
 	handleClose: () => void;
@@ -21,7 +21,14 @@ interface ThankToProps {
 	};
 }
 
-export default function ThankTo({ position, handleStep, handleClose, handleIsMixing, isMixing, thank }: ThankToProps) {
+export default function ThankCircleResult({
+	position,
+	handleStep,
+	handleClose,
+	handleIsMixing,
+	isMixing,
+	thank,
+}: ThankCircleResultProps) {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			handleIsMixing();
@@ -34,7 +41,7 @@ export default function ThankTo({ position, handleStep, handleClose, handleIsMix
 
 	return (
 		<>
-			{isMixing && <ThankMixing />}
+			{isMixing && <ThankCircleMixing />}
 			{!isMixing && (
 				<ElGrid between bottomSm>
 					<div>

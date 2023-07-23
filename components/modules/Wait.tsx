@@ -2,7 +2,7 @@
 
 import { useRecoilValue } from 'recoil';
 
-import { useCount } from '@/atoms/useSocketAtoms';
+import { useCount } from '@/atoms/socketAtoms';
 import clsxm from '@/service/mergeStyle';
 import WaitImg from 'public/images/wait-img.svg';
 

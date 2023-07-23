@@ -2,10 +2,10 @@
 
 import { useRecoilValue } from 'recoil';
 
-import { useCount } from '@/atoms/useSocketAtoms';
+import { useCount } from '@/atoms/socketAtoms';
 import MixingImg from 'public/images/mixing-img.svg';
 
-export default function ThankMixing() {
+export default function ThankCircleMixing() {
 	const count = useRecoilValue(useCount);
 
 	return (

@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { usePayload, usePublish } from '@/atoms/useSocketAtoms';
+import { usePayload, usePublish } from '@/atoms/socketAtoms';
 import Close from '@/components/modules/Close';
-import ThankList from '@/components/modules/ThankList';
-import ThankTo from '@/components/modules/ThankTo';
+import ThankCircleList from '@/components/modules/ThankCircleList';
+import ThankCircleResult from '@/components/modules/ThankCircleResult';
 import Wait from '@/components/modules/Wait';
 import useNavigation from '@/hooks/useNavigation';
 import localStorage from '@/service/localStorage';
@@ -27,12 +27,6 @@ export default function ProgressThankCircle() {
 	}, []);
 
 	const roomName = navigation.path().split('/')[2];
-
-	useEffect(() => {
-		if (position === 'organizer' && publish) {
-			publish(`/app/thankcircle/${roomName}/start`);
-		}
-	}, [position, publish]);
 
 	useEffect(() => {
 		if (payload?.type === 'READY') {
@@ -56,10 +50,10 @@ export default function ProgressThankCircle() {
 		<>
 			{isWaiting && position === 'participant' && <Wait position={position} />}
 			{payload?.type === 'READY' && (
-				<ThankList position={position} handleStep={handleStep} nicknameList={payload?.payload.nickname_list} />
+				<ThankCircleList position={position} handleStep={handleStep} nicknameList={payload?.payload.nickname_list} />
 			)}
 			{payload?.type === 'GUIDE_THANKS_TO' && (
-				<ThankTo
+				<ThankCircleResult
 					position={position}
 					handleStep={handleStep}
 					handleClose={handleClose}

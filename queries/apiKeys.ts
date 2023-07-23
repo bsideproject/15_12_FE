@@ -11,7 +11,14 @@ const apiKeys = {
 		return response;
 	},
 	createMoodCheckin: () => apiClient.post('/activity/moodcheckin'),
-	getMoodCheckin: (room: string) => apiClient.get(`/activity/moodcheckin/${room}`),
+	getMoodCheckin: async (room: string) => {
+		const response = await apiClient
+			.get(`/activity/moodcheckin/${room}`)
+			.then((res) => res.data)
+			.catch((err) => err.response.data);
+
+		return response;
+	},
 	createThankCircle: () => apiClient.post('/activity/thankcircle'),
 	getThankCircle: async (room: string) => {
 		const response = await apiClient
@@ -23,6 +30,15 @@ const apiKeys = {
 	},
 	createSpeedGame: (questions: QuestionProps[]) => apiClient.post('/activity/speedgame', { questions }),
 	getSpeedGame: (room: string) => apiClient.get(`/activity/speedgame/${room}`),
+	createMiniNetworking: () => apiClient.post('/activity/mininetworking'),
+	getMiniNetworking: async (room: string) => {
+		const response = await apiClient
+			.get(`/activity/mininetworking/${room}`)
+			.then((res) => res.data)
+			.catch((err) => err.response.data);
+
+		return response;
+	},
 };
 
 export default apiKeys;

@@ -5,13 +5,13 @@ import ElGrid from '../elements/ElGrid';
 
 import ActivityHead from './ActivityHead';
 
-interface ThankListProps {
+interface ThankCircleListProps {
 	position: string;
 	handleStep: () => void;
 	nicknameList: string[];
 }
 
-export default function ThankList({ position, handleStep, nicknameList }: ThankListProps) {
+export default function ThankCircleList({ position, handleStep, nicknameList }: ThankCircleListProps) {
 	return (
 		<ElGrid between pxNone bottomSm>
 			<div>
