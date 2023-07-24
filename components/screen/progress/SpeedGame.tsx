@@ -37,15 +37,11 @@ export default function ProgressSpeedGame() {
 		publish(`/app/speedgame/${roomName}/start`);
 	};
 
-	const handleClose = () => {
-		publish(`/app/speedgame/${roomName}/close`);
-	};
-
 	return (
 		<>
 			{isWaiting && position === 'participant' && <Wait position={position} />}
 			{payload?.type === 'OPENED_QUESTION' && (
-				<SpeedOpenQuestion position={position} question={payload?.payload} handleStep={handleStep} />
+				<SpeedOpenQuestion position={position} question={payload?.payload} handleStep={handleStep} publish={publish} />
 			)}
 			{payload?.type === 'OPENED_ANSWER' && (
 				<SpeedOpenAnswer position={position} answer={payload?.payload} handleStep={handleStep} />
