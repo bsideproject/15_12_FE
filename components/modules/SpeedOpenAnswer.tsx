@@ -10,14 +10,13 @@ import ElGrid from '../elements/ElGrid';
 interface SpeedOpenAnswerProps {
 	position: string;
 	handleStep: (value: string) => void;
+	answer: {
+		answer_text: string;
+		correct_user_list: string[];
+	};
 }
 
-export default function SpeedOpenAnswer({ position, handleStep }: SpeedOpenAnswerProps) {
-	const answer = {
-		answer_text: '대답 1 테스트',
-		correct_user_list: ['닉네임1', '닉네임2', '닉네임3'],
-	};
-
+export default function SpeedOpenAnswer({ position, handleStep, answer }: SpeedOpenAnswerProps) {
 	const titleClasses = clsxm('text-gray090', 'text-h3', 'mb-[1.11%]');
 
 	return (
@@ -40,7 +39,7 @@ export default function SpeedOpenAnswer({ position, handleStep }: SpeedOpenAnswe
 				})}
 			</div>
 			{position === 'organizer' && (
-				<ElButton type="button" _onClick={() => handleStep('OPENED_QUESTION')}>
+				<ElButton type="button" _onClick={() => handleStep}>
 					다음 문제로
 				</ElButton>
 			)}

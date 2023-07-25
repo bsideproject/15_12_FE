@@ -60,6 +60,7 @@ export default function ActivityList({ data, user }: ActivityListProps) {
 							<div className="py-[10.96%] px-[13.70%] bg-gray000">
 								<h3 className="text-h7 text-gray090 mb-[7.55%]">{activity.display_name}</h3>
 								<p className="text-p3 text-gray070">{activity.description}</p>
+								<p className="text-c text-gray030 mt-[1.11%]">추천 인원 00명</p>
 							</div>
 						</button>
 					</li>

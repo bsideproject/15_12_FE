@@ -103,8 +103,15 @@ export default function Sidebar({ isSidebar, handleToggleSide, userInfo, handleU
 					<span className={`${copylightClasses} text-c`}>Copyright ©2023 얼음땡 Inc.</span>
 					<span className={`${copylightClasses} text-c`}>All rights reserved.</span>
 					<div className="mt-[5.8%]">
-						<button className={`${navButtonClasses} text-c`}>개인정보처리방침</button>
-						<button className={`${navButtonClasses} text-c ml-[8px]`}>이용약관</button>
+						<button className={`${navButtonClasses} text-c`} onClick={() => navigation.push('/policy?tab=privacy')}>
+							개인정보처리방침
+						</button>
+						<button
+							className={`${navButtonClasses} text-c ml-[8px]`}
+							onClick={() => navigation.push('/policy?tab=service')}
+						>
+							이용약관
+						</button>
 						{userInfo.email && (
 							<button className={`${navButtonClasses} text-c ml-[8px]`} onClick={deleteUser}>
 								회원탈퇴
