@@ -47,7 +47,7 @@ export default function ProgressMiniNetworking() {
 	};
 
 	const handleClose = () => {
-		publish(`/app/mininetworking/${roomName}/close`);
+		publish(`/app/mininetworking/${roomName}/start`);
 	};
 
 	const handleGroupMatching = () => {

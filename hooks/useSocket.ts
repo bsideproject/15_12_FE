@@ -38,7 +38,7 @@ const useSocket = () => {
 				},
 				nickname ? { nickname } : undefined,
 			);
-			if (Object.keys(authorization).length === 0 && nickname) {
+			if ((Object.keys(authorization).length === 0 || socketUrl.includes('moodcheckin')) && nickname) {
 				client.current.subscribe(
 					'/user/queue/reply',
 					(response) => {
@@ -57,7 +57,7 @@ const useSocket = () => {
 	// ${process.env.NEXT_PUBLIC_API_SOCKET_URL}
 	const connect = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string) => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
+			const sock = new SockJS(`/ws`);
 			return sock;
 		});
 		if (client.current) {
