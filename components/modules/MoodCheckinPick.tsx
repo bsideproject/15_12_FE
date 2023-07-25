@@ -1,13 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import React from 'react';
 
-import userNickname from '@/atoms/userNickname';
 import moodCheckinArr from '@/constants/moodCheckinArr';
-import useNavigation from '@/hooks/useNavigation';
-import useSingleSocket from '@/hooks/useSingleSocket';
-import getUserSession from '@/service/getUserSession';
 import Logo from 'public/images/activity-logo.svg';
 
 import ElButton from '../elements/ElButton';
@@ -15,43 +10,13 @@ import ElGrid from '../elements/ElGrid';
 
 import ActivityHead from './ActivityHead';
 
-export default function MoodCheckinPick({ handleIsWaiting }: { handleIsWaiting: () => void }) {
-	const navigation = useNavigation();
-	const nickname = useRecoilValue(userNickname);
+interface MoodCheckinPickProps {
+	onChangePickMood: (value: number) => void;
+	onSendPickMood: () => void;
+	moodNum: number;
+}
 
-	const [moodNum, setMoodNum] = useState<number>(0);
-
-	const onChangMood = (value: number) => {
-		setMoodNum(value);
-	};
-
-	const { connect, publish } = useSingleSocket();
-
-	const roomName = navigation.path().split('/');
-
-	const connectMoodPick = async () => {
-		const session = await getUserSession();
-
-		connect(
-			'/user/queue/reply',
-			session ? { Authorization: `${session?.getAccessToken().getJwtToken()}` } : {},
-			session ? '주최자' : nickname,
-		);
-	};
-
-	useEffect(() => {
-		connectMoodPick();
-	}, []);
-
-	const onSend = () => {
-		if (moodNum === 0) {
-			alert('선택해 주세요.');
-			return;
-		}
-		publish(`/app/moodcheckin/${roomName[2]}/submit-mood`, { mood: moodNum });
-		handleIsWaiting();
-	};
-
+export default function MoodCheckinPick({ onChangePickMood, onSendPickMood, moodNum }: MoodCheckinPickProps) {
 	return (
 		<ElGrid between pxNone bottomSm>
 			<div className="mb-[8.89%]">
@@ -66,7 +31,7 @@ export default function MoodCheckinPick({ handleIsWaiting }: { handleIsWaiting: 
 							<li key={`${el.key}`}>
 								<button
 									type="button"
-									onClick={() => onChangMood(i + 1)}
+									onClick={() => onChangePickMood(i + 1)}
 									className={`border border-gray020 rounded px-[5.84%] py-[2.92%] w-full flex items-center ${
 										moodNum === i + 1 ? '!border-blue050 text-h7 text-blue050' : 'border-gray020 text-p2 text-gray020'
 									}`}
@@ -88,7 +53,7 @@ export default function MoodCheckinPick({ handleIsWaiting }: { handleIsWaiting: 
 				</ul>
 			</div>
 			<div className="px-[6.67%]">
-				<ElButton type="button" _onClick={onSend}>
+				<ElButton type="button" _onClick={onSendPickMood}>
 					제출하기
 				</ElButton>
 			</div>

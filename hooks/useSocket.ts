@@ -45,10 +45,12 @@ const useSocket = () => {
 					'/user/queue/reply',
 					(response) => {
 						const jsonBody = JSON.parse(response.body);
-						console.log(jsonBody, jsonBody.payload.participant_count);
+						if (jsonBody.type !== 'ANSWER_SUBMITTED') {
+							console.log(jsonBody);
 
-						setResult(jsonBody.payload);
-						setCount(jsonBody.payload.participant_count + 1);
+							setResult(jsonBody.payload);
+							setCount(jsonBody.payload.participant_count + 1);
+						}
 					},
 					{ nickname },
 				);

@@ -19,6 +19,7 @@ export default function ProgressMoodCheckin() {
 
 	const [position, setPosition] = useState<string>('');
 	const [isWaiting, setIsWaiting] = useState<boolean>(true);
+	const [moodNum, setMoodNum] = useState<number>(0);
 
 	useEffect(() => {
 		const userPosition = localStorage.get()!;
@@ -28,14 +29,10 @@ export default function ProgressMoodCheckin() {
 	const roomName = navigation.path().split('/')[2];
 
 	useEffect(() => {
-		if (payload?.type === 'WAITING' || payload?.type === 'OPENED_AVERAGE') {
+		if (payload.type === 'WAITING' || payload?.type === 'OPENED_AVERAGE') {
 			setIsWaiting(false);
 		}
-	}, [payload?.type]);
-
-	const handleIsWaiting = () => {
-		setIsWaiting(true);
-	};
+	}, [payload.type]);
 
 	const handleStep = () => {
 		publish(`/app/moodcheckin/${roomName}/start`);
@@ -45,10 +42,26 @@ export default function ProgressMoodCheckin() {
 		publish(`/app/moodcheckin/${roomName}/close`);
 	};
 
+	// 기분 체크
+	const onChangePickMood = (value: number) => {
+		setMoodNum(value);
+	};
+
+	const onSendPickMood = () => {
+		if (moodNum === 0) {
+			alert('선택해 주세요.');
+			return;
+		}
+		publish(`/app/moodcheckin/${roomName}/submit-mood`, { mood: moodNum });
+		setIsWaiting(true);
+	};
+
 	return (
 		<>
 			{isWaiting && <Wait position={position} handleStep={handleStep} />}
-			{!isWaiting && payload?.type === 'WAITING' && <MoodCheckinPick handleIsWaiting={handleIsWaiting} />}
+			{!isWaiting && (payload?.type === 'WAITING' || payload?.type === '임시타입') && (
+				<MoodCheckinPick onChangePickMood={onChangePickMood} onSendPickMood={onSendPickMood} moodNum={moodNum} />
+			)}
 			{!isWaiting && payload?.type === 'OPENED_AVERAGE' && (
 				<MoodCheckinResult position={position} handleClose={handleClose} />
 			)}
