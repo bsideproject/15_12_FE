@@ -68,6 +68,7 @@ export default function StartTemplate({ data, activity, roomName, payload }: Sta
 
 		switch (activity) {
 			case 'speedgame':
+				publish(`/app/${activity}/${roomName}/start`);
 				navigation.push(`${activity}/${roomName}/progress`);
 				break;
 			case 'moodcheckin':
