@@ -72,7 +72,9 @@ export default function ProgressMiniNetworking() {
 					participantList={payload?.payload}
 				/>
 			)}
-			{payload?.type === 'GROUPING' && <MiniNetworkingResult position={position} handleClose={handleClose} />}
+			{payload?.type === 'GROUPING' && (
+				<MiniNetworkingResult position={position} groupNum={groupNum} handleClose={handleClose} />
+			)}
 			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
 	);

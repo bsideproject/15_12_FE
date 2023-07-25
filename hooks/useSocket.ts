@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
-import { useCount, usePayload } from '@/atoms/socketAtoms';
+import { useCount, usePayload, useResult } from '@/atoms/socketAtoms';
 
 interface ConnectAuthorizationType {
 	[key: string]: string;
@@ -13,8 +13,10 @@ interface ConnectAuthorizationType {
 
 const useSocket = () => {
 	const client = useRef<CompatClient>();
+
 	const setPayload = useSetRecoilState(usePayload);
 	const setCount = useSetRecoilState(useCount);
+	const setResult = useSetRecoilState(useResult);
 
 	const subscribe = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string) => {
 		if (client.current) {
@@ -45,6 +47,7 @@ const useSocket = () => {
 						const jsonBody = JSON.parse(response.body);
 						console.log(jsonBody, jsonBody.payload.participant_count);
 
+						setResult(jsonBody.payload);
 						setCount(jsonBody.payload.participant_count + 1);
 					},
 					{ nickname },
