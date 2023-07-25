@@ -47,7 +47,7 @@ export default function ProgressMiniNetworking() {
 	};
 
 	const handleClose = () => {
-		publish(`/app/mininetworking/${roomName}/close`);
+		publish(`/app/mininetworking/${roomName}/start`);
 	};
 
 	const handleGroupMatching = () => {
@@ -72,7 +72,9 @@ export default function ProgressMiniNetworking() {
 					participantList={payload?.payload}
 				/>
 			)}
-			{payload?.type === 'GROUPING' && <MiniNetworkingResult position={position} handleClose={handleClose} />}
+			{payload?.type === 'GROUPING' && (
+				<MiniNetworkingResult position={position} groupNum={groupNum} handleClose={handleClose} />
+			)}
 			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
 	);
