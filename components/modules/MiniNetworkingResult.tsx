@@ -19,15 +19,15 @@ export default function MiniNetworkingResult({ position, groupNum, handleClose }
 
 	return (
 		<ElGrid between bottomSm>
-			<div>
-				<Logo className="mt-[32.05%] mb-[27.88%] mx-auto" />
+			<div className="text-center">
+				<Logo className="mt-[43.59%] mb-[7.69%] mx-auto rotate-45" />
 				{position === 'organizer' ? (
 					<>
-						<h2>{groupNum} 그룹 구성 완료!</h2>
-						<span>참여자 화면을 확인해주세요.</span>
+						<h2 className="text-h3 text-gray090">{groupNum} 그룹 구성 완료!</h2>
+						<span className="text-p2 text-gray070">참여자 화면을 확인해주세요.</span>
 					</>
 				) : (
-					<h2>
+					<h2 className="text-h3 text-gray090">
 						{result?.nickname}님은
 						<br />
 						{result?.group} 그룹입니다
