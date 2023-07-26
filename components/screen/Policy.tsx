@@ -1,9 +1,7 @@
 'use client';
 
-import { useParams, useSearchParams } from 'next/navigation';
-import { useRef, useState } from 'react';
-import { Navigation } from 'swiper';
-import { SwiperRef } from 'swiper/react';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 import policyArr from '@/constants/policyArr';
 import useNavigation from '@/hooks/useNavigation';
@@ -14,12 +12,12 @@ import ElGrid from '../elements/ElGrid';
 export default function ScreenOnBoarding() {
 	const navigation = useNavigation();
 	const searchParams = useSearchParams();
-	const tab = searchParams.get('tab')!;
+	const tab = searchParams.get('tab');
 
-	const [selectTab, setSelectTab] = useState<string>(tab);
+	const [selectTab, setSelectTab] = useState<string>(tab || 'privacy'); // tab이 없으면, privacy이 기본값
 
 	return (
-		<ElGrid pxNone>
+		<ElGrid pxNone bottomSm>
 			<div className="flex items-center mb-[1.39%] px-[6.67%] py-[3.33%]">
 				<button type="button" onClick={() => navigation.back()}>
 					<Back />
@@ -30,7 +28,10 @@ export default function ScreenOnBoarding() {
 					className={`w-[50%] px-[3.33%] py-[4.44%] text-p2 border-b-2 ${
 						selectTab === 'privacy' ? 'border-b-blue050' : 'border-b-gray020'
 					}`}
-					onClick={() => setSelectTab('privacy')}
+					onClick={() => {
+						setSelectTab('privacy');
+						navigation.push('/policy?tab=privacy');
+					}}
 				>
 					개인정보 처리방침
 				</button>
@@ -38,12 +39,15 @@ export default function ScreenOnBoarding() {
 					className={`w-[50%] px-[3.33%] py-[4.44%] text-p2 border-b-2 ${
 						selectTab === 'service' ? 'border-b-blue050' : 'border-b-gray020'
 					}`}
-					onClick={() => setSelectTab('service')}
+					onClick={() => {
+						setSelectTab('service');
+						navigation.push('/policy?tab=service');
+					}}
 				>
 					이용약관
 				</button>
 			</div>
-			<div className="p-[4.44%]">
+			<div className="p-[4.44%] overflow-y-auto">
 				{policyArr(selectTab)?.map((item) => {
 					return (
 						<div

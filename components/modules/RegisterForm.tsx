@@ -201,25 +201,28 @@ export default function RegisterForm() {
 					check={checkList.includes(0)}
 					title="만 14세 이상입니다"
 					span="(필수)"
+					policy=""
 				/>
 				<CheckBox
 					onChange={() => handleListCheck(1)}
 					check={checkList.includes(1)}
 					title="이용약관 동의"
 					span="(필수)"
+					policy="/policy?tab=service"
 				/>
 				<CheckBox
 					onChange={() => handleListCheck(2)}
 					check={checkList.includes(2)}
 					title="개인정보 수집·이용 동의"
 					span="(필수)"
+					policy="/policy?tab=privacy"
 				/>
-				<CheckBox
+				{/* <CheckBox
 					onChange={() => handleListCheck(3)}
 					check={checkList.includes(3)}
 					title="혜택/정보 수신 동의"
 					span="(선택)"
-				/>
+				/> */}
 			</div>
 			<ElButton
 				type="submit"

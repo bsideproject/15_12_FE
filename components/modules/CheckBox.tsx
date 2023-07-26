@@ -2,21 +2,26 @@
 
 import React from 'react';
 
+import useNavigation from '@/hooks/useNavigation';
 import clsxm from '@/service/mergeStyle';
 
 interface CheckBoxProps {
 	title: string;
-	span?: string;
 	check: number | boolean;
 	onChange: (check: boolean) => void;
+	span?: string;
+	policy?: string;
 }
 
-export default function CheckBox({ title, span, check, onChange }: CheckBoxProps) {
+export default function CheckBox({ title, check, onChange, span, policy }: CheckBoxProps) {
+	const navigation = useNavigation();
+
 	const checkClasses = clsxm(
 		"appearance-none border border-blue030 rounded-full bg-transparent w-4 h-4 checked:border-green050 checked:bg-[url('/images/check-green-icon.svg')] checked:bg-center checked:bg-no-repeat",
 	);
+
 	return (
-		<div className="flex justify-between items-center">
+		<div className="flex items-center justify-between">
 			<label htmlFor={title}>
 				<div className="flex items-center select-none">
 					<input
@@ -37,8 +42,8 @@ export default function CheckBox({ title, span, check, onChange }: CheckBoxProps
 					</p>
 				)}
 			</label>
-			{span && (
-				<button type="button" className="text-p3 text-gray070">
+			{policy && (
+				<button type="button" className="text-p3 text-gray070" onClick={() => navigation.push(`${policy}`)}>
 					약관보기
 				</button>
 			)}
