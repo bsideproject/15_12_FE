@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 
-import apiClient from '@/core';
-import useNavigation from '@/hooks/useNavigation';
+// import apiClient from '@/core';
+// import useNavigation from '@/hooks/useNavigation';
 import useNotify from '@/hooks/useNotify';
+import useMutationSpeedGame from '@/queries/mutationFn/useMutationSpeedGame';
 import clsxm from '@/service/mergeStyle';
 import SpeedGameIcon from 'public/images/activity01-sm-icon.svg';
 import AddIcon from 'public/images/add-icon.svg';
@@ -60,8 +61,8 @@ export default function ScreenSpeedGame() {
 	let copyQuestion = [...defaultQuestion];
 
 	const [questions, setQuestions] = useState<QuestionProps[]>(copyQuestion);
-	const navigation = useNavigation();
-	// const createRoom = useQuerySpeedGameCreate(questions);
+	// const navigation = useNavigation();
+	const createRoom = useMutationSpeedGame(questions);
 
 	const newQuestion = (inx: number) => {
 		return {
@@ -132,18 +133,18 @@ export default function ScreenSpeedGame() {
 					margin="mr-[3.89%]"
 					flex="flex-1"
 					width="w-auto"
-					_onClick={async () => {
-						await apiClient
-							.post(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame`, { questions })
-							.then((res) => {
-								const roomCode = res.data.room_code;
-								navigation.push(`/speedgame/start-game/room?room=${roomCode}`);
-							})
-							.catch((err) => {
-								console.log('err..', err);
-							});
-					}}
-					// _onClick={() => createRoom}
+					// _onClick={async () => {
+					// 	await apiClient
+					// 		.post(`${process.env.NEXT_PUBLIC_API_URL}/activity/speedgame`, { questions })
+					// 		.then((res) => {
+					// 			const roomCode = res.data.room_code;
+					// 			navigation.push(`/speedgame/start-game/room?room=${roomCode}`);
+					// 		})
+					// 		.catch((err) => {
+					// 			console.log('err..', err);
+					// 		});
+					// }}
+					_onClick={() => createRoom}
 				>
 					만들기
 				</ElButton>

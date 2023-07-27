@@ -1,31 +1,15 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import StartTemplate from '@/components/modules/StartTemplate';
 import useNavigation from '@/hooks/useNavigation';
-import useSocketHyo from '@/hooks/useSocketHyo';
-import useQuerySpeedGameGet from '@/queries/queryFn/useQuerySpeedGameGet';
-import getUserSession from '@/service/getUserSession';
+import useQuerySpeedGame from '@/queries/queryFn/useQuerySpeedGame';
 
 export default function StartSpeedGame() {
 	const navigation = useNavigation();
 
-	const activity = navigation.path().split('/')[1];
-	const room = navigation.params('room')!;
+	const room = navigation.path().split('/');
 
-	const { data } = useQuerySpeedGameGet(activity, room);
+	const { data } = useQuerySpeedGame(room[1], room[3]);
 
-	const { connect, payload } = useSocketHyo(`/topic/speedgame/${data?.room_name}/user-count`);
-
-	const userToken = async () => {
-		const session = await getUserSession();
-		connect({ Authorization: `${session?.getAccessToken().getJwtToken()}` });
-	};
-
-	useEffect(() => {
-		userToken();
-	}, [data]);
-
-	return <StartTemplate data={data} activity={activity} roomName={room} payload={payload} />;
+	return <StartTemplate data={data} activity={room[1]} roomName={room[3]} />;
 }
