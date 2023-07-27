@@ -1,6 +1,6 @@
 'use client';
 
-import Logo from 'public/images/activity-logo.svg';
+import MiniImage from 'public/images/mini-img.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -23,9 +23,9 @@ export default function MiniNetworkingList({
 			<div>
 				<div className="px-[6.67%]">
 					<ActivityHead title="미니 네트워킹" />
-					<Logo className="mt-[32.05%] mb-[27.88%] mx-auto" />
 				</div>
-				<div className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>div:not(:last-child)]:mb-[1%]">
+				<MiniImage className="mt-[3.89%]" />
+				<div className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>div:not(:last-child)]:mb-[2%]">
 					<h3 className="text-h7 text-gray090 mb-[3.21%]">참여자 리스트 </h3>
 					{participantList?.map((el) => {
 						return (

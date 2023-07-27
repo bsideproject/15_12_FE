@@ -5,7 +5,6 @@ import { useRecoilValue } from 'recoil';
 
 import { useCount } from '@/atoms/socketAtoms';
 import clsxm from '@/service/mergeStyle';
-import Logo from 'public/images/activity-logo.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -39,12 +38,11 @@ export default function MiniNetworkingMatching({
 		<ElGrid between bottomSm>
 			<div>
 				<ActivityHead title="미니 네트워킹" />
-				<p className="text-p2 text-gray070 mt-[4.49%] mb-[25%]">
+				<p className="text-p2 text-gray070 mt-[4.49%] mb-[40.38%]">
 					총 {count - 1}명이 참여합니다.
 					<br />몇 그룹으로 구성할까요?
 				</p>
 				<div>
-					<Logo className="mb-[5.13%] mx-auto" />
 					<div className="flex justify-between items-center w-[57.69%] mx-auto">
 						<input
 							className={`${inputClasses} ${
