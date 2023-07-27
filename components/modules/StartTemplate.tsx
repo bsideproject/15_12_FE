@@ -52,7 +52,7 @@ export default function StartTemplate({ data, activity, roomName, payload }: Sta
 		'border-gray020',
 		'w-[83.97%]',
 		'mx-auto',
-		'mb-[24.04%]',
+		'mb-[16.03%]',
 		'bg-white',
 		'rounded',
 		'px-[11.70%]',
