@@ -3,7 +3,7 @@
 import React from 'react';
 
 import moodCheckinArr from '@/constants/moodCheckinArr';
-import Logo from 'public/images/activity-logo.svg';
+import MoodImage from 'public/images/mood-img.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -22,13 +22,13 @@ export default function MoodCheckinPick({ onChangePickMood, onSendPickMood, mood
 			<div className="mb-[8.89%]">
 				<div className="px-[6.67%]">
 					<ActivityHead title="기분 체크인" />
-					<p className="text-p2 text-gray070 mt-[4.49%] mb-[13.46%]">오늘의 기분을 말해주세요</p>
-					<Logo className="mx-auto mb-[9.72%]" />
 				</div>
-				<ul className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>li:not(:last-child)]:mb-[1%]">
+				<MoodImage className="mt-[3.89%]" />
+				<div className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>div:not(:last-child)]:mb-[2%]">
+					<h3 className="text-h7 text-gray090 mb-[3.21%]">오늘의 기분을 말해주세요</h3>
 					{moodCheckinArr.map((el, i) => {
 						return (
-							<li key={`${el.key}`}>
+							<div key={`${el.key}`}>
 								<button
 									type="button"
 									onClick={() => onChangePickMood(i + 1)}
@@ -47,10 +47,10 @@ export default function MoodCheckinPick({ onChangePickMood, onSendPickMood, mood
 									</div>
 									{`${i + 1}점`}
 								</button>
-							</li>
+							</div>
 						);
 					})}
-				</ul>
+				</div>
 			</div>
 			<div className="px-[6.67%]">
 				<ElButton type="button" _onClick={onSendPickMood}>

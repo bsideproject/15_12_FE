@@ -38,6 +38,10 @@ export default function ProgressMoodCheckin() {
 		publish(`/app/moodcheckin/${roomName}/start`);
 	};
 
+	const handleRandom = () => {
+		publish(`/app/moodcheckin/${roomName}/random`);
+	};
+
 	const handleClose = () => {
 		publish(`/app/moodcheckin/${roomName}/close`);
 	};

@@ -48,7 +48,7 @@ const useSocket = () => {
 						console.log(jsonBody);
 						if (jsonBody.type !== 'ANSWER_SUBMITTED') {
 							setResult(jsonBody.payload);
-							setCount(jsonBody.payload.participant_count + 1);
+							setCount(jsonBody.payload.participant_count);
 						}
 					},
 					{ nickname },

@@ -2,7 +2,7 @@
 
 import { useRecoilValue } from 'recoil';
 
-import { useCount } from '@/atoms/socketAtoms';
+import { useCount, usePayload } from '@/atoms/socketAtoms';
 import clsxm from '@/service/mergeStyle';
 import WaitImg from 'public/images/wait-img.svg';
 
@@ -16,6 +16,7 @@ interface WaitProps {
 
 export default function Wait({ position, handleStep }: WaitProps) {
 	const count = useRecoilValue(useCount);
+	const payload = useRecoilValue(usePayload);
 
 	const textClasses = clsxm('text-p2');
 
@@ -29,7 +30,7 @@ export default function Wait({ position, handleStep }: WaitProps) {
 					기다리고 있어요.
 				</h3>
 				<p className={`${textClasses} text-gray070 mb-[20.51%]`}>참여자 {count}명</p>
-				{position === 'organizer' && <p className={`${textClasses} text-gray070`}>제출자 명</p>}
+				{position === 'organizer' && <p className={`${textClasses} text-gray070`}>제출자 {payload?.payload}명</p>}
 			</div>
 			{position === 'organizer' && (
 				<ElButton type="button" _onClick={handleStep}>
