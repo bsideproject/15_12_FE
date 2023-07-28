@@ -1,7 +1,7 @@
 'use client';
 
 import useMutationMiniNetworking from '@/queries/mutationFn/useMutationMiniNetworking';
-import Logo from 'public/images/activity-logo.svg';
+import Logo from 'public/images/mini-logo.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -16,7 +16,7 @@ export default function ScreenMiniNetworking() {
 				<ActivityHead title="미니 네트워킹" />
 			</div>
 			<div>
-				<Logo className="mb-[10.58%] mx-auto" />
+				<Logo className="mb-[12.82%] mx-auto" />
 				<h2 className="text-h6 text-gray090 text-center mb-[5.13%]">
 					그룹을 구성하여
 					<br />

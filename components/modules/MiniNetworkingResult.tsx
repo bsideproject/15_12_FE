@@ -3,7 +3,7 @@
 import { useRecoilValue } from 'recoil';
 
 import { useResult } from '@/atoms/socketAtoms';
-import Logo from 'public/images/activity-logo.svg';
+import Logo from 'public/images/mini-logo.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -19,13 +19,13 @@ export default function MiniNetworkingResult({ position, groupNum, handleClose }
 
 	return (
 		<ElGrid between bottomSm>
-			<div className="text-center">
-				<Logo className="mt-[43.59%] mb-[7.69%] mx-auto rotate-45" />
+			<div className="text-center h-full flex justify-center items-center">
 				{position === 'organizer' ? (
-					<>
+					<div>
+						<Logo className="mx-auto mb-[12.82%]" />
 						<h2 className="text-h3 text-gray090">{groupNum} 그룹 구성 완료!</h2>
 						<span className="text-p2 text-gray070">참여자 화면을 확인해주세요.</span>
-					</>
+					</div>
 				) : (
 					<h2 className="text-h3 text-gray090">
 						{result?.nickname}님은
