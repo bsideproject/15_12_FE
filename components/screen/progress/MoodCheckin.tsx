@@ -66,8 +66,8 @@ export default function ProgressMoodCheckin() {
 			{!isWaiting && (payload?.type === 'WAITING' || payload?.type === '임시타입') && (
 				<MoodCheckinPick onChangePickMood={onChangePickMood} onSendPickMood={onSendPickMood} moodNum={moodNum} />
 			)}
-			{!isWaiting && payload?.type === 'OPENED_AVERAGE' && (
-				<MoodCheckinResult position={position} handleClose={handleClose} />
+			{!isWaiting && (payload?.type === 'OPENED_AVERAGE' || payload?.type === 'OPENED_RANDOM') && (
+				<MoodCheckinResult position={position} handleRandom={handleRandom} handleClose={handleClose} />
 			)}
 			{payload?.type === 'CLOSED_ROOM' && <Close />}
 		</>
