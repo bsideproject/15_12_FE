@@ -9,7 +9,7 @@ import ElGrid from '../elements/ElGrid';
 
 interface SpeedOpenAnswerProps {
 	position: string;
-	handleStep: (value: string) => void;
+	handleStep: () => void;
 	answer: {
 		answer_text: string;
 		correct_user_list: string[];
@@ -39,7 +39,7 @@ export default function SpeedOpenAnswer({ position, handleStep, answer }: SpeedO
 				})}
 			</div>
 			{position === 'organizer' && (
-				<ElButton type="button" _onClick={() => handleStep}>
+				<ElButton type="button" _onClick={handleStep}>
 					다음 문제로
 				</ElButton>
 			)}

@@ -5,7 +5,7 @@ import queryKeys from '../queryKeys';
 
 const useQuerySpeedGame = (activity: string, room: string) => {
 	return useQuery(queryKeys.speedGame(room), () => apiKeys.getSpeedGame(room), {
-		enabled: activity === 'speedGame',
+		enabled: activity === 'speedgame',
 	});
 };
 

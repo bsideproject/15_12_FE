@@ -24,7 +24,7 @@ export default function ElQrImage({ src }: ELQrImageProps) {
 
 	return (
 		<div className={hiddenClasses}>
-			<Image src={src} alt="큐알_코드" className={imageClasses} priority width={150} height={150} />
+			{src && <Image src={src} alt="큐알_코드" className={imageClasses} priority width={150} height={150} />}
 		</div>
 	);
 }
