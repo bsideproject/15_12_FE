@@ -2,6 +2,7 @@
 
 import ACTIVITY_FIGCAPTION from '@/constants/activityFigcaption';
 import useNavigation from '@/hooks/useNavigation';
+import Users from '@/public/images/users-icon.svg';
 import clsxm from '@/service/mergeStyle';
 
 interface ActivityListProps {
@@ -9,6 +10,7 @@ interface ActivityListProps {
 		activity_id: number;
 		display_name: string;
 		description: string;
+		number_of_person: number;
 	}[];
 	user: string | boolean;
 }
@@ -57,10 +59,15 @@ export default function ActivityList({ data, user }: ActivityListProps) {
 							>
 								{ACTIVITY_FIGCAPTION[activity.display_name]?.icon}
 							</div>
-							<div className="py-[10.96%] px-[13.70%] bg-gray000">
+							<div className="flex flex-col items-center p-[10%] bg-gray000">
 								<h3 className="text-h7 text-gray090 mb-[7.55%]">{activity.display_name}</h3>
-								<p className="text-p3 text-gray070">{activity.description}</p>
-								<p className="text-c text-gray030 mt-[1.11%]">추천 인원 00명</p>
+								<p className="text-p3 text-gray070 mb-[1.11%] break-keep">{activity.description}</p>
+								<p className="text-c text-blueGray050">
+									<span className="mr-[5px]">
+										<Users className="inline-block" />
+									</span>
+									{activity.number_of_person === -1 ? '인원제한없음' : `추천 인원 ${activity.number_of_person}명`}
+								</p>
 							</div>
 						</button>
 					</li>

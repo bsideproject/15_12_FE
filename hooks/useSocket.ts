@@ -61,7 +61,7 @@ const useSocket = () => {
 	// ${process.env.NEXT_PUBLIC_API_SOCKET_URL}
 	const connect = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string) => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`/ws`);
+			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
 			return sock;
 		});
 		if (client.current) {
