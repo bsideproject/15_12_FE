@@ -3,14 +3,13 @@ import { AxiosResponse } from 'axios';
 import { useSetRecoilState } from 'recoil';
 
 import { useDisconnect, usePublish } from '@/atoms/socketAtoms';
-import { QuestionProps } from '@/components/screen/SpeedGame';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
 import getUserSession from '@/service/getUserSession';
 
 import apiKeys from '../apiKeys';
 
-const useMutationSpeedGame = (questions: QuestionProps[]) => {
+const useMutationSpeedGame = () => {
 	const navigation = useNavigation();
 
 	const setPublish = useSetRecoilState(usePublish);
