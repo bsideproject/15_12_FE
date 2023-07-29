@@ -23,10 +23,9 @@ interface StartTemplateProps {
 	};
 	activity: string;
 	roomName: string;
-	payload?: any;
 }
 
-export default function StartTemplate({ data, activity, roomName, payload }: StartTemplateProps) {
+export default function StartTemplate({ data, activity, roomName }: StartTemplateProps) {
 	const toast = useNotify();
 
 	const navigation = useNavigation();
@@ -98,7 +97,7 @@ export default function StartTemplate({ data, activity, roomName, payload }: Sta
 					<p className="text-p3 text-gray070">QR코드를 스캔해주세요.</p>
 				</div>
 				<div className={inputWrapClasses}>
-					<input className={`${inputClasses} text-p3`} value={`${data?.short_url}`} disabled />
+					{data && <input className={`${inputClasses} text-p3`} value={`${data.short_url}`} disabled />}
 					<button type="button" className={`${copyClasses} text-h7`} onClick={copyUrl}>
 						복사
 					</button>
