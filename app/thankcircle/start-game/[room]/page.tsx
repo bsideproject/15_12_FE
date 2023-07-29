@@ -1,7 +1,7 @@
 import { dehydrate, Hydrate } from '@tanstack/react-query';
 
 import getQueryClient from '@/app/getQueryClient';
-import StartThankCircle from '@/components/screen/StartGame/ThankCircle';
+import StartThankCircle from '@/components/screen/startGames/ThankCircle';
 import apiKeys from '@/queries/apiKeys';
 import queryKeys from '@/queries/queryKeys';
 

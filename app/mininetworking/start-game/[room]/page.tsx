@@ -1,7 +1,7 @@
 import { dehydrate, Hydrate } from '@tanstack/react-query';
 
 import getQueryClient from '@/app/getQueryClient';
-import StartMiniNetworking from '@/components/screen/StartGame/MiniNetworking';
+import StartMiniNetworking from '@/components/screen/startGames/MiniNetworking';
 import apiKeys from '@/queries/apiKeys';
 import queryKeys from '@/queries/queryKeys';
 
