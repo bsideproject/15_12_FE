@@ -48,7 +48,7 @@ const useSocket = () => {
 						console.log(jsonBody);
 						if (jsonBody.type !== 'ANSWER_SUBMITTED') {
 							setResult(jsonBody.payload);
-							setCount(jsonBody.payload.participant_count + 1);
+							setCount(jsonBody.payload.participant_count);
 						}
 					},
 					{ nickname },
@@ -61,7 +61,7 @@ const useSocket = () => {
 	// ${process.env.NEXT_PUBLIC_API_SOCKET_URL}
 	const connect = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string) => {
 		client.current = Stomp.over(() => {
-			const sock = new SockJS(`${process.env.NEXT_PUBLIC_API_SOCKET_URL}`);
+			const sock = new SockJS(`/ws`);
 			return sock;
 		});
 		if (client.current) {

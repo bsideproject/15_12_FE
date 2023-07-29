@@ -1,7 +1,7 @@
 'use client';
 
 import useMutationMoodCheckin from '@/queries/mutationFn/useMutationMoodCheckin';
-import MooodCheckinImg from 'public/images/mood-checkin-img.svg';
+import Logo from 'public/images/thank-mood-logo.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -14,8 +14,8 @@ export default function ScreenMoodCheckin() {
 		<ElGrid between bottomSm>
 			<div>
 				<ActivityHead title="기분 체크인" />
-				<div className="text-center mt-[34.62%]">
-					<MooodCheckinImg className="mb-[10.58%] mx-auto" />
+				<div className="text-center mt-[42.95%]">
+					<Logo className="mb-[13.46%] mx-auto" />
 					<p className="text-h6 text-gray090">
 						참여자의
 						<br />
