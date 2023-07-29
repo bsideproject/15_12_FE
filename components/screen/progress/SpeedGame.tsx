@@ -28,10 +28,10 @@ export default function ProgressSpeedGame() {
 	const roomName = navigation.path().split('/')[2];
 
 	useEffect(() => {
-		if (payload?.type === 'READY') {
+		if (payload?.type === 'OPENED_QUESTION') {
 			setIsWaiting(false);
 		}
-	}, [payload?.type === 'READY']);
+	}, [payload?.type === 'OPENED_QUESTION']);
 
 	const handleStep = () => {
 		publish(`/app/speedgame/${roomName}/start`);

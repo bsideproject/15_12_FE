@@ -34,7 +34,7 @@ export interface QuestionPayloadProps {
 
 interface SpeedOpenQuestionProps {
 	position: string;
-	handleStep: (value: string) => void;
+	handleStep: () => void;
 	question: QuestionPayloadProps;
 	publish: (sendUrl: string, value?: any) => void;
 }
@@ -50,7 +50,7 @@ export default function SpeedOpenQuestion({ position, handleStep, question, publ
 
 	const flexColClasses = clsxm('flex', 'flex-col', 'flex-1');
 	const centerClasses = clsxm('flex', 'flex-col', 'items-center', 'justify-center', 'flex-1');
-	const totalSubmitClasses = clsxm('text-center', 'text-gray070', 'mb-[4.44%]', 'text-p2');
+	// const totalSubmitClasses = clsxm('text-center', 'text-gray070', 'mb-[4.44%]', 'text-p2');
 	const finishSubmitClasses = clsxm('mt-[3.33%]', 'mb-[0.56%]', 'text-h3');
 	const headeRightClasses = clsxm(
 		'bg-gray080/80',
@@ -96,9 +96,9 @@ export default function SpeedOpenQuestion({ position, handleStep, question, publ
 			</div>
 			{position === 'organizer' ? (
 				<div>
-					<p className={totalSubmitClasses}>제출자 명</p>
+					{/* <p className={totalSubmitClasses}>제출자 명</p> */}
 					<div className="px-[6.67%]">
-						<ElButton type="button" _onClick={() => handleStep}>
+						<ElButton type="button" _onClick={handleStep}>
 							정답공개
 						</ElButton>
 					</div>
@@ -109,7 +109,7 @@ export default function SpeedOpenQuestion({ position, handleStep, question, publ
 						<ElButton
 							type="button"
 							_onClick={() => {
-								publish(`/app/speedgame/${roomName[2]}/submit-mood`, answerSelect);
+								publish(`/app/speedgame/${roomName[2]}/submit-answer`, answerSelect);
 								setAnswerSubmit(true);
 							}}
 							disabled={answerSelect.answerId === null}
