@@ -27,41 +27,8 @@ export interface QuestionProps {
 
 export default function ScreenSpeedGame() {
 	const toast = useNotify();
-	const [total, setTotal] = useState<number>(1);
-	const defaultQuestion: QuestionProps[] = [
-		{
-			number: 1,
-			question_text: '-',
-			answers: [
-				{
-					number: 1,
-					answer_text: '대답 1',
-					correct_answer: true,
-				},
-				{
-					number: 2,
-					answer_text: '대답 2',
-					correct_answer: false,
-				},
-				{
-					number: 3,
-					answer_text: '대답 3',
-					correct_answer: false,
-				},
-				{
-					number: 4,
-					answer_text: '대답 4',
-					correct_answer: false,
-				},
-			],
-		},
-	];
-	let copyQuestion = [...defaultQuestion];
-
-	const [questions, setQuestions] = useState<QuestionProps[]>(copyQuestion);
 	const createRoom = useMutationSpeedGame();
-
-	const newQuestion = (inx: number) => {
+	const questionForm = (inx: number): QuestionProps => {
 		return {
 			number: inx,
 			question_text: '',
@@ -89,6 +56,8 @@ export default function ScreenSpeedGame() {
 			],
 		};
 	};
+	const [questions, setQuestions] = useState<QuestionProps[]>([questionForm(1)]);
+	const [total, setTotal] = useState<number>(1);
 
 	const notlineClasses = clsxm('flex', 'w-full', 'mx-auto', 'pb-[29.17%]', 'text-p1', 'justify-center', 'items-center');
 	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-[6.67%]');
@@ -117,8 +86,7 @@ export default function ScreenSpeedGame() {
 				className={notlineClasses}
 				onClick={() => {
 					setTotal(total + 1);
-					copyQuestion = [...copyQuestion, newQuestion(total + 1)];
-					setQuestions([...questions, newQuestion(total + 1)]);
+					setQuestions([...questions, questionForm(total + 1)]);
 				}}
 			>
 				<AddIcon className="mr-[2.22%]" />
