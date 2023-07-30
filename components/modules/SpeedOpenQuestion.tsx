@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { useSubmitCount } from '@/atoms/socketAtoms';
 import useNavigation from '@/hooks/useNavigation';
@@ -43,10 +43,11 @@ interface SpeedOpenQuestionProps {
 	publish: (sendUrl: string, value?: any) => void;
 }
 
-export default async function SpeedOpenQuestion({ position, handleStep, question, publish }: SpeedOpenQuestionProps) {
+export default function SpeedOpenQuestion({ position, handleStep, question, publish }: SpeedOpenQuestionProps) {
 	const navigation = useNavigation();
 	const roomName = navigation.path().split('/');
 	const submitCount = useRecoilValue(useSubmitCount);
+	const setSubmitCount = useSetRecoilState(useSubmitCount);
 	const [answerSubmit, setAnswerSubmit] = useState<boolean>(false);
 	const [answerSelect, setAnswerSelect] = useState<AnswerSelectProps>({
 		questionId: question.question_id,
@@ -54,10 +55,17 @@ export default async function SpeedOpenQuestion({ position, handleStep, question
 	});
 
 	const { connect } = useSocket();
-	const session = await getUserSession();
-	connect(`${roomName[2]}/submit-count/${question.question_id}`, {
-		Authorization: `${session?.getAccessToken().getJwtToken()}`,
-	});
+
+	useEffect(() => {
+		const submitCountSubscribe = async () => {
+			const session = await getUserSession();
+			connect(`${roomName[2]}/submit-count/${question.question_id}`, {
+				Authorization: `${session?.getAccessToken().getJwtToken()}`,
+			});
+		};
+
+		submitCountSubscribe();
+	}, [question.question_id]);
 
 	const flexColClasses = clsxm('flex', 'flex-col', 'flex-1');
 	const centerClasses = clsxm('flex', 'flex-col', 'items-center', 'justify-center', 'flex-1');
