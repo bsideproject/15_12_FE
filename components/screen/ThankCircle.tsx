@@ -1,7 +1,7 @@
 'use client';
 
 import useMutationThankCircle from '@/queries/mutationFn/useMutationThankCircle';
-import Logo from 'public/images/thank-mood-logo.svg';
+import ActivityIcon03 from 'public/images/activity03-icon.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -14,7 +14,7 @@ export default function ScreenThankCircle() {
 		<ElGrid between bottomSm>
 			<div>
 				<ActivityHead title="감사서클" />
-				<Logo className="mt-[36.86%] mb-[13.46%] mx-auto" />
+				<ActivityIcon03 className="mt-[36.86%] mb-[13.46%] mx-auto" />
 				<h2 className="text-h6 text-gray090 text-center mb-[5.13%]">
 					초대된 참여자는 고마운 사람을
 					<br />한 명 지정할 수 있어요.

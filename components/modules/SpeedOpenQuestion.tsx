@@ -1,14 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import { useSubmitCount } from '@/atoms/socketAtoms';
 import useNavigation from '@/hooks/useNavigation';
 import useSocket from '@/hooks/useSocket';
 import getUserSession from '@/service/getUserSession';
 import clsxm from '@/service/mergeStyle';
-import SpeedGameIcon from 'public/images/activity01-sm-icon.svg';
+import ActivityIcon01 from 'public/images/activity01-icon.svg';
 import CheckBlueCircle from 'public/images/check-bule-circle.svg';
 
 import ElButton from '../elements/ElButton';
@@ -47,7 +47,6 @@ export default function SpeedOpenQuestion({ position, handleStep, question, publ
 	const navigation = useNavigation();
 	const roomName = navigation.path().split('/');
 	const submitCount = useRecoilValue(useSubmitCount);
-	const setSubmitCount = useSetRecoilState(useSubmitCount);
 	const [answerSubmit, setAnswerSubmit] = useState<boolean>(false);
 	const [answerSelect, setAnswerSelect] = useState<AnswerSelectProps>({
 		questionId: question.question_id,
@@ -103,7 +102,7 @@ export default function SpeedOpenQuestion({ position, handleStep, question, publ
 					</div>
 				) : (
 					<>
-						<GameImage bg="bg-[#E1DEBF]" svg={<SpeedGameIcon />} />
+						<GameImage bg="bg-[#E1DEBF]" svg={<ActivityIcon01 />} />
 						<SpeedGameSelect
 							position={position}
 							question={question}

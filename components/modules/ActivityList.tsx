@@ -54,7 +54,7 @@ export default function ActivityList({ data, user }: ActivityListProps) {
 					<li key={activity.activity_id} className={cardClasses}>
 						<button type="button" className="w-full" onClick={() => activityRoutes(activity.display_name)}>
 							<div
-								className="flex items-center justify-center"
+								className="flex items-center justify-center h-[83px]"
 								style={{ backgroundColor: `${ACTIVITY_FIGCAPTION[activity.display_name]?.color}` }}
 							>
 								{ACTIVITY_FIGCAPTION[activity.display_name]?.icon}

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import useNotify from '@/hooks/useNotify';
 import useMutationSpeedGame from '@/queries/mutationFn/useMutationSpeedGame';
 import clsxm from '@/service/mergeStyle';
-import SpeedGameIcon from 'public/images/activity01-sm-icon.svg';
+import ActivityIcon01 from 'public/images/activity01-icon.svg';
 import AddIcon from 'public/images/add-icon.svg';
 import SaveIcon from 'public/images/save-icon.svg';
 
@@ -67,31 +67,33 @@ export default function ScreenSpeedGame() {
 			<div className="px-[6.67%] mb-[3.33%]">
 				<ActivityHead title="스피드 게임" />
 			</div>
-			<GameImage bg="bg-[#E1DEBF]" svg={<SpeedGameIcon />} />
-			{questions.map((item, inx) => {
-				return (
-					<div key={`speedGame-question-${item.number}}`}>
-						<SpeedGameInputs
-							inx={inx}
-							number={item.number}
-							questions={questions}
-							setQuestions={setQuestions}
-							description="정답인 경우, 파란색 체크표시가 뜨도록 눌러주세요."
-						/>
-					</div>
-				);
-			})}
-			<button
-				type="button"
-				className={notlineClasses}
-				onClick={() => {
-					setTotal(total + 1);
-					setQuestions([...questions, questionForm(total + 1)]);
-				}}
-			>
-				<AddIcon className="mr-[2.22%]" />
-				<p className="text-p1 text-gray070">문제 추가하기</p>
-			</button>
+			<div>
+				<GameImage bg="bg-[#E1DEBF]" svg={<ActivityIcon01 />} />
+				{questions.map((item, inx) => {
+					return (
+						<div key={`speedGame-question-${item.number}}`}>
+							<SpeedGameInputs
+								inx={inx}
+								number={item.number}
+								questions={questions}
+								setQuestions={setQuestions}
+								description="정답인 경우, 파란색 체크표시가 뜨도록 눌러주세요."
+							/>
+						</div>
+					);
+				})}
+				<button
+					type="button"
+					className={notlineClasses}
+					onClick={() => {
+						setTotal(total + 1);
+						setQuestions([...questions, questionForm(total + 1)]);
+					}}
+				>
+					<AddIcon className="mr-[2.22%]" />
+					<p className="text-p1 text-gray070">문제 추가하기</p>
+				</button>
+			</div>
 			<div className={bottomClasses}>
 				<ElButton type="submit" margin="mr-[3.89%]" flex="flex-1" width="w-auto" _onClick={() => createRoom(questions)}>
 					만들기
