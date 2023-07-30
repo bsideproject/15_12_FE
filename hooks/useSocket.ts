@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
-import { useCount, usePayload, useResult } from '@/atoms/socketAtoms';
+import { usePayload, useResult, useCount, useSubmitCount } from '@/atoms/socketAtoms';
 
 interface ConnectAuthorizationType {
 	[key: string]: string;
@@ -17,6 +17,7 @@ const useSocket = () => {
 	const setPayload = useSetRecoilState(usePayload);
 	const setCount = useSetRecoilState(useCount);
 	const setResult = useSetRecoilState(useResult);
+	const setSubmitCount = useSetRecoilState(useSubmitCount);
 
 	const subscribe = (socketUrl: string, authorization: ConnectAuthorizationType, nickname?: string) => {
 		if (client.current) {
@@ -54,6 +55,20 @@ const useSocket = () => {
 					{ nickname },
 				);
 				client.current?.send(`/app/${socketUrl}/get-info`, {});
+			}
+			if (Object.keys(authorization).length === 0 || socketUrl.includes('submit-count')) {
+				setSubmitCount(0);
+				client.current.subscribe(
+					`/topic/speedgame/${socketUrl}`,
+					(response) => {
+						const jsonBody = JSON.parse(response.body);
+						console.log(jsonBody);
+						if (jsonBody.type === 'SUBMITTED_PARTICIPANT') {
+							setSubmitCount(jsonBody.payload.current_submit_count);
+						}
+					},
+					nickname ? { nickname } : undefined,
+				);
 			}
 		}
 	};
