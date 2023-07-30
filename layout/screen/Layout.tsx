@@ -36,7 +36,7 @@ export default function ScreenLayout({ children, className }: { children: React.
 						<ToastContainer
 							position="bottom-center"
 							autoClose={3000}
-							hideProgressBar={false}
+							hideProgressBar
 							newestOnTop={false}
 							closeOnClick
 							rtl={false}
@@ -44,6 +44,9 @@ export default function ScreenLayout({ children, className }: { children: React.
 							draggable
 							pauseOnHover
 							theme="light"
+							icon={false}
+							closeButton={false}
+							limit={1}
 						/>
 					</body>
 				</html>

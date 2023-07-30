@@ -1,7 +1,7 @@
 import { dehydrate, Hydrate } from '@tanstack/react-query';
 
 import getQueryClient from '@/app/getQueryClient';
-import StartMoodCheckIn from '@/components/screen/startGames/MoodCheckIn';
+import StartMoodCheckIn from '@/components/screen/startGame/MoodCheckIn';
 import apiKeys from '@/queries/apiKeys';
 import queryKeys from '@/queries/queryKeys';
 

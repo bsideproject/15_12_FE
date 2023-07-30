@@ -29,9 +29,14 @@ const useCount = atom<number>({
 	default: 1,
 });
 
+const useSubmitCount = atom<number>({
+	key: 'submitCount',
+	default: 0,
+});
+
 const useDisconnect = atom<() => void>({
 	key: 'disconnect',
 	default: () => {},
 });
 
-export { usePublish, usePayload, useResult, useCount, useDisconnect };
+export { usePublish, usePayload, useResult, useCount, useSubmitCount, useDisconnect };

@@ -46,3 +46,11 @@
 .swiper-pagination {
 	bottom: 15% !important;
 }
+
+.Toastify__toast {
+	@apply mx-[13.33%] mb-[26.67%] min-h-[34px] rounded-[14px] p-0 bg-gray080/80 !important;
+}
+
+.Toastify__toast-body {
+	@apply text-p3 text-gray000 text-center m-0 p-0 !important;
+}

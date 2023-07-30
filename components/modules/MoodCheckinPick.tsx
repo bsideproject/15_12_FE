@@ -3,12 +3,13 @@
 import React from 'react';
 
 import moodCheckinArr from '@/constants/moodCheckinArr';
-import MoodImage from 'public/images/mood-img.svg';
+import ActivityIcon02 from 'public/images/activity02-icon.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
 
 import ActivityHead from './ActivityHead';
+import GameImage from './GameImage';
 
 interface MoodCheckinPickProps {
 	onChangePickMood: (value: number) => void;
@@ -20,10 +21,10 @@ export default function MoodCheckinPick({ onChangePickMood, onSendPickMood, mood
 	return (
 		<ElGrid between pxNone bottomSm>
 			<div className="mb-[8.89%]">
-				<div className="px-[6.67%]">
+				<div className="px-[6.67%] mb-[3.89%]">
 					<ActivityHead title="기분 체크인" />
 				</div>
-				<MoodImage className="mt-[3.89%]" />
+				<GameImage bg="bg-[#CAD1DD]" svg={<ActivityIcon02 />} />
 				<div className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>div:not(:last-child)]:mb-[2%]">
 					<h3 className="text-h7 text-gray090 mb-[3.21%]">오늘의 기분을 말해주세요</h3>
 					{moodCheckinArr.map((el, i) => {

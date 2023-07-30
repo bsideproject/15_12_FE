@@ -8,7 +8,7 @@ interface GameImageProps {
 }
 
 export default function GameImage({ svg, bg }: GameImageProps) {
-	const imageClasses = clsxm('w-[100%]', 'py-[13.33%]', 'flex', 'items-center', 'justify-center');
+	const imageClasses = clsxm('w-[100%]', 'h-[137px]', 'flex', 'items-center', 'justify-center');
 
 	return <div className={`${bg} ${imageClasses}`}>{svg}</div>;
 }

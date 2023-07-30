@@ -1,11 +1,12 @@
 'use client';
 
-import ThankImage from 'public/images/thank-img.svg';
+import ActivityIcon03 from 'public/images/activity03-icon.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
 
 import ActivityHead from './ActivityHead';
+import GameImage from './GameImage';
 
 interface ThankCircleListProps {
 	position: string;
@@ -17,10 +18,10 @@ export default function ThankCircleList({ position, handleStep, nicknameList }: 
 	return (
 		<ElGrid between pxNone bottomSm>
 			<div>
-				<div className="px-[6.67%]">
+				<div className="px-[6.67%] mb-[3.89%]">
 					<ActivityHead title="감사 서클" />
 				</div>
-				<ThankImage className="mt-[3.89%]" />
+				<GameImage bg="bg-[#CAD1DD]" svg={<ActivityIcon03 />} />
 				<div className="bg-gray000 border border-gray020 px-[6.70%] py-[6.15%] [&>div:not(:last-child)]:mb-[2%]">
 					<h3 className="text-h7 text-gray090 mb-[3.21%]">참여자 리스트 </h3>
 					{nicknameList?.map((el, i) => {
