@@ -27,6 +27,15 @@ export interface QuestionProps {
 
 export default function ScreenSpeedGame() {
 	const toast = useNotify();
+	function hasEmptyText(questions: QuestionProps[]): boolean {
+		// eslint-disable-next-line no-restricted-syntax
+		for (const question of questions) {
+			if (question.question_text === '' || question.answers.some((answer) => answer.answer_text === '')) {
+				return true;
+			}
+		}
+		return false;
+	}
 	const createRoom = useMutationSpeedGame();
 	const questionForm = (inx: number): QuestionProps => {
 		return {
@@ -95,7 +104,16 @@ export default function ScreenSpeedGame() {
 				</button>
 			</div>
 			<div className={bottomClasses}>
-				<ElButton type="submit" _onClick={() => createRoom(questions)}>
+				<ElButton
+					type="submit"
+					_onClick={() => {
+						if (hasEmptyText(questions)) {
+							toast.info('모든 질문의 답안 4개를 모두 채워주세요.');
+						} else {
+							createRoom(questions);
+						}
+					}}
+				>
 					만들기
 				</ElButton>
 				{/* <ElButton
