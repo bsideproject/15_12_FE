@@ -10,6 +10,15 @@ export const metadata: Metadata = {
 	icons: {
 		icon: '/favicon.ico',
 	},
+	openGraph: {
+		images: [
+			{
+				url: 'public/images/openGraph/default-logo.png',
+				width: 600,
+				height: 315,
+			},
+		],
+	},
 	viewport: 'width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover',
 };
 
