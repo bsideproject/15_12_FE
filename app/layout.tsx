@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		images: [
 			{
-				url: 'images/openGraph/default-logo.png',
+				url: 'https://bside1512.dev/images/openGraph/default-logo.png',
 				width: 600,
 				height: 315,
 			},
