@@ -4,6 +4,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { useDisconnect, usePublish } from '@/atoms/socketAtoms';
 import useNavigation from '@/hooks/useNavigation';
+import useNotify from '@/hooks/useNotify';
 import useSocket from '@/hooks/useSocket';
 import getUserSession from '@/service/getUserSession';
 
@@ -11,6 +12,7 @@ import apiKeys from '../apiKeys';
 
 const useMutationSpeedGame = () => {
 	const navigation = useNavigation();
+	const toast = useNotify();
 
 	const setPublish = useSetRecoilState(usePublish);
 	const setDisconnect = useSetRecoilState(useDisconnect);
@@ -32,8 +34,10 @@ const useMutationSpeedGame = () => {
 
 			navigation.push(`/speedgame/start-game/${data?.data.room_name}`);
 		},
-		onError: (error) => {
+		onError: (error: any) => {
 			console.log(error);
+			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+			error.response.status === 401 && toast.error('로그인 후 이용해 주세요.');
 		},
 	});
 

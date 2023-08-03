@@ -42,24 +42,22 @@ export default function StartTemplate({ data, activity, roomName }: StartTemplat
 		}
 	};
 
-	const titleTextClasses = clsxm('text-gray090 text-center mb-[23.08%]');
-	const inputWrapClasses = clsxm(
+	const copyWrapClasses = clsxm(
 		'flex',
 		'items-center',
-		'justify-center',
 		'border',
 		'border-gray020',
 		'w-[83.97%]',
-		'mx-auto',
+		'text-gray09',
 		'mb-[16.03%]',
 		'bg-white',
 		'rounded',
 		'px-[11.70%]',
 		'py-[4.33%]',
+		'justify-between',
 	);
-	const inputClasses = clsxm('w-auto', 'outline-none', 'text-gray090', 'bg-transparent');
-	const copyClasses = clsxm('ml-[10px]', 'break-keep', 'text-blue050');
-	const participantWrapClasses = clsxm('flex', 'items-center', 'justify-center');
+	const copyClasses = clsxm('break-keep', 'text-blue050');
+	const participantWrapClasses = clsxm('flex', 'items-center', 'justify-center', 'w-full');
 	const participantClasses = clsxm('text-center', 'text-gray070', 'ml-[2.22%]');
 
 	const onNext = () => {
@@ -89,15 +87,13 @@ export default function StartTemplate({ data, activity, roomName }: StartTemplat
 
 	return (
 		<ElGrid between bottomSm>
-			<div>
-				<h2 className={`${titleTextClasses} text-h3`}>우리 같이 얼음땡 해요!</h2>
-				<div className="mb-[10.26%] text-center">
-					<ElQrImage src={data?.qr_code_image_url} />
-					<p className="text-h7 text-gray090">입장을 위한 QR코드</p>
-					<p className="text-p3 text-gray070">QR코드를 스캔해주세요.</p>
-				</div>
-				<div className={inputWrapClasses}>
-					{data && <input className={`${inputClasses} text-p3`} value={`${data.short_url}`} disabled />}
+			<div className="flex flex-col items-center">
+				<h2 className="text-gray090 text-h3">우리 같이 얼음땡 해요!</h2>
+				<ElQrImage src={data?.qr_code_image_url} />
+				<p className="text-h7 text-gray090">입장을 위한 QR코드</p>
+				<p className="text-p3 text-gray070 mb-[10.26%]">QR코드를 스캔해주세요.</p>
+				<div className={copyWrapClasses}>
+					{data?.short_url}
 					<button type="button" className={`${copyClasses} text-h7`} onClick={copyUrl}>
 						복사
 					</button>

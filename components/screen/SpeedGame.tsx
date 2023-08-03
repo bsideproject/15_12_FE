@@ -7,7 +7,7 @@ import useMutationSpeedGame from '@/queries/mutationFn/useMutationSpeedGame';
 import clsxm from '@/service/mergeStyle';
 import ActivityIcon01 from 'public/images/activity01-icon.svg';
 import AddIcon from 'public/images/add-icon.svg';
-import SaveIcon from 'public/images/save-icon.svg';
+// import SaveIcon from 'public/images/save-icon.svg';
 
 import ElButton from '../elements/ElButton';
 import ElGrid from '../elements/ElGrid';
@@ -27,6 +27,15 @@ export interface QuestionProps {
 
 export default function ScreenSpeedGame() {
 	const toast = useNotify();
+	function hasEmptyText(questions: QuestionProps[]): boolean {
+		// eslint-disable-next-line no-restricted-syntax
+		for (const question of questions) {
+			if (question.question_text === '' || question.answers.some((answer) => answer.answer_text === '')) {
+				return true;
+			}
+		}
+		return false;
+	}
 	const createRoom = useMutationSpeedGame();
 	const questionForm = (inx: number): QuestionProps => {
 		return {
@@ -60,7 +69,7 @@ export default function ScreenSpeedGame() {
 	const [total, setTotal] = useState<number>(1);
 
 	const notlineClasses = clsxm('flex', 'w-full', 'mx-auto', 'pb-[29.17%]', 'text-p1', 'justify-center', 'items-center');
-	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'p-[6.67%]');
+	const bottomClasses = clsxm('fixed', 'bottom-0', 'flex', 'w-full', 'max-w-[480px]', 'px-[6.67%]', 'pb-[6.67%]');
 
 	return (
 		<ElGrid pxNone>
@@ -95,10 +104,19 @@ export default function ScreenSpeedGame() {
 				</button>
 			</div>
 			<div className={bottomClasses}>
-				<ElButton type="submit" margin="mr-[3.89%]" flex="flex-1" width="w-auto" _onClick={() => createRoom(questions)}>
+				<ElButton
+					type="submit"
+					_onClick={() => {
+						if (hasEmptyText(questions)) {
+							toast.info('모든 질문의 답안 4개를 모두 채워주세요.');
+						} else {
+							createRoom(questions);
+						}
+					}}
+				>
 					만들기
 				</ElButton>
-				<ElButton
+				{/* <ElButton
 					type="button"
 					padding="px-[5.56%] py-[3.33%]"
 					flex="flex-0"
@@ -106,7 +124,7 @@ export default function ScreenSpeedGame() {
 					_onClick={() => toast.info('템플릿 기능 준비 중입니다.')}
 				>
 					<SaveIcon />
-				</ElButton>
+				</ElButton> */}
 			</div>
 		</ElGrid>
 	);

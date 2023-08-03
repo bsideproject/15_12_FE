@@ -40,7 +40,7 @@ export default function ScreenHome() {
 	return (
 		<ElGrid bottomSm>
 			<HomeHead handleToggleSide={handleToggleSide} menu />
-			<h2 className="text-h3 text-gray090 mb-[7.69%]">
+			<h2 className="text-h3 text-gray090 mb-[7.69%] break-keep">
 				원하는 액티비티를 <br /> 선택하세요
 			</h2>
 			<ActivityList data={data} user={userInfo.email} />
