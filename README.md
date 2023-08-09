@@ -30,63 +30,63 @@ $ yarn dev
 
 ### OnBoarding
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/9d10ec4f-7940-4a41-b91f-fa4176844cea' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/e9a16fbe-979d-4023-8dd6-a1d1388b3a36' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/c73d92e0-6d04-4c7f-8464-2bd5c41dc33c' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/5d6bd1ab-30bb-4b58-ab49-c961a87a69c7' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/9d10ec4f-7940-4a41-b91f-fa4176844cea' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/e9a16fbe-979d-4023-8dd6-a1d1388b3a36' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/c73d92e0-6d04-4c7f-8464-2bd5c41dc33c' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/5d6bd1ab-30bb-4b58-ab49-c961a87a69c7' width='200' />
 
 ### Home
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/2c51016d-577c-4116-a8ee-9ce0fda4751d' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/4be652e4-6977-4fcb-bab6-b85624ea2d96' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/66726d39-4b67-4b28-8ec8-0c7e0ca614a4' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/2c51016d-577c-4116-a8ee-9ce0fda4751d' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/4be652e4-6977-4fcb-bab6-b85624ea2d96' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/66726d39-4b67-4b28-8ec8-0c7e0ca614a4' width='200' />
 
 ### Login & Register
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/932ed3c2-b8e1-448e-a1a7-08884abfbed8' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/f71a7501-e62d-4c83-b64d-47c8e0f7ddcc' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/09046884-3c32-4542-ab4f-a832e6cfdd63' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/6009bcdb-e5c0-4c18-9532-41e6cc6530d5' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/932ed3c2-b8e1-448e-a1a7-08884abfbed8' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/f71a7501-e62d-4c83-b64d-47c8e0f7ddcc' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/09046884-3c32-4542-ab4f-a832e6cfdd63' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/6009bcdb-e5c0-4c18-9532-41e6cc6530d5' width='200' />
 
 ### Policy
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/07fb400c-b057-4b7a-9542-ac7b8fa33221' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/2f735319-3810-43f0-b17f-47472340109e' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/07fb400c-b057-4b7a-9542-ac7b8fa33221' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/2f735319-3810-43f0-b17f-47472340109e' width='200' />
 
 ### Game Common
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/65e15a2a-c240-4842-aaaa-351868b2a108' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/fa0a92a9-8aaa-4f5b-8843-9967c59cd9da' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/9b562ae2-6bab-489b-970c-d6ddc253de6e' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/024aed04-eb0a-4ec4-b7f3-91d76de2cfb8' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/65e15a2a-c240-4842-aaaa-351868b2a108' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/fa0a92a9-8aaa-4f5b-8843-9967c59cd9da' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/9b562ae2-6bab-489b-970c-d6ddc253de6e' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/024aed04-eb0a-4ec4-b7f3-91d76de2cfb8' width='200' />
 
 ### SpeedGame
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/6814e47e-c677-47ca-81da-7482ada4e70c' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/668637fd-690a-462c-a09b-d29b87ba58c3' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/3e4d2306-f6ff-4065-8c91-6a3412b8f41b' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/356af008-b19a-446d-888b-82f71f6f2f4f' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/6814e47e-c677-47ca-81da-7482ada4e70c' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/668637fd-690a-462c-a09b-d29b87ba58c3' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/3e4d2306-f6ff-4065-8c91-6a3412b8f41b' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/356af008-b19a-446d-888b-82f71f6f2f4f' width='200' />
 
 ### MoodCheckin
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/82b32b01-2b3c-40a3-909b-f7ddf4b86c67' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/9b5a94cf-9e56-4c45-85ba-e705a22f4153' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/581165eb-763b-4ad0-a298-f05e02a51b3c' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/02185626-bd4e-4b00-af80-af9ba3461651' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/82b32b01-2b3c-40a3-909b-f7ddf4b86c67' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/9b5a94cf-9e56-4c45-85ba-e705a22f4153' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/581165eb-763b-4ad0-a298-f05e02a51b3c' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/02185626-bd4e-4b00-af80-af9ba3461651' width='200' />
 
 ### ThankCircle
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/7b334ff3-f80e-4208-84d1-5ea40d6bbc9e' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/f796905f-63d6-43a3-89bc-bbf1092d4574' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/1991b5ae-17f4-4369-b590-68d3cd79c40c' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/b0ab45c6-b96e-4256-b61e-cf31cdf48bc5' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/7b334ff3-f80e-4208-84d1-5ea40d6bbc9e' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/f796905f-63d6-43a3-89bc-bbf1092d4574' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/1991b5ae-17f4-4369-b590-68d3cd79c40c' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/b0ab45c6-b96e-4256-b61e-cf31cdf48bc5' width='200' />
 
 ### MiniNetworking
 
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/0902e15d-7f9b-4c7d-9d13-49dde4313b18' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/05f65fb0-fb61-4494-be29-2ca58e41194a' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/2ae07399-8bb5-4698-b46a-3f3af23c7b8f' width='220' />
-<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/0fef4088-618b-4fea-9868-7a9540dd8557' width='220' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/0902e15d-7f9b-4c7d-9d13-49dde4313b18' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/05f65fb0-fb61-4494-be29-2ca58e41194a' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/2ae07399-8bb5-4698-b46a-3f3af23c7b8f' width='200' />
+<img src='https://github.com/bsideproject/15_12_FE/assets/92833235/0fef4088-618b-4fea-9868-7a9540dd8557' width='200' />
 
 ## Develop
 
